@@ -2,8 +2,14 @@
 
 import React, { Component } from 'react';
 import { View, Button } from 'react-native';
+import { Store } from '../data/Store';
 
 export class WelcomePage extends Component {
+  constructor(props) {
+    super(props);
+    Store.init();
+  }
+  
   render() {
     const { navigate } = this.props.navigation;
     return (
