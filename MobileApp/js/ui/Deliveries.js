@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Delivery } from './Delivery';
+import { DeliveryAdapter } from '../data/DeliveryAdapter';
 
 export class Deliveries extends Component {
   renderShipment(shipmentId) {
@@ -11,26 +12,17 @@ export class Deliveries extends Component {
     );
   }
 
-  getShipmentIds() {
-    let array = [];
-    for (let i = 1; i <= 100; ++i) {
-      let shipmentId = "DELIVERY" + (100000 + i);
-      array.push({key: i.toString(), shipmentId});
-    }
-    return array;
-  }
-
   render() {
-    const shipmentIds = this.getShipmentIds();
+    const shipments = DeliveryAdapter.getDeliveryShipments();
 
     return (
       <View>
         <FlatList
           removeClippedSubviews={true}
-          data={shipmentIds}
-          keyExtractor={item => item.key}
+          data={shipments}
+          keyExtractor={(shipment) => shipment.key}
           initialNumToRender={1}
-          renderItem={({item}) => this.renderShipment(item.shipmentId)}
+          renderItem={(shipment) => this.renderShipment(shipment.item.shipmentId)}
         />
       </View>
     )
