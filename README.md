@@ -13,7 +13,13 @@ export PATH=$PATH:$ANDROID_HOME/tools
 
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
-brew install node
+brew unlink node
+
+brew uninstall node
+
+brew install node@8
+
+brew link node@8
 
 brew install watchman
 
