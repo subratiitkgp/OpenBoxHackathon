@@ -6,9 +6,15 @@ import { Delivery } from './Delivery';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
 
 export class Deliveries extends Component {
+  constructor(props) {
+    super(props);
+
+    DeliveryAdapter.fetchDeliveryShipments();
+  }
+
   renderShipment(shipmentId) {
     return (
-      <Delivery shipmentId={shipmentId}/>
+      <Delivery shipmentId={shipmentId} navigation={this.props.navigation}/>
     );
   }
 

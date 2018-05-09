@@ -6,9 +6,15 @@ import { Pickup } from './Pickup';
 import { PickupAdapter } from '../data/PickupAdapter';
 
 export class Pickups extends Component {
+  constructor(props) {
+    super(props);
+
+    PickupAdapter.fetchPickupShipments();
+  }
+
   renderShipment(shipmentId) {
     return (
-      <Pickup shipmentId={shipmentId}/>
+      <Pickup shipmentId={shipmentId} navigation={this.props.navigation}/>
     );
   }
 
