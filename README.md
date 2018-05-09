@@ -5,7 +5,7 @@ Setup Instructions:
 
 https://facebook.github.io/react-native/docs/getting-started.html
 
-Install android studio with sdk
+Install android studio with sdk from https://developer.android.com/studio/
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 
