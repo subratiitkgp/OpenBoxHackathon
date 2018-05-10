@@ -15,13 +15,18 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   navigateToListPageAndSaveState(shipment, pickerValue, reasonPickerValue) {
-    shipment.status = pickerValue
-    console.log(reasonPickerValue)
-    shipment.reason = reasonPickerValue
-    console.log(shipment)
-    this.props.navigation.pop()
-  }
+    const status = pickerValue;
+    const reason = reasonPickerValue;
 
+    if (status === DeliveryStatus.DELIVERED.key) {
+      this.props.navigation.navigate('SignaturePage', {shipment, status, reason});
+      return;
+    }
+
+    shipment.status = status;
+    shipment.reason = reason;
+    this.props.navigation.pop();
+  }
 
   render() {
     const { navigation } = this.props;
@@ -77,8 +82,6 @@ export class DeliveryShipmentDetailsPage extends Component {
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}
               ])} 
           />
-        
-
         </View>
     );
   }
