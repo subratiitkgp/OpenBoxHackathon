@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import { Alert, View, Button } from 'react-native';
 import { Store } from '../data/Store';
 import { ShipmentStore } from '../data/ShipmentStore';
+
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
+
+import { Test } from './Test';
 
 const shipmentCount = 1;
 

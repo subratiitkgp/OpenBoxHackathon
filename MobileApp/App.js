@@ -16,6 +16,7 @@ import { OpenBoxCheckPage } from './js/ui/OpenBoxCheckPage';
 import { DummyPage } from './js/ui/DummyPage';
 
 
+
 export const App = createStackNavigator({
   HomePage: { screen: WelcomePage },
   TaskPage: { screen: TaskPage },

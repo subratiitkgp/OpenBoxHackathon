@@ -15,6 +15,7 @@ export class PickupShipmentDetailsPage extends Component {
     let shipment = PickupAdapter.getPickupShipment(shipmentId);
 
     return (
+       <TouchableOpacity onPress={() => navigation.navigate('test')}>
       <View style={{flex: 1, flexDirection: 'row',
             justifyContent: 'space-evenly', alignItems: 'center',
             margin: 10}}>
@@ -25,6 +26,7 @@ export class PickupShipmentDetailsPage extends Component {
           {shipmentId}
         </Text>
       </View>
+      </TouchableOpacity>
     );
   }
 }

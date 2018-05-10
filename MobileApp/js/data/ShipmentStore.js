@@ -29,6 +29,7 @@ export class ShipmentStore {
       primaryKey: "shipmentId",
       properties: {
         shipmentId: 'string',
+        shipmentType : 'string',
         customerId: 'string',
         customerName: 'string',
         customerAddress1: 'string',
@@ -36,7 +37,14 @@ export class ShipmentStore {
         customerCity: 'string',
         customerPincode: 'string',
         category: 'string',
-        openBoxChecks: 'string[]', // Serialized
+        sellerOBChecks : 'string',
+        customerOBChecks : 'string',
+        sellerSCChecks : 'string',
+        customerSCChecks : 'string',
+        isSellerOBCheckRequired : 'bool',
+        isSellerSCCheckRequired : 'bool',
+        isCustomerOBCheckRequired : 'bool',
+        isCustomerSCCheckRequired : 'bool',
         status: 'string',
         reason: 'string'
       }
@@ -45,9 +53,12 @@ export class ShipmentStore {
 
   static getCheckSchema() {
     return {
-      checkName: 'string',
-      checkData: 'string',
-      checkResult: 'string'
+      name : "Check",
+      properties : {
+        checkName: 'string',
+        checkData: 'string',
+        results : 'string'
+      }
     }
   }
 }

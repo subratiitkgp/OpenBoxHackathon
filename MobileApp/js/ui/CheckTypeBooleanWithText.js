@@ -72,4 +72,7 @@ export class CheckTypeBooleanWithText extends Component {
       </View>
       )
     }
-}
+
+
+
+  }
