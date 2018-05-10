@@ -49,7 +49,7 @@ export class WelcomePage extends Component {
   render() {
     return (
       <View style={{flex: 1, borderWidth: 1}}>
-      <CheckTypeBoolean shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
+      <CheckTypeMultiChoice shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
       </View>
     )
   }

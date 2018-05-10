@@ -29,7 +29,9 @@ export class CheckTypeMultiChoice extends Component {
       checksLength: OpenBoxChecks[shipment.category].length,
       checkQuestionHeader: OpenBoxChecks[shipment.category][checkId].value,
       checkData: check.checkData,
-      checkResults: check.checkResults
+      checkResults: check.checkResults,
+      shipment,
+      check
     };
 
     this.state = {
@@ -64,8 +66,7 @@ export class CheckTypeMultiChoice extends Component {
           title="Yes"
           onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
           [ 
-            {text:"Ok", onPress: () => this.navigateToNextPage(this.props.shipmentId, 
-              this.props.checkId, this.localProps.checksLength)},
+            {text:"Ok", onPress: () => this.saveResultsAndNavigate("PASSED")},
             {text:"Cancel", onPress: () => console.log("Cancel pressed")}
           ])}
           />
@@ -75,7 +76,7 @@ export class CheckTypeMultiChoice extends Component {
           title="No"
           onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
           [ 
-            {text:"Ok", onPress:() => this.props.navigation.pop(checkId+1)},
+            {text:"Ok", onPress:() => this.saveResultsAndNavigate("FAILED")},
             {text:"Cancel", onPress: () => console.log("Cancel pressed")}
           ])}      
         />
@@ -84,11 +85,17 @@ export class CheckTypeMultiChoice extends Component {
     );
   }
 
-  saveResultsAndNavigate() {
-    checkResults = "Yes"
-    this.navigateToNextPage(this.props.shipmentId,
-                  this.props.checkId, this.localProps.checksLength)
-
+  saveResultsAndNavigate(result) {
+      if(result === "PASSED") {
+        this.localProps.check.checkResults = "PASSED";
+        console.log(this.localProps.shipment);
+        this.navigateToNextPage(this.props.shipmentId,this.props.checkId, this.localProps.checksLength)
+      }
+      else
+      {
+        this.localProps.check.checkResults = "FAILED";
+        this.props.navigation.pop(checkId+1);
+      }
   }
 
   changeCheckboxState(value, index) {

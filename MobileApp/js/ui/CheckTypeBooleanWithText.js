@@ -40,6 +40,7 @@ export class CheckTypeBooleanWithText extends Component {
   }
 
 
+
   render() {
     const shipmentId = this.props.shipmentId;
     // let shipment = ShipmentStore.getShipment(shipmentId);
