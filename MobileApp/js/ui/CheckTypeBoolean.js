@@ -8,7 +8,6 @@ import { DeliveryAdapter } from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
 
 export class CheckTypeBoolean extends Component {
-
   constructor(props) {
       super(props);
 
