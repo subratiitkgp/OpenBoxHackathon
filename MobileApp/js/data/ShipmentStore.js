@@ -55,4 +55,16 @@ export class ShipmentStore {
       }
     }
   }
+
+  static getCheckSchema() {
+    return {
+      name : "Check",
+      properties : {
+        checkName: 'string',
+        checkData: 'string',
+        checkResults : 'string',
+        checkInfo : 'string'
+      }
+    }
+  }
 }

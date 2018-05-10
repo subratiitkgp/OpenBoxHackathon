@@ -23,11 +23,13 @@ export class CheckTypeMultiChoice extends Component {
     const check = checks[checkId];
 
     const checkData = check.checkData;
+    const checkResults = check.checkResults;
     
     this.localProps = {
       checksLength: OpenBoxChecks[shipment.category].length,
       checkQuestionHeader: OpenBoxChecks[shipment.category][checkId].value,
-      checkData: check.checkData
+      checkData: check.checkData,
+      checkResults: check.checkResults
     };
 
     this.state = {
@@ -80,6 +82,13 @@ export class CheckTypeMultiChoice extends Component {
       </View>
       </View>
     );
+  }
+
+  saveResultsAndNavigate() {
+    checkResults = "Yes"
+    this.navigateToNextPage(this.props.shipmentId,
+                  this.props.checkId, this.localProps.checksLength)
+
   }
 
   changeCheckboxState(value, index) {

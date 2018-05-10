@@ -6,6 +6,7 @@ import { Store } from '../data/Store';
 import { ShipmentStore } from '../data/ShipmentStore';
 
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
+import { CheckTypeBoolean } from './CheckTypeBoolean';
 
 const shipmentCount = 1;
 
@@ -45,15 +46,15 @@ export class WelcomePage extends Component {
     Alert.alert("Deleted", "Deleted");
   }
 
-  render1() {
+  render() {
     return (
       <View style={{flex: 1, borderWidth: 1}}>
-      <CheckTypeMultiChoice shipmentId={"ABC"} checkId={0}/>
+      <CheckTypeBoolean shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
       </View>
     )
   }
 
-  render() {
+  render1() {
     const { navigate } = this.props.navigation;
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>

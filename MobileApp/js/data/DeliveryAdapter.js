@@ -87,6 +87,8 @@ export class DeliveryAdapter {
       reason: undefined,
     }
 
+
+
     shipments.push(shipment1, shipment2);
     return shipments;
   }
