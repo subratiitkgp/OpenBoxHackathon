@@ -21,6 +21,7 @@ export class DeliveryAdapter {
       customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
       customerCity: 'Bangalore', customerPincode: '560043',
       category: 'MOBILE',
+      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg',
       CUSTOMER_OPENBOX_CHECKS: [
         {
           checkName: 'CATEGORY',
@@ -62,7 +63,7 @@ export class DeliveryAdapter {
       SELLER_SMARTCHECK_CHECKS: undefined,
       isSellerOBCheckRequired: true,
       isSellerSCCheckRequired: true,
-      isCustomerOBCheckRequired: false,
+      isCustomerOBCheckRequired: true,
       isCustomerSCCheckRequired: false,
       status: "OUT_FOR_DELIVERY",
       reason: undefined,
@@ -74,6 +75,7 @@ export class DeliveryAdapter {
       customerId: '123', 'customerName': 'Vishal', 'customerAddress1': 'Banaswadi', 'customerAddress2': 'Banaswadi',
       customerCity: 'Bangalore', 'customerPincode': '560043',
       category: 'APPAREL',
+      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/81Q9deM-LXL._UY879_.jpg',
       CUSTOMER_OPENBOX_CHECKS: [
         {
            checkName: 'CATEGORY',
@@ -122,6 +124,7 @@ export class DeliveryAdapter {
           customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
           customerCity: 'Bangalore', customerPincode: '560043',
           category: 'LARGE',
+          imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71G-Tn1JNcL._SL1337_.jpg',
           CUSTOMER_OPENBOX_CHECKS: [
             {
               checkName: 'CATEGORY',
@@ -173,6 +176,7 @@ export class DeliveryAdapter {
           customerId: '123', 'customerName': 'Vishal', 'customerAddress1': 'Banaswadi', 'customerAddress2': 'Banaswadi',
           customerCity: 'Bangalore', 'customerPincode': '560043',
           category: 'BEAUTY',
+          imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71Mua-w4%2BTL._SL1500_.jpg',
           CUSTOMER_OPENBOX_CHECKS: [
             {
                checkName: 'CATEGORY',

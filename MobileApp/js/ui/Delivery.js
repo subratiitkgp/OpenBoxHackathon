@@ -32,7 +32,7 @@ export class Delivery extends Component {
         <View style={{flex: 1, flexDirection: 'row',
                       justifyContent: 'space-evenly', alignItems: 'center',
                       margin: 10}}>
-          <Image source={{uri: 'https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg'}}
+          <Image source={{uri: shipment.imageUrl}}
                 style={{width: 100, height: 200}}
           />
           <View style={{flexDirection: 'column'}}>

@@ -84,22 +84,3 @@ export class WelcomePage extends Component {
     )
   }
 }
-
-/*
-        <Button
-          title="Print Shipments"
-          onPress={() => this.printShipments()}
-        />
-        <Button
-          title="Create Shipment"
-          onPress={() => this.createNewShipment()}
-        />
-        <Button
-          title="Update Shipment"
-          onPress={() => this.updateShipment()}
-        />  
-        <Button
-          title="Delete Shipments"
-          onPress={() => this.deleteAllShipments()}
-        />
-        */

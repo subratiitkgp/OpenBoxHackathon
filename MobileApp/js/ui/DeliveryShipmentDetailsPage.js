@@ -29,6 +29,7 @@ export class DeliveryShipmentDetailsPage extends Component {
 
     shipment.status = status;
     shipment.reason = reason;
+    DeliveryAdapter.syncDeliveryShipment(shipment);
     this.props.navigation.pop();
   }
 
@@ -86,7 +87,7 @@ export class DeliveryShipmentDetailsPage extends Component {
     return(
         <View style={{flex: 1,
               justifyContent: 'space-evenly', alignItems: 'center'}}>
-            <Image source={{uri: 'https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg'}}
+            <Image source={{uri: shipment.imageUrl}}
                   style={{width: 100, height: 200}}
             />
           <Text>

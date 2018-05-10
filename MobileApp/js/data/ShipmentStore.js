@@ -49,6 +49,7 @@ export class ShipmentStore {
         customerId: 'string', customerName: 'string', customerAddress1: 'string', customerAddress2: 'string',
         customerCity: 'string', customerPincode: 'string',
         category: 'string',
+        imageUrl:'string',
         CUSTOMER_OPENBOX_CHECKS : 'string?', SELLER_OPENBOX_CHECKS : 'string?', CUSTOMER_SMARTCHECK_CHECKS : 'string?', SELLER_SMARTCHECK_CHECKS : 'string?',
         isSellerOBCheckRequired : 'bool', isSellerSCCheckRequired : 'bool', isCustomerOBCheckRequired : 'bool', isCustomerSCCheckRequired : 'bool',
         status: 'string', reason: 'string?', signature: 'string?'
