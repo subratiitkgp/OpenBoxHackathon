@@ -10,11 +10,11 @@ export class ShipmentStore {
     tmpShipment.SELLER_OPENBOX_CHECKS = JSON.stringify(shipment.SELLER_OPENBOX_CHECKS);
     tmpShipment.CUSTOMER_SMARTCHECK_CHECKS = JSON.stringify(shipment.CUSTOMER_SMARTCHECK_CHECKS);
     tmpShipment.SELLER_SMARTCHECK_CHECKS = JSON.stringify(shipment.SELLER_SMARTCHECK_CHECKS);
-    Store.save(this.getShipmentSchema().name, shipment);
+    Store.save(this.getShipmentSchema().name, tmpShipment);
   }
 
   static saveAllShipments(shipments) {
-    shipments.foreach(shipment => this.saveShipment(shipment));
+    shipments.forEach(shipment => this.saveShipment(shipment));
   }
 
   static getShipment(shipmentId) {
@@ -49,21 +49,9 @@ export class ShipmentStore {
         customerId: 'string', customerName: 'string', customerAddress1: 'string', customerAddress2: 'string',
         customerCity: 'string', customerPincode: 'string',
         category: 'string',
-        CUSTOMER_OPENBOX_CHECKS : 'string', SELLER_OPENBOX_CHECKS : 'string', CUSTOMER_SMARTCHECK_CHECKS : 'string', SELLER_SMARTCHECK_CHECKS : 'string',
+        CUSTOMER_OPENBOX_CHECKS : 'string?', SELLER_OPENBOX_CHECKS : 'string?', CUSTOMER_SMARTCHECK_CHECKS : 'string?', SELLER_SMARTCHECK_CHECKS : 'string?',
         isSellerOBCheckRequired : 'bool', isSellerSCCheckRequired : 'bool', isCustomerOBCheckRequired : 'bool', isCustomerSCCheckRequired : 'bool',
-        status: 'string', reason: 'string'
-      }
-    }
-  }
-
-  static getCheckSchema() {
-    return {
-      name : "Check",
-      properties : {
-        checkName: 'string',
-        checkData: 'string',
-        checkResults : 'string',
-        checkInfo : 'string'
+        status: 'string', reason: 'string?', signature: 'string?'
       }
     }
   }

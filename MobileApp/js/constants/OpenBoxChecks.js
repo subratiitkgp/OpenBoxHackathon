@@ -19,9 +19,9 @@ export const CheckTypes = {
 export const CheckNames = {
   CATEGORY: {key: "CATEGORY", value: "Is the Category of the item correct ?"},
   CONDITION: {key: "CONDITION", value: "Is the condition of the item good ?"},
-  BRAND: {key: "BRAND", value: "Is the brand of the item correct ?"}
-  COLOR: {key: "COLOR", value: "Is the color of the item correct ?"}
-  SIZE:  {key: "SIZE", value: "Is the size of the item correct ?"}
+  BRAND: {key: "BRAND", value: "Is the brand of the item correct ?"},
+  COLOR: {key: "COLOR", value: "Is the color of the item correct ?"},
+  SIZE:  {key: "SIZE", value: "Is the size of the item correct ?"},
   ACCESSORIES : {key: "ACCESSORIES", value: "Are all the accessories present ?"}
 }
 

@@ -17,13 +17,13 @@ const shipmentCount = 1;
 export class WelcomePage extends Component {
   constructor(props) {
     super(props);
-    // Store.init([ShipmentStore.getShipmentSchema()]);
-    // this.deleteAllShipments();
-    DeliveryAdapter.initializeDeliveryShipments()
+    Store.init([ShipmentStore.getShipmentSchema()]);
+    const shipments = ShipmentStore.getAllShipments();
+    DeliveryAdapter.setDeliveryShipments(shipments);
   }
 
   printShipments() {
-    console.log(ShipmentStore.getAllShipments());
+    console.log(DeliveryAdapter.fetchDeliveryShipments());
   }
 
   getDummyShipment(shipmentCount) {
@@ -48,7 +48,7 @@ export class WelcomePage extends Component {
   deleteAllShipments() {
     ShipmentStore.deleteAllShipments();
     shipmentCount = 1;
-    Alert.alert("Deleted", "Deleted");
+    // Alert.alert("Deleted", "Deleted");
   }
 
   render1() {
@@ -66,6 +66,19 @@ export class WelcomePage extends Component {
         <Button
           title="Delivery Executive"
           onPress={() => navigate('TaskPage', { name: 'Jane' })}
+        />
+        <Button
+          title="Reinitialize Shipments"
+          onPress={() => {
+            ShipmentStore.deleteAllShipments();
+            const shipments = DeliveryAdapter.initializeDeliveryShipments();
+            ShipmentStore.saveAllShipments(shipments);
+            DeliveryAdapter.setDeliveryShipments(shipments);
+          }}
+        />
+        <Button
+          title="Print Shipments"
+          onPress={() => this.printShipments()}
         />
       </View>
     )

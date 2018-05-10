@@ -1,12 +1,18 @@
 'use strict';
 
+import { ShipmentStore } from '../data/ShipmentStore';
+
 let shipmentsGlobal = [];
 
 export class DeliveryAdapter {
+  static setDeliveryShipments(shipments) {
+    shipmentsGlobal = shipments;
+  }
+
   static fetchDeliveryShipments() {
-    console.log(shipmentsGlobal);
     return shipmentsGlobal;
   }
+
   static initializeDeliveryShipments() {
     let shipments = [];
 
@@ -31,9 +37,10 @@ export class DeliveryAdapter {
         {
           checkName: 'ACCESSORIES',
           checkData: [ 
-            { key : "CHARGER", value : "Charger" }],
+            { key : "CHARGER", value : "Charger" },
             { key: "HEADPHONE", value: "Headphone" },
             { key: "BATTERY", value: "Battery" }
+          ],
           checkInfo: "BLACK",
           checkResults: undefined
         },
@@ -59,6 +66,7 @@ export class DeliveryAdapter {
       isCustomerSCCheckRequired: false,
       status: "OUT_FOR_DELIVERY",
       reason: undefined,
+      signature: undefined
     }
 
     const shipment2 = {
@@ -107,6 +115,7 @@ export class DeliveryAdapter {
       isCustomerSCCheckRequired: false,
       status: "OUT_FOR_DELIVERY",
       reason: undefined,
+      signature: undefined
     }
     const shipment3 = {
           key: "3", shipmentId: "003", type: 'DELIVERY',
@@ -129,8 +138,9 @@ export class DeliveryAdapter {
             {
               checkName: 'ACCESSORIES',
               checkData: [
-                { key : "WIRE", value : "Wire" }],
-                { key: "STAND", value: "Stand" },
+                { key : "WIRE", value : "Wire" },
+                { key: "STAND", value: "Stand" }
+              ],
               checkInfo: "BLACK",
               checkResults: undefined
             },
@@ -210,5 +220,9 @@ export class DeliveryAdapter {
 
   static getDeliveryShipment(shipmentId) {
     return this.fetchDeliveryShipments().find(shipment => shipment.shipmentId === shipmentId);
+  }
+
+  static syncDeliveryShipment(shipment) {
+    ShipmentStore.saveShipment(shipment);
   }
 }
