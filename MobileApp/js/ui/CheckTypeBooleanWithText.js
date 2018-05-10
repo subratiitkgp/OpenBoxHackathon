@@ -5,16 +5,40 @@ import { Text, View, Button, Alert, TextInput, Picker } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
 import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
 import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';
-
+import { DeliveryAdapter } from '../data/DeliveryAdapter';
+import { CheckUtil } from '../util/CheckUtil';
 
 export class CheckTypeBooleanWithText extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showTextInput: false
-    }
+    constructor(props) {
+          super(props);
+          const shipmentId = this.props.shipmentId;
+          let shipment = this.getDummyShipment1(shipmentId);
+
+          // let shipment = ShipmentStore.getShipment(shipmentId);
+          const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
+          const checks = shipment[checkScenario];
+          const checkId = this.props.checkId;
+          const check = checks[checkId];
+          const checksLength = OpenBoxChecks[shipment.category].length;
+          const checkQuestionHeader = OpenBoxChecks[shipment.category][checkId].value;
+          this.state = {
+                showTextInput: false
+              }
+          this.localProps = {
+                checksLength: OpenBoxChecks[shipment.category].length,
+                checkQuestionHeader,
+                checkData: check.checkData,
+                checkResults: check.checkResults,
+                shipment,
+                check,
+                checkId
+              };
   }
+
+  getDummyShipment1(shipmentId) {
+     return (DeliveryAdapter.fetchDeliveryShipments())[0];
+   }
 
   getDummyShipment(shipmentId) {
     return {
@@ -38,27 +62,33 @@ export class CheckTypeBooleanWithText extends Component {
         this.props.navigation.pop(checkId+1)
       }
   }
-
+  saveResultsAndNavigate(result) {
+        if(result === "PASSED") {
+          this.localProps.check.checkResults = "PASSED";
+          console.log(this.localProps.shipment);
+          this.navigateToNextPage(this.props.shipmentId,this.localProps.checkId, this.localProps.checksLength)
+        }
+        else
+        {
+          this.localProps.check.checkResults = "FAILED";
+          this.props.navigation.pop(this.localProps.checkId+1);
+        }
+  }
 
 
   render() {
-    const shipmentId = this.props.shipmentId;
-    // let shipment = ShipmentStore.getShipment(shipmentId);
-    let shipment = this.getDummyShipment(shipmentId);
-    const checkId = this.props.checkId;
-    const checksLength = OpenBoxChecks[shipment.category].length;
-    const staticCheckValue = OpenBoxChecks[shipment.category][checkId].value;
+
     
     return (
       <View style={{flex: 1, justifyContent: 'space-between', margin: 100}}>
       <Text>
-        {staticCheckValue}
+        {this.localProps.checkQuestionHeader}
       </Text>
       <Button
         title="Correct"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
-          {text:"Ok", onPress: () => this.navigateToNextPage(shipmentId, checkId, checksLength)},
+          {text:"Ok", onPress: () => this.saveResultsAndNavigate("PASSED")},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
         ])}
         />
@@ -78,7 +108,7 @@ export class CheckTypeBooleanWithText extends Component {
               title="Save"
               onPress={() => Alert.alert("Confirmation","This will take you back to main page.",
               [ 
-                {text:"Ok", onPress:() => this.props.navigation.pop(checkId+1)},
+                {text:"Ok", onPress:() => this.saveResultsAndNavigate("FAILED")},
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}
               ])} 
             />

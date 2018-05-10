@@ -20,11 +20,11 @@ export class CheckTypeSingleChoice extends Component {
         const checkId = this.props.checkId;
         const check = checks[checkId];
         const checksLength = OpenBoxChecks[shipment.category].length;
-        checkQuestionHeader: OpenBoxChecks[shipment.category][checkId].value;
+        const checkQuestionHeader = OpenBoxChecks[shipment.category][checkId].value;
 
         this.localProps = {
               checksLength: OpenBoxChecks[shipment.category].length,
-              checkQuestionHeader: OpenBoxChecks[shipment.category][checkId].value,
+              checkQuestionHeader,
               checkData: check.checkData,
               checkResults: check.checkResults,
               shipment,
