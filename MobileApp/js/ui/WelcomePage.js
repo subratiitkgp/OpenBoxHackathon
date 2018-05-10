@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Alert, View, Button } from 'react-native';
 import { Store } from '../data/Store';
 import { ShipmentStore } from '../data/ShipmentStore';
+import { DeliveryAdapter } from '../data/DeliveryAdapter';
 
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 import { CheckTypeBoolean } from './CheckTypeBoolean';
@@ -15,6 +16,7 @@ export class WelcomePage extends Component {
     super(props);
     // Store.init([ShipmentStore.getShipmentSchema()]);
     // this.deleteAllShipments();
+    DeliveryAdapter.initializeDeliveryShipments()
   }
 
   printShipments() {

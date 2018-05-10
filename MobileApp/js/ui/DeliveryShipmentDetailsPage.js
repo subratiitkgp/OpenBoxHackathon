@@ -45,6 +45,9 @@ export class DeliveryShipmentDetailsPage extends Component {
           <Text>
             {shipmentId}
           </Text>
+          
+
+  
           <Button
           title="Start Open Box"
           onPress={() => {

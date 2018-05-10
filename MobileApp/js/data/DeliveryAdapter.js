@@ -1,7 +1,13 @@
 'use strict';
 
+let shipmentsGlobal = [];
+
 export class DeliveryAdapter {
   static fetchDeliveryShipments() {
+    console.log(shipmentsGlobal);
+    return shipmentsGlobal;
+  }
+  static initializeDeliveryShipments() {
     let shipments = [];
 
     const shipment1 = {
@@ -90,6 +96,8 @@ export class DeliveryAdapter {
 
 
     shipments.push(shipment1, shipment2);
+
+    shipmentsGlobal = shipments;
     return shipments;
   }
 
