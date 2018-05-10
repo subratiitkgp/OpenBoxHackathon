@@ -10,7 +10,7 @@ export class DeliveryShipmentDetailsPage extends Component {
     super(props);
     this.state={
         pickerValue: DeliveryStatus.OUT_FOR_DELIVERY.key,
-        reasonPickerValue: undefined
+        reasonPickerValue: undefined,
     }
   }
 
@@ -32,11 +32,19 @@ export class DeliveryShipmentDetailsPage extends Component {
     this.props.navigation.pop();
   }
 
+  disableOpenBoxButton(shipment) {
+    console.log(shipment.isCustomerOBCheckRequired);
+    if(shipment.isCustomerOBCheckRequired === true) {
+        return false;
+    }
+    return true;
+  }
+
   areAllChecksPassed(shipment) {
     const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
     let flag = true;
     custOpenBoxChecks.forEach(check => {
-      if(check.checkResults === undefined || check.checkResults=== 'FAILED') {
+      if(shipment.isCustomerOBCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
         flag =  false;
       }
     });
@@ -88,12 +96,14 @@ export class DeliveryShipmentDetailsPage extends Component {
             {this.getCheckIcon("COB", custOpenBox)}
             {this.getCheckIcon("SOB", sellerOpenBox)}
           </View>
-          <Button
+          {shipment.isCustomerOBCheckRequired === true ? 
+            <Button
             title="Start Open Box"
             onPress={() => {
               navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
-            }}
-          />
+            }}/>
+            : null}
+          
           <View style={{margin: 10, width: "100%", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderWidth: 1}}>
             <Text>Delivery Status</Text>
             <Picker 
