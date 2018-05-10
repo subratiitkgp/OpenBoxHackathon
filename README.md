@@ -29,7 +29,7 @@ npm install -g react-native-cli
 
 Open Android Studio and start the emulator / Connect your android mobile with usb debugging enabled.
 
-Clone the project and Go inside MobileApp folder
+Clone the project and Go inside OpenBoxHackathon/MobileApp folder
 
 npm install
 
