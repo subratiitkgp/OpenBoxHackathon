@@ -124,7 +124,7 @@ export class DeliveryAdapter {
           customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
           customerCity: 'Bangalore', customerPincode: '560043',
           category: 'LARGE',
-          imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71G-Tn1JNcL._SL1337_.jpg',
+          imageUrl:'https://images-na.ssl-images-amazon.com/images/I/81drtEjsU8L._SX679_.jpg',
           CUSTOMER_OPENBOX_CHECKS: [
             {
               checkName: 'CATEGORY',
