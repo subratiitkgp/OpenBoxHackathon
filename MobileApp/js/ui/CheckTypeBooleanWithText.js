@@ -41,7 +41,6 @@ export class CheckTypeBooleanWithText extends Component {
 
 
   render() {
-    const { push } = this.props.navigation;
     const shipmentId = this.props.shipmentId;
     // let shipment = ShipmentStore.getShipment(shipmentId);
     let shipment = this.getDummyShipment(shipmentId);
@@ -50,7 +49,7 @@ export class CheckTypeBooleanWithText extends Component {
     const staticCheckValue = OpenBoxChecks[shipment.category][checkId].value;
     
     return (
-      <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
+      <View style={{flex: 1, justifyContent: 'space-between', margin: 100}}>
       <Text>
         {staticCheckValue}
       </Text>
@@ -73,10 +72,10 @@ export class CheckTypeBooleanWithText extends Component {
         <View>
         {this.state.showTextInput===true ? 
           <View>
-            <TextInput style={{flex:1, justifyContent: 'space-evenly', placeholder: 'What was the received product?'}}/>
+            <TextInput style={{height: 50, margin: 20}} placeholder={'What was the received product?'}/>
             <Button
               title="Save"
-              onPress={() => Alert.alert("This will take you back to main page.",
+              onPress={() => Alert.alert("Confirmation","This will take you back to main page.",
               [ 
                 {text:"Ok", onPress:() => this.props.navigation.pop(checkId+1)},
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}

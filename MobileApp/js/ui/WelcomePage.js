@@ -7,14 +7,12 @@ import { ShipmentStore } from '../data/ShipmentStore';
 
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 
-import { Test } from './Test';
-
 const shipmentCount = 1;
 
 export class WelcomePage extends Component {
   constructor(props) {
     super(props);
-    Store.init([ShipmentStore.getShipmentSchema()]);
+    // Store.init([ShipmentStore.getShipmentSchema()]);
     // this.deleteAllShipments();
   }
 
