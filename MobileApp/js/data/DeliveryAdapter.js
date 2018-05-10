@@ -17,9 +17,21 @@ export class DeliveryAdapter {
     'customerCity': 'Bangalore',
     'customerPincode': '560043',
     'category': 'MOBILE',
-    'sellerOBChecks': [{
+    'CUSTOMER_OPENBOX_CHECKS': [{
       'checkName': 'COLOR',
-      'checkData': undefined,
+      'checkData': [ 
+        { key : "CHARGER",
+          value : "Charger"
+        },
+        {
+          key: "HEADPHONE",
+          value: "Headphone"
+        },
+        {
+          key: "BATTERY",
+          value: "Battery"
+        }
+      ],
       'checkInfo': "BLACK",
       'results' : undefined
     },
@@ -57,9 +69,9 @@ export class DeliveryAdapter {
           'results' : undefined
     },
     ],
-    'CUSTOMER_OB_CHECKS': "",
-    'SELLER_SC_CHECKS' : "",
-    'customerSCChecks' : "",
+    'SELLER_OPENBOX_CHECKS': "",
+    'CUSTOMER_SMARTCHECK_CHECKS' : "",
+    'SELLER_SMARTCHECK_CHECKS' : "",
     'isSellerOBCheckRequired' : true,
     'isSellerSCCheckRequired' : true,
     'isCustomerOBCheckRequired' : true,
@@ -79,15 +91,15 @@ export class DeliveryAdapter {
     'customerCity': 'Bangalore',
     'customerPincode': '560043',
     'category': 'MOBILE',
-    'sellerOBChecks': [{
+    'CUSTOMER_OPENBOX_CHECKS': [{
       'checkName': 'COLOR',
       'checkData': undefined,
       'checkInfo': "BLACK",
       'results' : undefined
     }],
-    'CUSTOMER_OB_CHECKS': "",
-    'SELLER_SC_CHECKS' : "",
-    'customerSCChecks' : "",
+    'SELLER_OPENBOX_CHECKS': "",
+    'CUSTOMER_SMARTCHECK_CHECKS' : "",
+    'SELLER_SMARTCHECK_CHECKS' : "",
     'isSellerOBCheckRequired' : true,
     'isSellerSCCheckRequired' : true,
     'isCustomerOBCheckRequired' : true,
@@ -101,11 +113,12 @@ export class DeliveryAdapter {
       let shipmentId = "DELIVERY" + (100000 + i);
       shipments.push({key: i.toString(), shipmentId});
     }
+    // deliveryShipments = shipments;
+
     */
 
-    shipments.push(shipment);
+    shipments.push(shipment1, shipment2);
     return shipments;
-    // deliveryShipments = shipments;
   }
 
   static updateDeliveryShipments(shipmentId, status, openBoxInfo) {

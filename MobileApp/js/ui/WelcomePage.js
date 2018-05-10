@@ -48,13 +48,15 @@ export class WelcomePage extends Component {
     Alert.alert("Deleted", "Deleted");
   }
 
-  render1() {
+  render() {
     return (
+      <View style={{flex: 1, borderWidth: 1}}>
       <CheckTypeMultiChoice shipmentId={"ABC"} checkId={0}/>
+      </View>
     )
   }
 
-  render() {
+  render1() {
     const { navigate } = this.props.navigation;
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>

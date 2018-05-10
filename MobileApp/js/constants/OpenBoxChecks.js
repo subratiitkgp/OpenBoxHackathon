@@ -19,13 +19,14 @@ export const CheckTypes = {
 export const CheckNames = {
   CATEGORY: {key: "CATEGORY", value: "Category"},
   CONDITION: {key: "CONDITION", value: "Is the condition of the item good ?"},
+  BRAND: {key: "BRAND", value: "Is the brand of the item correct ?"}
 }
 
 export const OpenBoxChecks = {
   MOBILE: [
-      {checkName:CheckNames.CATEGORY, value: "Category", checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:"CONDITION", checkType:CheckTypes.SINGLECHOICE},
-      {checkName:"BRAND",value: "Is the brand correct", checkType:CheckTypes.BOOLEAN},
+      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
+      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
+      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
       {checkName:"COLOR",value: "Color", checkType:CheckTypes.TRISTATE},
       {checkName:"ACCESSORIES",value: "Accessories", checkType:CheckTypes.MULTICHOICE}
   ],
