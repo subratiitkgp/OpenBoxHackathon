@@ -67,8 +67,8 @@ export class DeliveryAdapter {
       SELLER_SMARTCHECK_CHECKS: undefined,
       isSellerOBCheckRequired: true,
       isSellerSCCheckRequired: true,
-      isCustomerOBCheckRequired: true,
-      isCustomerSCCheckRequired: true,
+      isCustomerOBCheckRequired: false,
+      isCustomerSCCheckRequired: false,
       status: "OUT_FOR_DELIVERY",
       reason: undefined,
     }
@@ -90,9 +90,9 @@ export class DeliveryAdapter {
       CUSTOMER_SMARTCHECK_CHECKS: undefined,
       SELLER_SMARTCHECK_CHECKS: undefined,
       isSellerOBCheckRequired: true,
-      isSellerSCCheckRequired: true,
+      isSellerSCCheckRequired: false,
       isCustomerOBCheckRequired: true,
-      isCustomerSCCheckRequired: true,
+      isCustomerSCCheckRequired: false,
       status: "OUT_FOR_DELIVERY",
       reason: undefined,
     }
