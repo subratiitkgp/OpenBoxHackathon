@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Alert, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Alert, Text, View, Image, TouchableOpacity, Button } from 'react-native';
 import { DeliveryAdapter} from '../data/DeliveryAdapter';
 
 export class DeliveryShipmentDetailsPage extends Component {
@@ -24,6 +24,12 @@ export class DeliveryShipmentDetailsPage extends Component {
           <Text>
             {shipmentId}
           </Text>
+          <Button
+          title="Start Open Box"
+          onPress={() => {
+            navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+          }}
+        />
         </View>
     );
   }
