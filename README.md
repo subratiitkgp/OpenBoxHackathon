@@ -34,3 +34,5 @@ Clone the project and Go inside OpenBoxHackathon/MobileApp folder
 npm install
 
 react-native run-android
+
+Open the project in Visual Studio Code and happy coding :)
