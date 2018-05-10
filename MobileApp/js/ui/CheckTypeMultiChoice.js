@@ -3,17 +3,29 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
-import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
-
+import { Category, OpenBoxChecks, CheckNames, CheckTypes } from '../constants/OpenBoxChecks';
+import { CheckUtil } from '../util/CheckUtil';
+import { ShipmentType } from '../constants/ShipmentType';
+import { ShipmentStatus, DeliveryStatus } from '../constants/DeliveryStatus';
 
 export class CheckTypeMultiChoice extends Component {
-
-
   getDummyShipment(shipmentId) {
     return {
       shipmentId,
-      category: "MOBILE",
-      
+      type: ShipmentType.DELIVERY.key,
+      category: Category.MOBILE.key,
+      status: DeliveryStatus.OUT_FOR_DELIVERY,
+      CUSTOMER_OPENBOX: [
+        {
+          checkName: CheckNames.CONDITION,
+          checkData: [
+            "A", "B", "C"
+          ],
+          checkResults: {
+
+          }
+        }
+      ]
     }
   }
 
@@ -32,19 +44,18 @@ export class CheckTypeMultiChoice extends Component {
       }
   }
 
-
   render() {
-    const { push } = this.props.navigation;
     const shipmentId = this.props.shipmentId;
     // let shipment = ShipmentStore.getShipment(shipmentId);
     let shipment = this.getDummyShipment(shipmentId);
-    const openBoxChecks = shipment.openBoxChecks;
+    const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
+
+    const checks = shipment[checkScenario];
+
     const checkId = this.props.checkId;
     const checksLength = OpenBoxChecks[shipment.category].length;
     const staticCheckValue = OpenBoxChecks[shipment.category][checkId].value;
   
-    
-
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
       <Text>

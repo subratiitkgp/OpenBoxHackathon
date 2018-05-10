@@ -36,8 +36,7 @@ export class ShipmentStore {
         customerCity: 'string',
         customerPincode: 'string',
         category: 'string',
-        checks: 'string[]', // Serialized
-        checkData: 'string[]', // Serialized
+        openBoxChecks: 'string[]', // Serialized
         status: 'string',
         reason: 'string'
       }
@@ -47,7 +46,8 @@ export class ShipmentStore {
   static getCheckSchema() {
     return {
       checkName: 'string',
-      checkData: 'string'
+      checkData: 'string',
+      checkResult: 'string'
     }
   }
 }

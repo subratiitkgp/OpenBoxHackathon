@@ -16,6 +16,11 @@ export const CheckTypes = {
   BOOLEANWITHTEXT: {key:"BOOLEANWITHTEXT", value:"Boolean with text"}
 }
 
+export const CheckNames = {
+  CATEGORY: {key: "CATEGORY", value: "Category"},
+  CONDITION: {key: "CONDITION", value: "Condition"}
+}
+
 export const OpenBoxChecks = {
   MOBILE: [
       {checkName:"CATEGORY",value: "Category", checkType:CheckTypes.BOOLEANWITHTEXT},

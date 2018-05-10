@@ -1,6 +1,7 @@
 'use strict';
 
 export const DeliveryStatus = {
+    OUT_FOR_DELIVERY: {key: "OUT_FOR_DELIVERY", value: "Out For Delivery"},
     DELIVERED: {key: "DELIVERED", value: "Delivered"},
     UNDELIVERED_AGENT_ISSUE: {key: "UNDELIVERED_AGENT_ISSUE", value: "Undelivered Agent Issue"},
     UNDELIVERED_CUSTOMER_ISSUE: {key: "UNDELIVERED_CUSTOMER_ISSUE", value: "Undelivered Customer Issue"},

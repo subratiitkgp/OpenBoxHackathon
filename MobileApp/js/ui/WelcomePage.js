@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Alert, View, Button } from 'react-native';
 import { Store } from '../data/Store';
 import { ShipmentStore } from '../data/ShipmentStore';
+import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 
 const shipmentCount = 1;
 
@@ -44,6 +45,12 @@ export class WelcomePage extends Component {
     ShipmentStore.deleteAllShipments();
     shipmentCount = 1;
     Alert.alert("Deleted", "Deleted");
+  }
+
+  render1() {
+    return (
+      <CheckTypeMultiChoice shipmentId={"ABC"} checkId={0}/>
+    )
   }
 
   render() {
