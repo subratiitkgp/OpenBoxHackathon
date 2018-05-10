@@ -7,6 +7,7 @@ import { ShipmentStore } from '../data/ShipmentStore';
 
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 import { CheckTypeBoolean } from './CheckTypeBoolean';
+import {CheckTypeSingleChoice} from './CheckTypeSingleChoice';
 
 const shipmentCount = 1;
 
@@ -53,7 +54,7 @@ export class WelcomePage extends Component {
   render1() {
     return (
       <View style={{flex: 1, borderWidth: 1}}>
-      <CheckTypeMultiChoice shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
+      <CheckTypeSingleChoice shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
       </View>
     )
   }
