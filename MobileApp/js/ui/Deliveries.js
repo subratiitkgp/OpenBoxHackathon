@@ -11,9 +11,9 @@ export class Deliveries extends Component {
     super(props);
   }
 
-  renderShipment(shipmentId) {
+  renderShipment(shipment) {
       return (
-        <Delivery shipmentId={shipmentId} navigation={this.props.navigation}/>
+        <Delivery shipment={shipment} navigation={this.props.navigation}/>
       );
   }
 
@@ -27,7 +27,7 @@ export class Deliveries extends Component {
           data={shipments}
           keyExtractor={(shipment) => shipment.key}
           initialNumToRender={1}
-          renderItem={(shipment) => this.renderShipment(shipment.item.shipmentId)}
+          renderItem={(shipment) => this.renderShipment(shipment.item)}
         />
       </View>
     )
