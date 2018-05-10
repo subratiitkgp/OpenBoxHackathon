@@ -17,9 +17,12 @@ export const CheckTypes = {
 }
 
 export const CheckNames = {
-  CATEGORY: {key: "CATEGORY", value: "Category"},
+  CATEGORY: {key: "CATEGORY", value: "Is the Category of the item correct ?"},
   CONDITION: {key: "CONDITION", value: "Is the condition of the item good ?"},
   BRAND: {key: "BRAND", value: "Is the brand of the item correct ?"}
+  COLOR: {key: "COLOR", value: "Is the color of the item correct ?"}
+  SIZE:  {key: "SIZE", value: "Is the size of the item correct ?"}
+  ACCESSORIES : {key: "ACCESSORIES", value: "Are all the accessories present ?"}
 }
 
 export const OpenBoxChecks = {
@@ -27,21 +30,28 @@ export const OpenBoxChecks = {
       {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
       {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
       {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
-      {checkName:"COLOR",value: "Color", checkType:CheckTypes.TRISTATE},
+      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE},
       {checkName:"ACCESSORIES",value: "Accessories", checkType:CheckTypes.MULTICHOICE}
   ],
   APPAREL: [
-      {checkName:"CATEGORY",value: "Category", checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:"CONDITION",value: "Item Condition", checkType:CheckTypes.SINGLECHOICE},
-      {checkName:"BRAND",value: "Brand", checkType:CheckTypes.BOOLEAN},
-      {checkName:"SIZE",value: "Size", checkType:CheckTypes.BOOLEAN},
-      {checkName:"COLOR",value: "Color", checkType:CheckTypes.TRISTATE}
+      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
+      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
+      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
+      {checkName:CheckNames.SIZE, checkType:CheckTypes.BOOLEAN},
+      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE}
   ],
   LARGE: [
-      {checkName:"CATEGORY",value: "Category", checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:"CONDITION",value: "Item Condition", checkType:CheckTypes.SINGLECHOICE},
-      {checkName:"BRAND",value: "Brand", checkType:CheckTypes.BOOLEAN},
-      {checkName:"COLOR",value: "Color", checkType:CheckTypes.TRISTATE},
-      {checkName:"ACCESSORIES",value: "Accessories", checkType:CheckTypes.MULTICHOICE}
+      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
+      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
+      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
+      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE},
+      {checkName:CheckNames.ACCESSORIES, checkType:CheckTypes.MULTICHOICE}
+  ],
+  BEAUTY: [
+      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
+      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
+      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
+      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE},
   ]
+
 }
