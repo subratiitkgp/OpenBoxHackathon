@@ -48,7 +48,7 @@ export class WelcomePage extends Component {
     Alert.alert("Deleted", "Deleted");
   }
 
-  render() {
+  render1() {
     return (
       <View style={{flex: 1, borderWidth: 1}}>
       <CheckTypeMultiChoice shipmentId={"ABC"} checkId={0}/>
@@ -56,7 +56,7 @@ export class WelcomePage extends Component {
     )
   }
 
-  render1() {
+  render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>

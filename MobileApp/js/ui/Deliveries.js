@@ -8,8 +8,6 @@ import { DeliveryAdapter } from '../data/DeliveryAdapter';
 export class Deliveries extends Component {
   constructor(props) {
     super(props);
-
-    DeliveryAdapter.fetchDeliveryShipments();
   }
 
   renderShipment(shipmentId) {
@@ -19,7 +17,7 @@ export class Deliveries extends Component {
   }
 
   render() {
-    const shipments = DeliveryAdapter.getDeliveryShipments();
+    const shipments = DeliveryAdapter.fetchDeliveryShipments();
 
     return (
       <View>
