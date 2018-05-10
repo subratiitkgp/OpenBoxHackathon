@@ -1,3 +1,5 @@
+import { StringUtil } from '../util/StringUtil';
+
 'use strict';
 
 const Realm = require('realm');
@@ -41,6 +43,6 @@ export class Store {
   }
 
   static copyFromRealm(realmObject) {
-    return JSON.parse(JSON.stringify(realmObject));
+    return StringUtil.cloneObject(realmObject);
   }
 }

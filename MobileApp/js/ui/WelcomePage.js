@@ -20,16 +20,13 @@ export class WelcomePage extends Component {
     console.log(ShipmentStore.getAllShipments());
   }
 
+  getDummyShipment(shipmentCount) {
+    return (DeliveryAdapter.fetchDeliveryShipments())[shipmentCount];
+  }
+
   createNewShipment() {
-    const shipmentId = "DELIVERY" + (100000 + shipmentCount);
-    const shipment = {
-      shipmentId,
-      status: "OFD",
-      reason: ""
-    };
-
+    const shipment = this.getDummyShipment(shipmentCount);
     ShipmentStore.saveShipment(shipment);
-
     shipmentCount = shipmentCount + 1;
     Alert.alert("Created", "Created");
   }
