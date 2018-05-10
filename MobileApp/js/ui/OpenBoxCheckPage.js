@@ -7,6 +7,7 @@ import { CheckTypeBoolean } from './CheckTypeBoolean';
 import { CheckTypeBooleanWithText } from './CheckTypeBooleanWithText';
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 import { CheckTypeSingleChoice } from './CheckTypeSingleChoice';
+import { CheckTypeTriState } from './CheckTypeTriState';
 import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
 
 export class OpenBoxCheckPage extends Component {
@@ -51,7 +52,6 @@ export class OpenBoxCheckPage extends Component {
   }
 
   render() {
-    console.log("opening page again");
     const { navigate } = this.props.navigation;
     const { navigation } = this.props;
 
@@ -64,12 +64,13 @@ export class OpenBoxCheckPage extends Component {
     const openBoxChecks = OpenBoxChecks[category];
 
     const checkId = this.props.navigation.getParam('checkId');
-    console.log(checkId);
 
     const openBoxCheck = openBoxChecks[checkId];
 
     const checkType = openBoxCheck.checkType;
-    console.log(checkType);
+    console.log("printing values")
+    console.log(checkId);
+    console.log(checkType.key);
 
     if(checkType.key===CheckTypes.MULTICHOICE.key) {
       return this.renderCheckTypeMultiChoice(shipmentId, checkId, navigation)

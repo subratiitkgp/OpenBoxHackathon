@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Text, View, Button, Alert } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
 import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
+import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';
 
 
 export class CheckTypeBooleanWithText extends Component {
@@ -28,13 +29,12 @@ export class CheckTypeBooleanWithText extends Component {
       if(!this.isLastCheck(checkId, checksLength)) {
         this.props.navigation.push('OpenBoxCheckPage', {shipmentId: shipmentId, checkId: checkId+1})
       } else {
-        this.props.navigation.push('DeliveryShipmentsDetailPage', {shipmentId: shipmentId, checkId: checkId})
+        this.props.navigation.pop(checkId+1)
       }
   }
 
 
   render() {
-    console.log("back to boolean with text");
     const { push } = this.props.navigation;
     const shipmentId = this.props.shipmentId;
     // let shipment = ShipmentStore.getShipment(shipmentId);
@@ -52,7 +52,7 @@ export class CheckTypeBooleanWithText extends Component {
         {staticCheckValue}
       </Text>
       <Button
-        title="Yes"
+        title="Correct"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
           {text:"Ok", onPress: () => this.navigateToNextPage(shipmentId, checkId, checksLength)},
@@ -60,13 +60,15 @@ export class CheckTypeBooleanWithText extends Component {
         ])}
         />
       <Button
-        title="No"
+        title="Incorrect"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
         [ 
-          {text:"Ok", onPress:() => this.navigateToNextPage(shipmentId, checkId, checksLength)},
+          {text:"Ok", onPress:() => this.props.navigation.pop(checkId+1)},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
         ])}      
         />
+        
+
       </View>
       )
     }

@@ -13,6 +13,8 @@ import { TaskPage } from './js/ui/TaskPage';
 import { DeliveryShipmentDetailsPage } from './js/ui/DeliveryShipmentDetailsPage';
 import { PickupShipmentDetailsPage } from './js/ui/PickupShipmentDetailsPage';
 import { OpenBoxCheckPage } from './js/ui/OpenBoxCheckPage';
+import { DummyPage } from './js/ui/DummyPage';
+
 
 export const App = createStackNavigator({
   HomePage: { screen: WelcomePage },
@@ -20,5 +22,6 @@ export const App = createStackNavigator({
   DeliveryShipmentDetailsPage: { screen: DeliveryShipmentDetailsPage },
   PickupShipmentDetailsPage: { screen: PickupShipmentDetailsPage },
   OpenBoxCheckPage: {screen: OpenBoxCheckPage},
+  DummyPage: {screen: DummyPage}
 });
 
