@@ -10,6 +10,7 @@ import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 import { CheckTypeBoolean } from './CheckTypeBoolean';
 import {CheckTypeSingleChoice} from './CheckTypeSingleChoice';
 import {CheckTypeTriState} from './CheckTypeTriState';
+import {CheckTypeBooleanWithText} from './CheckTypeBooleanWithText';
 
 const shipmentCount = 1;
 
@@ -53,15 +54,15 @@ export class WelcomePage extends Component {
     Alert.alert("Deleted", "Deleted");
   }
 
-  render() {
+  render1() {
     return (
       <View style={{flex: 1, borderWidth: 1}}>
-      <CheckTypeTriState shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
+      <CheckTypeBooleanWithText shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
       </View>
     )
   }
 
-  render1() {
+  render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
