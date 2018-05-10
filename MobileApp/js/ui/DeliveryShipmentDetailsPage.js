@@ -89,29 +89,35 @@ export class DeliveryShipmentDetailsPage extends Component {
             {this.getCheckIcon("SOB", sellerOpenBox)}
           </View>
           <Button
-          title="Start Open Box"
-          onPress={() => {
-            navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
-          }}
-        />
-        <Picker 
-        mode={"dropdown"}
-        style={{width:270, height: 50}} 
-        selectedValue={this.state.pickerValue} 
-        onValueChange={(itemValue, itemIndex) => this.setState({pickerValue: itemValue, reasonPickerValue: Object.entries(DeliveryReason[pickerValue])[0]})}>
-        {pickerItems}
-        </Picker>
-        <Picker 
-        mode={"dropdown"}
-        style={{width:270, height: 50}} 
-        selectedValue={this.state.reasonPickerValue} 
-        onValueChange={(itemValue, itemIndex) => this.setState({reasonPickerValue: itemValue})}>
-        {reasonPickerItems}
-        </Picker>  
+            title="Start Open Box"
+            onPress={() => {
+              navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+            }}
+          />
+          <View style={{margin: 10, width: "100%", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderWidth: 1}}>
+            <Text>Delivery Status</Text>
+            <Picker 
+              mode={"dropdown"}
+              style={{width:270, height: 50}} 
+              selectedValue={this.state.pickerValue} 
+              onValueChange={(itemValue, itemIndex) => this.setState({pickerValue: itemValue, reasonPickerValue: Object.entries(DeliveryReason[pickerValue])[0]})}>
+                {pickerItems}
+            </Picker>
+          </View>
+          <View style={{margin: 10, width: "100%", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderWidth: 1}}>
+            <Text>Reason</Text>
+            <Picker 
+              mode={"dropdown"}
+              style={{width:270, height: 50}} 
+              selectedValue={this.state.reasonPickerValue} 
+              onValueChange={(itemValue, itemIndex) => this.setState({reasonPickerValue: itemValue})}>
+                {reasonPickerItems}
+            </Picker>  
+          </View>
         
-        <Button
-              title="Update Delivery Status"
-              onPress={() => Alert.alert("Confirmation","Are you sure you want to update this delivery status",
+          <Button
+            title="Update Delivery Status"
+            onPress={() => Alert.alert("Confirmation","Are you sure you want to update this delivery status",
               [ 
                 {text:"Ok", onPress:() => this.navigateToListPageAndSaveState(shipment, this.state.pickerValue, this.state.reasonPickerValue)},
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}

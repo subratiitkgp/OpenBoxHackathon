@@ -64,13 +64,15 @@ export class WelcomePage extends Component {
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
         <Button
-          title="Facility Manager"
-          onPress={() => navigate('TaskPage', { name: 'Jane' })}
-        />
-        <Button
           title="Delivery Executive"
           onPress={() => navigate('TaskPage', { name: 'Jane' })}
         />
+      </View>
+    )
+  }
+}
+
+/*
         <Button
           title="Print Shipments"
           onPress={() => this.printShipments()}
@@ -87,7 +89,4 @@ export class WelcomePage extends Component {
           title="Delete Shipments"
           onPress={() => this.deleteAllShipments()}
         />
-      </View>
-    )
-  }
-}
+        */
