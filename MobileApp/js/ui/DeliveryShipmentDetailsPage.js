@@ -19,6 +19,10 @@ export class DeliveryShipmentDetailsPage extends Component {
     const reason = reasonPickerValue;
 
     if (status === DeliveryStatus.DELIVERED.key) {
+      if(!this.areAllChecksPassed(shipment)) {
+        Alert.alert("Confirmation","All checks are not passed. Shipment cannot be delivered.");
+        return;
+      }
       this.props.navigation.navigate('SignaturePage', {shipment, status, reason});
       return;
     }
@@ -27,6 +31,20 @@ export class DeliveryShipmentDetailsPage extends Component {
     shipment.reason = reason;
     this.props.navigation.pop();
   }
+
+  areAllChecksPassed(shipment) {
+    const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
+    let flag = true;
+    custOpenBoxChecks.forEach(check => {
+      if(check.checkResults === undefined || check.checkResults=== 'FAILED') {
+        flag =  false;
+      }
+    });
+    return flag;
+  }
+
+
+
 
   render() {
     const { navigation } = this.props;
