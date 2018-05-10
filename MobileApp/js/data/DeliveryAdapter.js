@@ -47,7 +47,11 @@ export class DeliveryAdapter {
         },
         {
           checkName: 'CONDITION',
-          checkData: undefined,
+          checkData: [
+            { key : "CHARGER", value : "Charger" },
+            { key: "HEADPHONE", value: "Headphone" },
+            { key: "BATTERY", value: "Battery" }
+          ],
           checkInfo: "BLACK",
           checkResults: undefined
         },

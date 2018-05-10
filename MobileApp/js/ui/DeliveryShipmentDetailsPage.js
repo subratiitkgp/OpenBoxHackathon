@@ -15,6 +15,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   navigateToListPageAndSaveState(shipment, pickerValue, reasonPickerValue) {
+    console.log(shipment);
     shipment.status = pickerValue
     console.log(reasonPickerValue)
     shipment.reason = reasonPickerValue
