@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, Button, Alert } from 'react-native';
+import { Text, View, Button, Alert, TextInput } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
 import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
 import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';
@@ -9,6 +9,12 @@ import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';
 
 export class CheckTypeBooleanWithText extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showTextInput: false
+    }
+  }
 
   getDummyShipment(shipmentId) {
     return {
@@ -39,13 +45,10 @@ export class CheckTypeBooleanWithText extends Component {
     const shipmentId = this.props.shipmentId;
     // let shipment = ShipmentStore.getShipment(shipmentId);
     let shipment = this.getDummyShipment(shipmentId);
-    const openBoxChecks = shipment.openBoxChecks;
     const checkId = this.props.checkId;
     const checksLength = OpenBoxChecks[shipment.category].length;
     const staticCheckValue = OpenBoxChecks[shipment.category][checkId].value;
-  
     
-
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
       <Text>
@@ -61,14 +64,27 @@ export class CheckTypeBooleanWithText extends Component {
         />
       <Button
         title="Incorrect"
-        onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
+        onPress={() => Alert.alert("Confirmation", "Please enter the product category you actually received",
         [ 
-          {text:"Ok", onPress:() => this.props.navigation.pop(checkId+1)},
+          {text:"Ok", onPress: () => this.setState({showTextInput: true})},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
-        ])}      
+        ])} 
         />
-        
-
+        <View>
+        {this.state.showTextInput===true ? 
+          <View>
+            <TextInput style={{flex:1, justifyContent: 'space-evenly', placeholder: 'What was the received product?'}}/>
+            <Button
+              title="Save"
+              onPress={() => Alert.alert("This will take you back to main page.",
+              [ 
+                {text:"Ok", onPress:() => this.props.navigation.pop(checkId+1)},
+                {text:"Cancel", onPress: () => console.log("Cancel pressed")}
+              ])} 
+            />
+          </View>
+          :null}
+        </View>
       </View>
       )
     }

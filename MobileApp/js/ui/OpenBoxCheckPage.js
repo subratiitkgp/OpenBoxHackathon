@@ -69,7 +69,6 @@ export class OpenBoxCheckPage extends Component {
 
     const checkType = openBoxCheck.checkType;
     console.log("printing values")
-    console.log(checkId);
     console.log(checkType.key);
 
     if(checkType.key===CheckTypes.MULTICHOICE.key) {
