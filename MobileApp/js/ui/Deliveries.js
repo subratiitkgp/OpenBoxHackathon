@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Delivery } from './Delivery';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
+import { DeliveryStatus } from '../constants/DeliveryStatus';
 
 export class Deliveries extends Component {
   constructor(props) {
@@ -11,14 +12,14 @@ export class Deliveries extends Component {
   }
 
   renderShipment(shipmentId) {
-    return (
-      <Delivery shipmentId={shipmentId} navigation={this.props.navigation}/>
-    );
+      return (
+        <Delivery shipmentId={shipmentId} navigation={this.props.navigation}/>
+      );
   }
 
   render() {
-    const shipments = DeliveryAdapter.fetchDeliveryShipments();
-
+    let shipments = DeliveryAdapter.fetchDeliveryShipments();
+    shipments=shipments.filter(shipment => shipment.status===DeliveryStatus.OUT_FOR_DELIVERY.key)
     return (
       <View>
         <FlatList

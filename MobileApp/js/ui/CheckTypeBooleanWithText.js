@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, Button, Alert, TextInput } from 'react-native';
+import { Text, View, Button, Alert, TextInput, Picker } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
 import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
 import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';

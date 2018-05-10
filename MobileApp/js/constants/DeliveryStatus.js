@@ -11,6 +11,9 @@ export const DeliveryStatus = {
 export const DeliveryReason = {
     DELIVERED: {
     },
+    OUT_FOR_DELIVERY: {
+
+    },
     UNDELIVERED_AGENT_ISSUE: {
         RAIN: {key: "RAIN", value: "Rain"},
         VEHICLE_ISSUE: {key: "VEHICLE_ISSUE", value: "Vehicle Issue"},
