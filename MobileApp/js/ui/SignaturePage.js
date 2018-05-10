@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import { Alert, View, Button, Picker, StyleSheet } from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
- 
+import {DeliveryAdapter} from '../data/DeliveryAdapter';
+
 export class SignaturePage extends Component {
   static navigationOptions = {
     title: "Signature"
