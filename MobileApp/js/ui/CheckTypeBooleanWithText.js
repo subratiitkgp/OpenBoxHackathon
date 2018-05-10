@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, TextInput, Picker } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
-import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
+import { OpenBoxChecks, CheckTypes, CheckNames } from '../constants/OpenBoxChecks';
 import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
@@ -13,7 +13,7 @@ export class CheckTypeBooleanWithText extends Component {
     constructor(props) {
           super(props);
           const shipmentId = this.props.shipmentId;
-          let shipment = this.getDummyShipment1(shipmentId);
+          let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
 
           // let shipment = ShipmentStore.getShipment(shipmentId);
           const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
@@ -21,7 +21,10 @@ export class CheckTypeBooleanWithText extends Component {
           const checkId = this.props.checkId;
           const check = checks[checkId];
           const checksLength = OpenBoxChecks[shipment.category].length;
-          const checkQuestionHeader = OpenBoxChecks[shipment.category][checkId].value;
+
+          const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
+          const checkQuestionHeader = CheckNames[checkName].value;
+
           this.state = {
                 showTextInput: false
               }
@@ -34,18 +37,6 @@ export class CheckTypeBooleanWithText extends Component {
                 check,
                 checkId
               };
-  }
-
-  getDummyShipment1(shipmentId) {
-     return (DeliveryAdapter.fetchDeliveryShipments())[0];
-   }
-
-  getDummyShipment(shipmentId) {
-    return {
-      shipmentId,
-      category: "MOBILE",
-      
-    }
   }
 
   isLastCheck(checkId, checksLength) {

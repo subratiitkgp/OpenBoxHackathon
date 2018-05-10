@@ -15,6 +15,10 @@ import {CheckTypeBooleanWithText} from './CheckTypeBooleanWithText';
 const shipmentCount = 1;
 
 export class WelcomePage extends Component {
+  static navigationOptions = {
+    title: "Welcome"
+  };
+
   constructor(props) {
     super(props);
     Store.init([ShipmentStore.getShipmentSchema()]);

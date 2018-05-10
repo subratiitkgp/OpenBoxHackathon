@@ -27,31 +27,30 @@ export const CheckNames = {
 
 export const OpenBoxChecks = {
   MOBILE: [
-      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
-      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
-      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE},
-      {checkName:"ACCESSORIES",value: "Accessories", checkType:CheckTypes.MULTICHOICE}
+      {checkName:CheckNames.CATEGORY.key, checkType:CheckTypes.BOOLEANWITHTEXT.key},
+      {checkName:CheckNames.CONDITION.key, checkType:CheckTypes.SINGLECHOICE.key},
+      {checkName:CheckNames.BRAND.key, checkType:CheckTypes.BOOLEAN.key},
+      {checkName:CheckNames.COLOR.key, checkType:CheckTypes.TRISTATE.key},
+      {checkName:CheckNames.ACCESSORIES.key, checkType:CheckTypes.MULTICHOICE.key}
   ],
   APPAREL: [
-      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
-      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
-      {checkName:CheckNames.SIZE, checkType:CheckTypes.BOOLEAN},
-      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE}
+      {checkName:CheckNames.CATEGORY.key, checkType:CheckTypes.BOOLEANWITHTEXT.key},
+      {checkName:CheckNames.CONDITION.key, checkType:CheckTypes.SINGLECHOICE.key},
+      {checkName:CheckNames.BRAND.key, checkType:CheckTypes.BOOLEAN.key},
+      {checkName:CheckNames.SIZE.key, checkType:CheckTypes.BOOLEAN.key},
+      {checkName:CheckNames.COLOR.key, checkType:CheckTypes.TRISTATE.key}
   ],
   LARGE: [
-      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
-      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
-      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE},
-      {checkName:CheckNames.ACCESSORIES, checkType:CheckTypes.MULTICHOICE}
+      {checkName:CheckNames.CATEGORY.key, checkType:CheckTypes.BOOLEANWITHTEXT.key},
+      {checkName:CheckNames.CONDITION.key, checkType:CheckTypes.SINGLECHOICE.key},
+      {checkName:CheckNames.BRAND.key, checkType:CheckTypes.BOOLEAN.key},
+      {checkName:CheckNames.COLOR.key, checkType:CheckTypes.TRISTATE.key},
+      {checkName:CheckNames.ACCESSORIES.key, checkType:CheckTypes.MULTICHOICE.key}
   ],
   BEAUTY: [
-      {checkName:CheckNames.CATEGORY, checkType:CheckTypes.BOOLEANWITHTEXT},
-      {checkName:CheckNames.CONDITION, checkType:CheckTypes.SINGLECHOICE},
-      {checkName:CheckNames.BRAND, checkType:CheckTypes.BOOLEAN},
-      {checkName:CheckNames.COLOR, checkType:CheckTypes.TRISTATE},
+      {checkName:CheckNames.CATEGORY.key, checkType:CheckTypes.BOOLEANWITHTEXT.key},
+      {checkName:CheckNames.CONDITION.key, checkType:CheckTypes.SINGLECHOICE.key},
+      {checkName:CheckNames.BRAND.key, checkType:CheckTypes.BOOLEAN.key},
+      {checkName:CheckNames.COLOR.key, checkType:CheckTypes.TRISTATE.key},
   ]
-
 }

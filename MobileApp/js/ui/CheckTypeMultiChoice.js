@@ -14,20 +14,24 @@ export class CheckTypeMultiChoice extends Component {
     super(props);
 
     const shipmentId = this.props.shipmentId;
-    // let shipment = ShipmentStore.getShipment(shipmentId);
-    let shipment = this.getDummyShipment1(shipmentId);
+    let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
     const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
 
     const checks = shipment[checkScenario];
     const checkId = this.props.checkId;
     const check = checks[checkId];
 
+    console.log()
+
     const checkData = check.checkData;
     const checkResults = check.checkResults;
+
+    const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
+    const checkQuestionHeader = CheckNames[checkName].value;
     
     this.localProps = {
       checksLength: OpenBoxChecks[shipment.category].length,
-      checkQuestionHeader: OpenBoxChecks[shipment.category][checkId].value,
+      checkQuestionHeader,
       checkData: check.checkData,
       checkResults: check.checkResults,
       shipment,
@@ -102,40 +106,6 @@ export class CheckTypeMultiChoice extends Component {
     let checkBoxValues = this.state.checkBoxValues;
     checkBoxValues[index] = value;
     this.setState(checkBoxValues);
-  }
-
-  getDummyShipment1(shipmentId) {
-    return (DeliveryAdapter.fetchDeliveryShipments())[0];
-  }
-
-  getDummyShipment(shipmentId) {
-    return {
-      shipmentId,
-      type: ShipmentType.DELIVERY.key,
-      category: Category.MOBILE.key,
-      status: DeliveryStatus.OUT_FOR_DELIVERY,
-      CUSTOMER_OPENBOX: [
-        {
-          checkName: CheckNames.CONDITION,
-          checkData: [
-            {
-              key: "A",
-              value: "A"
-            },
-            {
-              key: "B",
-              value: "B"
-            },
-            {
-              key: "C",
-              value: "C"
-            }
-          ],
-          checkResults: {
-          }
-        }
-      ]
-    }
   }
 
   isLastCheck(checkId, checksLength) {

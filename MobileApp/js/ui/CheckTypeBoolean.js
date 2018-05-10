@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
-import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
+import { OpenBoxChecks, CheckTypes, CheckNames } from '../constants/OpenBoxChecks';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
 
@@ -12,7 +12,7 @@ export class CheckTypeBoolean extends Component {
       super(props);
 
       const shipmentId = this.props.shipmentId;
-      let shipment = this.getDummyShipment(shipmentId);
+      let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
       const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
 
       const checks = shipment[checkScenario];
@@ -22,18 +22,16 @@ export class CheckTypeBoolean extends Component {
       const checkResults = check.checkResults;
 
       const checksLength = OpenBoxChecks[shipment.category].length;
-      const checkQuestionHeader = OpenBoxChecks[shipment.category][checkId].value;
+      
+      const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
+      const checkQuestionHeader = CheckNames[checkName].value;
 
       this.localProps = {
         checksLength: OpenBoxChecks[shipment.category].length,
-        checkQuestionHeader: OpenBoxChecks[shipment.category][checkId].value,
+        checkQuestionHeader,
         checkResults: check.checkResults,
         check
       };
-  }
-
-  getDummyShipment(shipmentId) {
-    return (DeliveryAdapter.fetchDeliveryShipments())[0];
   }
 
   isLastCheck(checkId, checksLength) {
