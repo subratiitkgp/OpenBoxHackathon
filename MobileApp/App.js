@@ -18,8 +18,6 @@ import { CheckTypeMultiChoice } from './js/ui/CheckTypeMultiChoice';
 import { CheckTypeTriState } from './js/ui/CheckTypeTriState';
 import { CheckTypeBooleanWithText } from './js/ui/CheckTypeBooleanWithText';
 
-
-
 export const App = createStackNavigator({
   HomePage: { screen: WelcomePage },
   TaskPage: { screen: TaskPage },

@@ -29,9 +29,25 @@ export class ShipmentStore {
       primaryKey: "shipmentId",
       properties: {
         shipmentId: 'string',
+        customerId: 'string',
+        customerName: 'string',
+        customerAddress1: 'string',
+        customerAddress2: 'string',
+        customerCity: 'string',
+        customerPincode: 'string',
+        category: 'string',
+        checks: 'string[]', // Serialized
+        checkData: 'string[]', // Serialized
         status: 'string',
         reason: 'string'
       }
+    }
+  }
+
+  static getCheckSchema() {
+    return {
+      checkName: 'string',
+      checkData: 'string'
     }
   }
 }
