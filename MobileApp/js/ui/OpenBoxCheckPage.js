@@ -11,36 +11,67 @@ import { CheckTypeTriState } from './CheckTypeTriState';
 import { OpenBoxChecks, CheckTypes } from '../constants/OpenBoxChecks';
 
 export class OpenBoxCheckPage extends Component {
+  constructor(props) {
+    super(props);
 
-  renderCheckTypeBoolean(shipmentId, checkId, navigation) {
+    const shipmentId = this.props.navigation.getParam('shipmentId');
+    let shipment = this.getDummyShipment(shipmentId);
+    const category = shipment.category;
+    const openBoxChecks = OpenBoxChecks[category];
+    const checkId = this.props.navigation.getParam('checkId');
+    const openBoxCheck = openBoxChecks[checkId];
+    const checkType = openBoxCheck.checkType;
+
+    this.localProps = {
+      checkType,
+      shipmentId,
+      checkId
+    };
+
+    this.ChangeThisTitle(checkType.value);
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    const {state} = navigation;
+    let title = `${state.params.title}`;
+    if (title === undefined) title = "Loading";
+    return { title };
+  };
+
+  ChangeThisTitle(titleText) {
+    const {setParams} = this.props.navigation;
+    setParams({ title: titleText })
+  }
+
+  renderCheckTypeBoolean() {
     return (
-      <CheckTypeBoolean shipmentId={shipmentId} checkId={checkId} navigation={navigation}/>
+      <CheckTypeBoolean shipmentId={this.localProps.shipmentId} checkId={this.localProps.checkId} navigation={this.props.navigation}/>
     )
   }
 
-  renderCheckTypeTriState(shipmentId, checkId, navigation) {
+  renderCheckTypeTriState() {
     return (
-      <CheckTypeTriState shipmentId={shipmentId} checkId={checkId} navigation={navigation}/>
+      <CheckTypeTriState shipmentId={this.localProps.shipmentId} checkId={this.localProps.checkId} navigation={this.props.navigation}/>
     )
   }
 
-  renderCheckTypeBooleanWithText(shipmentId, checkId, navigation) {
+  renderCheckTypeBooleanWithText() {
     return (
       <View style={{flex: 1}}>
-      <CheckTypeBooleanWithText shipmentId={shipmentId} checkId={checkId} navigation={navigation}/>
+      <CheckTypeBooleanWithText shipmentId={this.localProps.shipmentId} checkId={this.localProps.checkId} navigation={this.props.navigation}/>
       </View>
     )
   }
 
-  renderCheckTypeMultiChoice(shipmentId, checkId, navigation) {
+  renderCheckTypeMultiChoice() {
     return (
-      <CheckTypeMultiChoice shipmentId={shipmentId} checkId={checkId} navigation={navigation}/>
+      <CheckTypeMultiChoice shipmentId={this.localProps.shipmentId} checkId={this.localProps.checkId} navigation={this.props.navigation}/>
     )
   }
 
-  renderCheckTypeSingleChoice(shipmentId, checkId, navigation) {
+  renderCheckTypeSingleChoice() {
     return (
-      <CheckTypeSingleChoice shipmentId={shipmentId} checkId={checkId} navigation={navigation}/>
+      <CheckTypeSingleChoice shipmentId={this.localProps.shipmentId} checkId={this.localProps.checkId} navigation={this.props.navigation}/>
     )
   }
 
@@ -55,37 +86,20 @@ export class OpenBoxCheckPage extends Component {
     const { navigate } = this.props.navigation;
     const { navigation } = this.props;
 
-    const shipmentId = this.props.navigation.getParam('shipmentId');
-    // let shipment = ShipmentStore.getShipment(shipmentId);
-    let shipment = this.getDummyShipment(shipmentId);
-
-    const category = shipment.category;
-
-    const openBoxChecks = OpenBoxChecks[category];
-
-    const checkId = this.props.navigation.getParam('checkId');
-
-    const openBoxCheck = openBoxChecks[checkId];
-
-    const checkType = openBoxCheck.checkType;
-    console.log("printing values")
-    console.log(checkType.key);
-
-    if(checkType.key===CheckTypes.MULTICHOICE.key) {
-      return this.renderCheckTypeMultiChoice(shipmentId, checkId, navigation)
+    if(this.localProps.checkType.key===CheckTypes.MULTICHOICE.key) {
+      return this.renderCheckTypeMultiChoice();
     }
-    if(checkType.key===CheckTypes.SINGLECHOICE.key) {
-      return this.renderCheckTypeSingleChoice(shipmentId, checkId, navigation)
+    if(this.localProps.checkType.key===CheckTypes.SINGLECHOICE.key) {
+      return this.renderCheckTypeSingleChoice();
     }
-    if(checkType.key===CheckTypes.BOOLEAN.key) {
-      return this.renderCheckTypeBoolean(shipmentId, checkId, navigation)
+    if(this.localProps.checkType.key===CheckTypes.BOOLEAN.key) {
+      return this.renderCheckTypeBoolean();
     }
-    if(checkType.key===CheckTypes.TRISTATE.key) {
-      return this.renderCheckTypeTriState(shipmentId, checkId, navigation)
+    if(this.localProps.checkType.key===CheckTypes.TRISTATE.key) {
+      return this.renderCheckTypeTriState();
     }
-    if(checkType.key===CheckTypes.BOOLEANWITHTEXT.key) {
-      return this.renderCheckTypeBooleanWithText(shipmentId, checkId, navigation)
+    if(this.localProps.checkType.key===CheckTypes.BOOLEANWITHTEXT.key) {
+      return this.renderCheckTypeBooleanWithText();
     }
   }
-
 }
