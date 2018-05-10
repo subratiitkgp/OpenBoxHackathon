@@ -28,6 +28,21 @@ export class DeliveryShipmentDetailsPage extends Component {
     this.props.navigation.pop();
   }
 
+  getCheckIcon(tag, enabled) {
+    if (enabled) return (
+      <View>
+        <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
+        <Text>{tag}</Text>
+      </View>
+    );
+    else return (
+      <View>
+        <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>
+        <Text>{tag}</Text>
+      </View>
+    )
+  }
+
   render() {
     const { navigation } = this.props;
     const shipmentId = navigation.getParam('shipmentId');
@@ -55,38 +70,8 @@ export class DeliveryShipmentDetailsPage extends Component {
             {shipmentId}
           </Text>
           <View style={{flexDirection: 'row'}}>
-            {custOpenBox===true ? 
-              <View>
-              <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
-                <Text>
-                  {"COB"}
-                </Text>
-              </View>
-              : <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>}
-            {sellerOpenBox===true ? 
-              <View>
-              <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
-                <Text>
-                  {"SOB"}
-                </Text>
-              </View>
-              : <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>}
-            {custSC===true ? 
-              <View>
-              <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
-                <Text>
-                  {"CSC"}
-                </Text>
-              </View>
-              : <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>}
-            {sellerSC===true ? 
-              <View>
-              <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
-                <Text>
-                  {"SSC"}
-                </Text>
-              </View>
-              : <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>}   
+            {this.getCheckIcon("COB", custOpenBox)}
+            {this.getCheckIcon("SOB", sellerOpenBox)}
           </View>
           <Button
           title="Start Open Box"
