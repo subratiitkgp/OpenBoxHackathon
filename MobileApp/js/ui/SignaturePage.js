@@ -47,8 +47,7 @@ export class SignaturePage extends Component {
     let shipment = this.props.navigation.getParam('shipment');
     shipment.status = this.props.navigation.getParam('status');
     shipment.reason = this.props.navigation.getParam('reason');
-    console.log("Signature Page");
-    console.log(shipment);
+    DeliveryAdapter.syncDeliveryShipment(shipment);
     this.props.navigation.pop(2);
   }
 
