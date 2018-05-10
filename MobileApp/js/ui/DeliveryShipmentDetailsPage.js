@@ -22,7 +22,6 @@ export class DeliveryShipmentDetailsPage extends Component {
       this.props.navigation.navigate('SignaturePage', {shipment, status, reason});
       return;
     }
-  }
 
     shipment.status = status;
     shipment.reason = reason;
