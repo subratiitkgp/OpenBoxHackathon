@@ -11,6 +11,7 @@ import { CheckTypeBoolean } from './CheckTypeBoolean';
 import {CheckTypeSingleChoice} from './CheckTypeSingleChoice';
 import {CheckTypeTriState} from './CheckTypeTriState';
 import {CheckTypeBooleanWithText} from './CheckTypeBooleanWithText';
+import { DeliveryStatus, DeliveryReason } from '../constants/DeliveryStatus';
 
 const shipmentCount = 1;
 
@@ -56,9 +57,30 @@ export class WelcomePage extends Component {
   }
 
   render1() {
+    const { navigate } = this.props.navigation;
+    const shipment = (ShipmentStore.getAllShipments())[0];
+    const status = DeliveryStatus.DELIVERED.key;
+    const reason = undefined;
+
     return (
-      <View style={{flex: 1, borderWidth: 1}}>
-      <CheckTypeBooleanWithText shipmentId={"ABC"} checkId={0} navigation={this.props.navigation}/>
+      <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
+        <Button
+          title="Delivery Executive"
+          onPress={() => navigate('SignaturePage', {shipment, status, reason})}
+        />
+        <Button
+          title="Reinitialize Shipments"
+          onPress={() => {
+            ShipmentStore.deleteAllShipments();
+            const shipments = DeliveryAdapter.initializeDeliveryShipments();
+            ShipmentStore.saveAllShipments(shipments);
+            DeliveryAdapter.setDeliveryShipments(shipments);
+          }}
+        />
+        <Button
+          title="Print Shipments"
+          onPress={() => this.printShipments()}
+        />
       </View>
     )
   }

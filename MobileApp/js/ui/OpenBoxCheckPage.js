@@ -24,12 +24,6 @@ export class OpenBoxCheckPage extends Component {
     const checkType = openBoxCheck.checkType;
     const checkName = openBoxCheck.checkName;
 
-    console.log(shipmentId);
-    console.log(category);
-    console.log(checkId);
-    console.log(checkName);
-    console.log(shipment);
-
     this.localProps = {
       checkType,
       shipmentId,

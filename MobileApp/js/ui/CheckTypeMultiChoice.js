@@ -21,8 +21,6 @@ export class CheckTypeMultiChoice extends Component {
     const checkId = this.props.checkId;
     const check = checks[checkId];
 
-    console.log()
-
     const checkData = check.checkData;
     const checkResults = check.checkResults;
 

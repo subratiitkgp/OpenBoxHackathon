@@ -37,13 +37,12 @@ export class CheckTypeSingleChoice extends Component {
   saveResultsAndNavigate(result) {
         if(result === "PASSED") {
           this.localProps.check.checkResults = "PASSED";
-          console.log(this.localProps.shipment);
           this.navigateToNextPage(this.props.shipmentId,this.props.checkId, this.localProps.checksLength)
         }
         else
         {
           this.localProps.check.checkResults = "FAILED";
-          this.props.navigation.pop(checkId+1);
+          this.props.navigation.pop(this.props.checkId + 1);
         }
   }
 
