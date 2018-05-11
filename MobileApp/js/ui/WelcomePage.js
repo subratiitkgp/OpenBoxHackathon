@@ -29,7 +29,7 @@ export class WelcomePage extends Component {
   }
 
   printShipments() {
-    console.log(ShipmentStore.getAllShipments());
+    console.log(ShipmentStore.getAllShipments().length);
   }
 
   getDummyShipment(shipmentCount) {
@@ -63,7 +63,6 @@ export class WelcomePage extends Component {
     ShipmentStore.saveAllShipments(shipments);
     DeliveryAdapter.setDeliveryShipments(shipments);
     const pickupShipments = PickupAdapter.initializePickupShipments();
-    console.log(pickupShipments);
     ShipmentStore.saveAllShipments(pickupShipments);
     PickupAdapter.setPickupShipments(pickupShipments);
     Alert.alert("Info", "Shipments have been reinitialized");
@@ -74,7 +73,7 @@ export class WelcomePage extends Component {
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
         <Button
-          title="Delivery Executive"
+          title="Field Associate"
           onPress={() => navigate('TaskPage', { name: 'Jane' })}
         />
         <Button

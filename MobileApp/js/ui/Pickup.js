@@ -51,8 +51,8 @@ export class Pickup extends Component {
                 </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
-                {this.getCheckIcon("CSC", sellerSC)}
-                {this.getCheckIcon("SSC", custSC)}
+                {this.getCheckIcon("CSC", custSC)}
+                {this.getCheckIcon("SSC", sellerSC)}
             </View>
           </View>
         </View>

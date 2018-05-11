@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Pickup } from './Pickup';
-import { PickupAdapter } from '../data/PickupAdapter';
+import { ShipmentStore } from '../data/ShipmentStore';
 import { PickupStatus } from '../constants/PickupStatus';
 import { ShipmentType } from '../constants/ShipmentType';
 
@@ -19,7 +19,7 @@ export class Pickups extends Component {
   }
 
   render() {
-    let shipments = PickupAdapter.fetchPickupShipments();
+    let shipments = ShipmentStore.getAllShipments();
     shipments=shipments.filter(shipment => 
       shipment.status===PickupStatus.OUT_FOR_PICKUP.key
       && shipment.type===ShipmentType.PICKUP.key)

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Delivery } from './Delivery';
-import { DeliveryAdapter } from '../data/DeliveryAdapter';
+import { ShipmentStore } from '../data/ShipmentStore';
 import { DeliveryStatus } from '../constants/DeliveryStatus';
 import { ShipmentType } from '../constants/ShipmentType';
 
@@ -19,7 +19,7 @@ export class Deliveries extends Component {
   }
 
   render() {
-    let shipments = DeliveryAdapter.fetchDeliveryShipments();
+    let shipments = ShipmentStore.getAllShipments();
     shipments=shipments.filter(shipment => 
       shipment.status===DeliveryStatus.OUT_FOR_DELIVERY.key
       && shipment.type===ShipmentType.DELIVERY.key)

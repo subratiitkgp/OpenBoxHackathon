@@ -3,31 +3,29 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Alert } from 'react-native';
 import { CheckTypeBoolean } from './CheckTypeBoolean';
-import { CheckTypeBooleanWithText } from './CheckTypeBooleanWithText';
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
-import { CheckTypeSingleChoice } from './CheckTypeSingleChoice';
-import { CheckTypeTriState } from './CheckTypeTriState';
-import { OpenBoxChecks, CheckTypes, CheckNames } from '../constants/OpenBoxChecks';
+import { CheckTypeBooleanWithData } from './CheckTypeBooleanWithData';
+import { CheckTypeBooleanWithImage } from './CheckTypeBooleanWithImage';
+import { SmartChecks, CheckTypes, CheckNames } from '../constants/SmartChecks';
 import { CheckUtil } from '../util/CheckUtil';
 import { ShipmentStore } from '../data/ShipmentStore';
 import { ShipmentType } from '../constants/ShipmentType';
 
-export class OpenBoxCheckPage extends Component {
+export class SmartCheckPage extends Component {
   constructor(props) {
     super(props);
-
-    const shipmentId = this.props.navigation.getParam('shipmentId');
+    const shipment = this.props.navigation.getParam('shipment');
     const checkId = this.props.navigation.getParam('checkId');
+ 
 
-    let shipment = ShipmentStore.getShipment(shipmentId);
     const category = shipment.category;
 
-    const openBoxChecks = OpenBoxChecks[category];
-    const check = openBoxChecks[checkId];
+    const smartChecks = SmartChecks[category];
+    const check = smartChecks[checkId];
 
     const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
 
-    const checksLength = openBoxChecks.length;
+    const checksLength = smartChecks.length;
     const checkName = check.checkName;
     const checkQuestionHeader = CheckNames[check.checkName].value;
 
@@ -53,8 +51,8 @@ export class OpenBoxCheckPage extends Component {
 
   static navigateToNextPage(checkDetails, navigation) {
     if(!this.isLastCheck(checkDetails)) {
-        navigation.push('OpenBoxCheckPage', {
-          shipmentId: checkDetails.shipment.shipmentId,
+        navigation.push('SmartCheckPage', {
+          shipment: checkDetails.shipment,
           checkId: checkDetails.checkId + 1
         });
     } else {
@@ -62,7 +60,7 @@ export class OpenBoxCheckPage extends Component {
       [
         {text:"Ok", onPress: () => {
             navigation.pop(checkDetails.checkId+2);
-            const pageName = checkDetails.shipment.type == ShipmentType.DELIVERY ? 
+            const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY ? 
               'DeliveryShipmentDetailsPage' : 'PickupShipmentDetailsPage';
             navigation.navigate(pageName, {shipmentId: checkDetails.shipment.shipmentId});
           }
@@ -77,21 +75,20 @@ export class OpenBoxCheckPage extends Component {
       this.navigateToNextPage(checkDetails, navigation);
     } else {
         navigation.pop(checkDetails.checkId+2);
-        navigation.navigate("DeliveryShipmentDetailsPage", {
-            shipmentId: checkDetails.shipment.shipmentId
-        });
+        const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY ? 
+              'DeliveryShipmentDetailsPage' : 'PickupShipmentDetailsPage';
+        navigation.navigate(pageName, {shipment: checkDetails.shipment});
     }
     ShipmentStore.saveShipment(checkDetails.shipment);
   }
 
   static navigationOptions = ({ navigation }) => {
-    const shipmentId = navigation.getParam('shipmentId');
+    const shipment = navigation.getParam('shipment');
     const checkId = navigation.getParam('checkId');
 
-    let shipment = ShipmentStore.getShipment(shipmentId);
     const category = shipment.category;
-    const openBoxChecks = OpenBoxChecks[category];
-    const check = openBoxChecks[checkId];
+    const smartChecks = SmartChecks[category];
+    const check = smartChecks[checkId];
     const checkName = check.checkName;
     return {title: CheckNames[checkName].key};
   };
@@ -102,16 +99,18 @@ export class OpenBoxCheckPage extends Component {
     )
   }
 
-  renderCheckTypeTriState() {
+  renderCheckTypeBooleanWithData() {
     return (
-      <CheckTypeTriState checkDetails={this.localProps.checkDetails} navigation={this.props.navigation}/>
+      <View style={{flex: 1}}>
+      <CheckTypeBooleanWithData checkDetails={this.localProps.checkDetails} navigation={this.props.navigation}/>
+      </View>
     )
   }
 
-  renderCheckTypeBooleanWithText() {
+  renderCheckTypeBooleanWithImage() {
     return (
       <View style={{flex: 1}}>
-      <CheckTypeBooleanWithText checkDetails={this.localProps.checkDetails} navigation={this.props.navigation}/>
+      <CheckTypeBooleanWithImage checkDetails={this.localProps.checkDetails} navigation={this.props.navigation}/>
       </View>
     )
   }
@@ -122,11 +121,6 @@ export class OpenBoxCheckPage extends Component {
     )
   }
 
-  renderCheckTypeSingleChoice() {
-    return (
-      <CheckTypeSingleChoice checkDetails={this.localProps.checkDetails} navigation={this.props.navigation}/>
-    )
-  }
 
   render() {
     const { navigate } = this.props.navigation;
@@ -135,17 +129,14 @@ export class OpenBoxCheckPage extends Component {
     if(this.localProps.checkDetails.check.checkType === CheckTypes.MULTICHOICE.key) {
       return this.renderCheckTypeMultiChoice();
     }
-    if(this.localProps.checkDetails.check.checkType === CheckTypes.SINGLECHOICE.key) {
-      return this.renderCheckTypeSingleChoice();
-    }
     if(this.localProps.checkDetails.check.checkType === CheckTypes.BOOLEAN.key) {
       return this.renderCheckTypeBoolean();
     }
-    if(this.localProps.checkDetails.check.checkType === CheckTypes.TRISTATE.key) {
-      return this.renderCheckTypeTriState();
+    if(this.localProps.checkDetails.check.checkType === CheckTypes.BOOLEANWITHDATA.key) {
+      return this.renderCheckTypeBooleanWithData();
     }
-    if(this.localProps.checkDetails.check.checkType === CheckTypes.BOOLEANWITHTEXT.key) {
-      return this.renderCheckTypeBooleanWithText();
+    if(this.localProps.checkDetails.check.checkType === CheckTypes.BOOLEANWITHIMAGE.key) {
+      return this.renderCheckTypeBooleanWithImage();
     }
   }
 }

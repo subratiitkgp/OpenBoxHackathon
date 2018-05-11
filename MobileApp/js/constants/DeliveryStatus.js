@@ -12,7 +12,6 @@ export const DeliveryReason = {
     DELIVERED: {
     },
     OUT_FOR_DELIVERY: {
-
     },
     UNDELIVERED_AGENT_ISSUE: {
         RAIN: {key: "RAIN", value: "Rain"},

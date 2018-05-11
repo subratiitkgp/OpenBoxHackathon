@@ -5,6 +5,7 @@ import { Text, View, Button, Alert, CheckBox, FlatList } from 'react-native';
 import { ShipmentType } from '../constants/ShipmentType';
 import { ShipmentStatus, DeliveryStatus } from '../constants/DeliveryStatus';
 import { OpenBoxCheckPage } from './OpenBoxCheckPage';
+import { SmartCheckPage } from './SmartCheckPage';
 
 export class CheckTypeMultiChoice extends Component {
   constructor(props) {
@@ -57,7 +58,13 @@ export class CheckTypeMultiChoice extends Component {
             }
             Alert.alert("Confirmation", "Are you sure your check is passed?",
             [
-              {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)},
+              {text:"Ok", onPress:() => {
+                (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+                  OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
+                :
+                  SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
+                }
+              },
               {text:"Cancel", onPress: () => console.log("Cancel pressed")}
             ])}
           }
@@ -68,7 +75,13 @@ export class CheckTypeMultiChoice extends Component {
           title="No"
           onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
           [ 
-            {text:"Ok", onPress:() => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)},
+            {text:"Ok", onPress:() => {
+              (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+                OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)
+              :
+                SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)
+              }
+            },
             {text:"Cancel", onPress: () => console.log("Cancel pressed")}
           ])}      
         />

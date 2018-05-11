@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert } from 'react-native';
 import { OpenBoxCheckPage } from './OpenBoxCheckPage';
+import { SmartCheckPage } from './SmartCheckPage';
+import { ShipmentType } from '../constants/ShipmentType';
 
 export class CheckTypeBoolean extends Component {
   render() {
@@ -15,7 +17,13 @@ export class CheckTypeBoolean extends Component {
         title="Yes"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
-          {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)},
+          {text:"Ok", onPress: () => {
+            (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+              OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
+            :
+              SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
+            }
+          },
           {text:"Cancel", onPress: () => {}}
         ])}
         />
@@ -23,7 +31,13 @@ export class CheckTypeBoolean extends Component {
         title="No"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
         [ 
-          {text:"Ok", onPress:() => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)},
+          {text:"Ok", onPress:() => {
+            (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+              OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)
+            :
+              SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)
+            }
+          },
           {text:"Cancel", onPress: () => {}}
         ])}      
         />

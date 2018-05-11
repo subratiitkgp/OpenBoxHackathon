@@ -15,11 +15,11 @@ export const CheckTypes = {
 export const CheckNames = {
   CONDITION: {key: "CONDITION", value: "Is the condition of the item good ?"},
   IMAGE: {key: "IMAGE", value: "Does the item match the image ?"},
-  SERIAL: {key: "IMAGE", value: "Does the serial number of the device match ?"},
+  SERIAL: {key: "SERIAL", value: "Does the serial number of the device match ?"},
   ACCESSORIES : {key: "ACCESSORIES", value: "Are the following accessories present ?"},
 }
 
-export const SmartBoxChecks = {
+export const SmartChecks = {
   MOBILE: [
       {checkName:CheckNames.CONDITION.key, checkType:CheckTypes.BOOLEAN.key},
       {checkName:CheckNames.IMAGE.key, checkType:CheckTypes.BOOLEANWITHIMAGE.key},

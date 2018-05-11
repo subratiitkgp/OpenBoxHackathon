@@ -11,6 +11,8 @@ export const PickupStatus = {
 export const PickupReason = {
     PICKED: {
     },
+    OUT_FOR_PICKUP: {
+    },
     UNPICKED_AGENT_ISSUE: {
         RAIN: {key: "RAIN", value: "Rain"},
         VEHICLE_ISSUE: {key: "VEHICLE_ISSUE", value: "Vehicle Issue"},

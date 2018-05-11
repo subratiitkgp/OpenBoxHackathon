@@ -66,7 +66,7 @@ export class PickupAdapter {
       isSellerOBCheckRequired: true,
       isSellerSCCheckRequired: true,
       isCustomerOBCheckRequired: true,
-      isCustomerSCCheckRequired: false,
+      isCustomerSCCheckRequired: true,
       status: "OUT_FOR_PICKUP",
       reason: undefined,
       signature: undefined
@@ -103,7 +103,7 @@ export class PickupAdapter {
       isSellerOBCheckRequired: true,
       isSellerSCCheckRequired: false,
       isCustomerOBCheckRequired: true,
-      isCustomerSCCheckRequired: false,
+      isCustomerSCCheckRequired: true,
       status: "OUT_FOR_PICKUP",
       reason: undefined,
       signature: undefined

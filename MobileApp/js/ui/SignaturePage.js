@@ -5,6 +5,7 @@ import { Alert, View, Button, Picker, StyleSheet, Modal, Text, ActivityIndicator
 import SignatureCapture from 'react-native-signature-capture';
 import { CheckUtil } from '../util/CheckUtil';
 import { ShipmentStore } from '../data/ShipmentStore';
+import { ShipmentType } from '../constants/ShipmentType';
 
 export class SignaturePage extends Component {
   constructor(props) {
@@ -20,9 +21,12 @@ export class SignaturePage extends Component {
       reason
     };
 
+    const checkRequired = shipment.type === ShipmentType.DELIVERY ? 
+      shipment.isCustomerOBCheckRequired : shipment.isCustomerSCCheckRequired;
+
     this.state = {
       reviewModalVisible: false,
-      reviewedSummary: !shipment.isCustomerOBCheckRequired,
+      reviewedSummary: !checkRequired,
       signed: false,
       loadingModalVisible: false
     }
@@ -34,10 +38,12 @@ export class SignaturePage extends Component {
 
   render() {
     let shipment = this.localProps.shipment;    
+    const checkRequired = shipment.type === ShipmentType.DELIVERY ? 
+      shipment.isCustomerOBCheckRequired : shipment.isCustomerSCCheckRequired;
     return (
       <View style={{flex: 1}}>
         {
-          shipment.isCustomerOBCheckRequired ? 
+          checkRequired ? 
             <View style={{margin: 10}}>
               <Text style={{fontSize: 24}}>Please Review Check Summary</Text>
               <Button
@@ -110,6 +116,7 @@ export class SignaturePage extends Component {
   getSummaryText() {
     const shipment = this.localProps.shipment;
     const checks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+
     return (
       <View style={{flex: 1, margin: 20}}>
         <Text style={{fontSize: 24, fontWeight: 'bold'}}>Please Review Check Summary: {'\n'} {'\n'}</Text>
@@ -140,19 +147,21 @@ export class SignaturePage extends Component {
   _onSaveEvent(result) {
     // result.encoded - for the base64 encoded png
     // result.pathName - for the file path name
-    let shipment = this.localProps.shipment;
-    shipment.status = this.localProps.status;
-    shipment.reason = this.localProps.reason;
-    shipment.signature = result.encoded;
-    ShipmentStore.saveShipment(shipment);
     this.setState({loadingModalVisible: true});
     setTimeout(() => {
       this.setState({loadingModalVisible: false});
-      this.props.navigation.pop(3);
       setTimeout(() => {
-        this.props.navigation.navigate("TaskPage");
-      }, 300);
-    }, 2000);
+        this.props.navigation.pop(3);
+        let shipment = this.localProps.shipment;
+        shipment.status = this.localProps.status;
+        shipment.reason = this.localProps.reason;
+        shipment.signature = result.encoded;
+        ShipmentStore.saveShipment(shipment);
+        setTimeout(() => {
+          this.props.navigation.navigate("TaskPage");
+        }, 500);
+      }, 500);
+    }, 1000);
   }
 
   _onDragEvent() {

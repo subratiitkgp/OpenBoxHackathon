@@ -6,21 +6,19 @@ import { OpenBoxCheckPage } from './OpenBoxCheckPage';
 import { SmartCheckPage } from './SmartCheckPage';
 import { ShipmentType } from '../constants/ShipmentType';
 
-export class CheckTypeBooleanWithImage extends Component {
+export class CheckTypeBooleanWithData extends Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 50}}>
       <Text style={{fontWeight: "bold",fontSize : 24}}>
         {this.props.checkDetails.checkQuestionHeader}
       </Text>
-      <Image source={{uri: this.props.checkDetails.shipmentCheck.checkData.displayValue}}
-             style={{width: 200, height: 200}}
-       />
+      <Text style={{fontSize: 24, fontWeight: 'bold'}}>{this.props.checkDetails.shipmentCheck.checkData.displayValue}</Text>
       <Button
         title="Yes"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
-          {text:"Ok", onPress:() => {
+          {text:"Ok", onPress: () => {
             (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
               OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
             :

@@ -2,6 +2,7 @@
 
 import { ShipmentType } from '../constants/ShipmentType';
 import { DeliveryStatus } from '../constants/DeliveryStatus';
+import { PickupStatus } from '../constants/PickupStatus';
 
 export const CheckScenario = {
   SELLER_OPENBOX_CHECKS: {key: "SELLER_OPENBOX_CHECKS", value: "Seller Openbox"},
@@ -15,6 +16,10 @@ export class CheckUtil {
     if (shipmentType === ShipmentType.DELIVERY.key) {
       if (shipmentStatus === DeliveryStatus.OUT_FOR_DELIVERY.key) {
         return CheckScenario.CUSTOMER_OPENBOX_CHECKS.key;
+      }
+    } else if (shipmentType === ShipmentType.PICKUP.key) {
+      if (shipmentStatus === PickupStatus.OUT_FOR_PICKUP.key) {
+        return CheckScenario.CUSTOMER_SMARTCHECK_CHECKS.key;
       }
     }
 

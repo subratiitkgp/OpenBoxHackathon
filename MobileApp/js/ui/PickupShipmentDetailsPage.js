@@ -14,6 +14,11 @@ export class PickupShipmentDetailsPage extends Component {
   
   constructor(props) {
     super(props);
+
+    const shipmentId = this.props.navigation.getParam('shipmentId');
+    const shipment = ShipmentStore.getShipment(shipmentId);
+    this.localProps = {shipment}
+
     this.state={
         pickerValue: PickupStatus.OUT_FOR_PICKUP.key,
         reasonPickerValue: undefined,
@@ -25,10 +30,11 @@ export class PickupShipmentDetailsPage extends Component {
   navigateToListPageAndSaveState(shipment, pickerValue, reasonPickerValue) {
     const status = pickerValue;
     const reason = reasonPickerValue;
+    console.log(shipment);
 
-    if (status === PickupStatus.DELIVERED.key) {
+    if (status === PickupStatus.PICKED.key) {
       if(!this.areAllChecksPassed(shipment)) {
-        Alert.alert("Confirmation","All checks are not passed. Shipment cannot be delivered.");
+        Alert.alert("Confirmation","All checks are not passed. Shipment cannot be picked.");
         return;
       }
       this.props.navigation.navigate('SignaturePage', {shipment, status, reason});
@@ -46,18 +52,18 @@ export class PickupShipmentDetailsPage extends Component {
     }, 2000);
   }
 
-  disableOpenBoxButton(shipment) {
-    if(shipment.isCustomerOBCheckRequired === true) {
+  disableSmartButton(shipment) {
+    if(shipment.isCustomerSCCheckRequired === true) {
       return false;
     }
     return true;
   }
 
   areAllChecksPassed(shipment) {
-    const custOpenBoxChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+    const custSmartChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
     let flag = true;
-    custOpenBoxChecks.forEach(check => {
-      if(shipment.isCustomerOBCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
+    custSmartChecks.forEach(check => {
+      if(shipment.isCustomerSCCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
         flag =  false;
       }
     });
@@ -65,10 +71,10 @@ export class PickupShipmentDetailsPage extends Component {
   }
 
   isAnyCheckPassedOrFailed(shipment) {
-    const custOpenBoxChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+    const custSmartChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
     let flag = false;
-    custOpenBoxChecks.forEach(check => {
-      if(shipment.isCustomerOBCheckRequired && (check.checkResults === 'PASSED' || check.checkResults === 'FAILED')) {
+    custSmartChecks.forEach(check => {
+      if(shipment.isCustomerSCCheckRequired && (check.checkResults === 'PASSED' || check.checkResults === 'FAILED')) {
         flag =  true;
       }
     });
@@ -92,13 +98,10 @@ export class PickupShipmentDetailsPage extends Component {
 
   render() {
     const { navigation } = this.props;
-    const shipmentId = navigation.getParam('shipmentId');
-    let shipment = ShipmentStore.getShipment(shipmentId);
+    const shipment = this.localProps.shipment;
     const pickerValue = this.state.pickerValue;
-    const sellerOpenBox = shipment.isSellerOBCheckRequired;
-    const custOpenBox = shipment.isCustomerOBCheckRequired;
-    const sellerSC = shipment.isSellerSCCheckRequired;
-    const custSC = shipment.isCustomerSCCheckRequired;
+    const sellerSC = this.localProps.shipment.isSellerSCCheckRequired;
+    const custSC = this.localProps.shipment.isCustomerSCCheckRequired;
 
     let pickerItems = Object.entries(PickupStatus).map((key, value) => {
       return <Picker.Item key={key[1].key} value={key[1].key} label={key[1].value} />
@@ -132,31 +135,31 @@ export class PickupShipmentDetailsPage extends Component {
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            {this.getCheckIcon("COB", custOpenBox)}
-            {this.getCheckIcon("SOB", sellerOpenBox)}
+            {this.getCheckIcon("CSC", custSC)}
+            {this.getCheckIcon("SSC", sellerSC)}
           </View>
           
-          {shipment.isCustomerOBCheckRequired === true ? 
+          {shipment.isCustomerSCCheckRequired === true ? 
               this.isAnyCheckPassedOrFailed(shipment) === false ? 
               <Button
-              title="Start Open Box"
+              title="Start Smart Check"
               onPress={() => {
-                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+                navigation.navigate("SmartCheckPage", {shipment, checkId: 0});
               }}
               />
               :  
               this.areAllChecksPassed(shipment) === true ? 
               <Button
-              title="Open Box Done" color="green"
+              title="Smart Check Done" color="green"
               onPress={() => {
-                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+                navigation.navigate("SmartCheckPage", {shipment, checkId: 0});
               }}
               />
               :
               <Button
-              title="Re-Start Open Box"
+              title="Re-Start Smart Check"
               onPress={() => {
-                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+                navigation.navigate("SmartCheckPage", {shipment, checkId: 0});
               }}
               />
             : null}
@@ -188,7 +191,7 @@ export class PickupShipmentDetailsPage extends Component {
         
           <Button
             title="Update Pickup Status" disabled={this.state.updateStatusButtonDisabled}
-            onPress={() => Alert.alert("Confirmation","Are you sure you want to update this delivery status",
+            onPress={() => Alert.alert("Confirmation","Are you sure you want to update this pickup status",
               [ 
                 {text:"Ok", onPress:() => this.navigateToListPageAndSaveState(shipment, this.state.pickerValue, this.state.reasonPickerValue)},
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}
