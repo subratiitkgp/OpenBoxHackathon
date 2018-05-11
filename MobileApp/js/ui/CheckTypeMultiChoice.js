@@ -39,7 +39,6 @@ export class CheckTypeMultiChoice extends Component {
     };
 
     this.state = {
-      console.log(this.localProps.checkData)
       checkBoxValues: Array(this.localProps.checkData.length).fill(false)
     };
   }
