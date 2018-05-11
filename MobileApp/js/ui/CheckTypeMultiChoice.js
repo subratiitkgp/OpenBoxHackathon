@@ -3,66 +3,36 @@
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, CheckBox, FlatList } from 'react-native';
 import { ShipmentStore } from '../data/ShipmentStore';
-import { Category, OpenBoxChecks, CheckNames, CheckTypes } from '../constants/OpenBoxChecks';
-import { CheckUtil } from '../util/CheckUtil';
 import { ShipmentType } from '../constants/ShipmentType';
 import { ShipmentStatus, DeliveryStatus } from '../constants/DeliveryStatus';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
+import { OpenBoxCheckPage } from './OpenBoxCheckPage';
 
 export class CheckTypeMultiChoice extends Component {
   constructor(props) {
     super(props);
-
-    const shipmentId = this.props.shipmentId;
-    let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
-    const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
-
-    const checks = shipment[checkScenario];
-    const checkId = this.props.checkId;
-    const check = checks[checkId];
-
-    const checkData = check.checkData;
-    const checkResults = check.checkResults;
-
-    const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
-    const checkQuestionHeader = CheckNames[checkName].value;
-    
-
-    this.localProps = {
-      checksLength: OpenBoxChecks[shipment.category].length,
-      checkQuestionHeader,
-      checkData: check.checkData,
-      checkResults: check.checkResults,
-      shipment,
-      check,
-      checkId
-    };
-
-    this.state = {
-      checkBoxValues: Array(this.localProps.checkData.length).fill(false)
-    };
+    this.state = {checkBoxValues: Array(this.props.checkDetails.shipmentCheck.checkData.length).fill(false)};
   }
 
-  verifyMandatoryChecksSelected(checkData, checkBoxValues) {
+  verifyMandatoryChecksSelected() {
     let i;
-    for(i = 0 ; i < checkData.length ; i++) {
-      if(checkData[i].required === true && checkBoxValues[i] === false) {
+    for(i = 0 ; i < this.props.checkDetails.shipmentCheck.checkData.length ; i++) {
+      if(this.props.checkDetails.shipmentCheck.checkData[i].required === true && this.state.checkBoxValues[i] === false) {
         return false;
       }
     }
     return true;
   }
 
-
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'space-between',margin: 50}}>
       <Text style={{fontWeight: "bold",fontSize : 24}}>
-        {this.localProps.checkQuestionHeader}
+        {this.props.checkDetails.checkQuestionHeader}
       </Text>
       <FlatList style={{borderWidth: 1}}
         removeClippedSubviews={true}
-        data={this.localProps.checkData}
+        data={this.props.checkDetails.shipmentCheck.checkData}
         keyExtractor={(checkData) => checkData.key}
         initialNumToRender={1}
         renderItem={(checkData, index) => {
@@ -82,7 +52,7 @@ export class CheckTypeMultiChoice extends Component {
         <Button style={{margin: 100, padding: 100}}
           title="Yes"
           onPress={() => {
-            let areMandatoryChecksSelected = this.verifyMandatoryChecksSelected(this.localProps.checkData, this.state.checkBoxValues);
+            let areMandatoryChecksSelected = this.verifyMandatoryChecksSelected();
             if(areMandatoryChecksSelected === false) {
               Alert.alert("Alert", "All mandatory checks need to be selected for this product.","")
               return;
@@ -111,37 +81,20 @@ export class CheckTypeMultiChoice extends Component {
 
   saveResultsAndNavigate(result) {
     if(result === "PASSED") {
-      this.localProps.check.checkResults = "PASSED";
-      this.navigateToNextPage(this.props.shipmentId, this.localProps.checkId, this.localProps.checksLength)
-    }
+      this.props.checkDetails.shipmentCheck.checkResults = "PASSED";
+      OpenBoxCheckPage.navigateToNextPage(this.props.checkDetails.checkId, this.props.checkDetails.checksLength,
+        this.props.navigation, this.props.checkDetails.shipment.shipmentId);    }
     else
     {
-      this.localProps.check.checkResults = "FAILED";
-      this.props.navigation.pop(this.localProps.checkId + 1);
+      this.props.checkDetails.shipmentCheck.checkResults = "FAILED";
+      this.props.navigation.pop(this.props.checkDetails.checkId + 1);
     }
-    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
+    DeliveryAdapter.syncDeliveryShipment(this.props.checkDetails.shipment);
   }
 
   changeCheckboxState(value, index) {
     let checkBoxValues = this.state.checkBoxValues;
     checkBoxValues[index] = value;
     this.setState(checkBoxValues);
-  }
-
-  isLastCheck(checkId, checksLength) {
-    if(checkId===checksLength-1) {
-      return true;
-    }
-    else return false;
-  }
-
-  navigateToNextPage(shipmentId, checkId, checksLength) {
-    if(!this.isLastCheck(checkId, checksLength)) {
-      this.props.navigation.push('OpenBoxCheckPage', {shipmentId: shipmentId, checkId: checkId + 1})
-    } else {
-      Alert.alert("Info", "All checks have been completed.", [
-        {text:"Ok", onPress: () => this.props.navigation.pop(checkId + 1)},
-      ])
-    }
   }
 }
