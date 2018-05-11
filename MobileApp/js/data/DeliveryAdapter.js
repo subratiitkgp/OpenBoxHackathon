@@ -30,22 +30,29 @@ export class DeliveryAdapter {
           checkResults: undefined
         },
         {
+                  checkName: 'CONDITION',
+                  checkData: undefined,
+                  checkInfo: "BLACK",
+                  checkResults: undefined
+        },
+        {
           checkName: 'COLOR',
           checkData: undefined,
           checkInfo: "BLACK",
           checkResults: undefined
         },
-        {
-          checkName: 'CONDITION',
-          checkData: undefined,
-          checkInfo: "BLACK",
-          checkResults: undefined
-        },
+
         {
           checkName: 'BRAND',
           checkData: undefined,
           checkInfo: "BLACK",
           checkResults: undefined
+        },
+        {
+           checkName: 'SEAL',
+           checkData: undefined,
+           checkInfo: "BLACK",
+           checkResults: undefined
         },
         {
                   checkName: 'ACCESSORIES',

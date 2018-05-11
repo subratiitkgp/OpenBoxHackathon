@@ -22,7 +22,8 @@ export const CheckNames = {
   BRAND: {key: "BRAND", value: "Is the brand of the item correct ?"},
   COLOR: {key: "COLOR", value: "Is the color of the item correct ?"},
   SIZE:  {key: "SIZE", value: "Is the size of the item correct ?"},
-  ACCESSORIES : {key: "ACCESSORIES", value: "Are the following accessories present ?"}
+  ACCESSORIES : {key: "ACCESSORIES", value: "Are the following accessories present ?"},
+  SEAL : {key: "SEAL", value: "Is the item sealed?"}
 }
 
 export const OpenBoxChecks = {
@@ -30,8 +31,10 @@ export const OpenBoxChecks = {
       {checkName:CheckNames.CATEGORY.key, checkType:CheckTypes.BOOLEANWITHTEXT.key},
       {checkName:CheckNames.CONDITION.key, checkType:CheckTypes.SINGLECHOICE.key},
       {checkName:CheckNames.BRAND.key, checkType:CheckTypes.BOOLEAN.key},
+      {checkName:CheckNames.SEAL.key, checkType:CheckTypes.BOOLEAN.key},
       {checkName:CheckNames.COLOR.key, checkType:CheckTypes.TRISTATE.key},
       {checkName:CheckNames.ACCESSORIES.key, checkType:CheckTypes.MULTICHOICE.key}
+
   ],
   APPAREL: [
       {checkName:CheckNames.CATEGORY.key, checkType:CheckTypes.BOOLEANWITHTEXT.key},
