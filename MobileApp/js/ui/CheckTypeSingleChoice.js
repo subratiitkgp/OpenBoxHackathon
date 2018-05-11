@@ -2,9 +2,7 @@
 
 import React, { Component } from 'react';
 import { Text, View, Button, Alert } from 'react-native';
-import { ShipmentStore } from '../data/ShipmentStore';
 import { OpenBoxChecks, CheckTypes, CheckNames } from '../constants/OpenBoxChecks';
-import { DeliveryAdapter } from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
 import { OpenBoxCheckPage } from './OpenBoxCheckPage';
 

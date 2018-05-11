@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { Alert, View, Button, Picker, StyleSheet, Modal, Text, ActivityIndicator } from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
-import {DeliveryAdapter} from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
+import { ShipmentStore } from '../data/ShipmentStore';
 
 export class SignaturePage extends Component {
   constructor(props) {
@@ -144,7 +144,7 @@ export class SignaturePage extends Component {
     shipment.status = this.localProps.status;
     shipment.reason = this.localProps.reason;
     shipment.signature = result.encoded;
-    DeliveryAdapter.syncDeliveryShipment(shipment);
+    ShipmentStore.saveShipment(shipment);
     this.setState({loadingModalVisible: true});
     setTimeout(() => {
       this.setState({loadingModalVisible: false});

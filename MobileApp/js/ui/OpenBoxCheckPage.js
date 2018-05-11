@@ -9,7 +9,6 @@ import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 import { CheckTypeSingleChoice } from './CheckTypeSingleChoice';
 import { CheckTypeTriState } from './CheckTypeTriState';
 import { OpenBoxChecks, CheckTypes, CheckNames } from '../constants/OpenBoxChecks';
-import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
 import { ShipmentStore } from '../data/ShipmentStore';
 
@@ -82,7 +81,7 @@ export class OpenBoxCheckPage extends Component {
             shipmentId: checkDetails.shipment.shipmentId
         });
     }
-    DeliveryAdapter.syncDeliveryShipment(checkDetails.shipment);
+    ShipmentStore.saveShipment(checkDetails.shipment);
   }
 
   static navigationOptions = ({ navigation }) => {
