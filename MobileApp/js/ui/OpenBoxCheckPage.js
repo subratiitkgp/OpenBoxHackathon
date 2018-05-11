@@ -46,22 +46,32 @@ export class OpenBoxCheckPage extends Component {
     };
   }
 
-  static isLastCheck(checkId, checksLength) {
-    if(checkId === checksLength - 1) return true;
+  static isLastCheck(checkDetails) {
+    if(checkDetails.checkId === checkDetails.checksLength - 1) return true;
     else return false;
   }
 
-  static navigateToNextPage(checkId, checksLength, navigation, shipmentId) {
-    if(!this.isLastCheck(checkId, checksLength)) {
+  static navigateToNextPage(checkDetails, navigation) {
+    if(!this.isLastCheck(checkDetails)) {
         navigation.push('OpenBoxCheckPage', {
-          shipmentId,
-          checkId: checkId + 1
+          shipmentId: checkDetails.shipment.shipmentId,
+          checkId: checkDetails.checkId + 1
         });
       } else {
         Alert.alert("Info", "All checks have been completed.", [
-          {text:"Ok", onPress: () => navigation.pop(checkId + 1)},
+          {text:"Ok", onPress: () => navigation.pop(checkDetails.checkId + 1)},
         ])
       }
+  }
+
+  static saveResultsAndNavigate(checkDetails, checkResult, navigation) {
+    checkDetails.shipmentCheck.checkResults = checkResult;
+    if(checkResult === "PASSED") {
+      this.navigateToNextPage(checkDetails, navigation);
+    } else {
+      navigation.pop(checkDetails.checkId + 1);
+    }
+    DeliveryAdapter.syncDeliveryShipment(checkDetails.shipment);
   }
 
   static navigationOptions = ({ navigation }) => {

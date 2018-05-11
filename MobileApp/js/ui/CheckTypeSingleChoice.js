@@ -9,19 +9,6 @@ import { CheckUtil } from '../util/CheckUtil';
 import { OpenBoxCheckPage } from './OpenBoxCheckPage';
 
 export class CheckTypeSingleChoice extends Component {
-  saveResultsAndNavigate(result) {
-    if(result === "PASSED") {
-      this.props.checkDetails.shipmentCheck.checkResults = "PASSED";
-      OpenBoxCheckPage.navigateToNextPage(this.props.checkDetails.checkId, this.props.checkDetails.checksLength,
-        this.props.navigation, this.props.checkDetails.shipment.shipmentId);    }
-    else
-    {
-      this.props.checkDetails.shipmentCheck.checkResults = "FAILED";
-      this.props.navigation.pop(this.props.checkDetails.checkId + 1);
-    }
-    DeliveryAdapter.syncDeliveryShipment(this.props.checkDetails.shipment);
-  }
-
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'space-evenly', margin: 50}}>
@@ -32,7 +19,7 @@ export class CheckTypeSingleChoice extends Component {
         title="Yes"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
-          {text:"Ok", onPress: () => this.saveResultsAndNavigate("PASSED")},
+          {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
         ])}
         />
@@ -40,7 +27,7 @@ export class CheckTypeSingleChoice extends Component {
         title="No"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
         [ 
-          {text:"Ok", onPress:() => this.saveResultsAndNavigate("FAILED")},
+          {text:"Ok", onPress:() => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
         ])}      
         />

@@ -13,20 +13,6 @@ export class CheckTypeBooleanWithText extends Component {
     this.state = {showTextInput: false}
   }
   
-  saveResultsAndNavigate(result) {
-    if(result === "PASSED") {
-      this.props.checkDetails.shipmentCheck.checkResults = "PASSED";
-      OpenBoxCheckPage.navigateToNextPage(this.props.checkDetails.checkId, this.props.checkDetails.checksLength,
-        this.props.navigation, this.props.checkDetails.shipment.shipmentId);
-    }
-    else
-    {
-      this.props.checkDetails.shipmentCheck.checkResults = "FAILED";
-      this.props.navigation.pop(this.props.checkDetails.checkId + 1);
-    }
-    DeliveryAdapter.syncDeliveryShipment(this.props.checkDetails.shipment);
-  }
-
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'space-between', margin: 50}}>
@@ -37,7 +23,7 @@ export class CheckTypeBooleanWithText extends Component {
         title="Correct"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
-          {text:"Ok", onPress: () => this.saveResultsAndNavigate("PASSED")},
+          {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
         ])}
         />
@@ -57,7 +43,7 @@ export class CheckTypeBooleanWithText extends Component {
               title="Save"
               onPress={() => Alert.alert("Confirmation","This will take you back to main page.",
               [ 
-                {text:"Ok", onPress:() => this.saveResultsAndNavigate("FAILED")},
+                {text:"Ok", onPress:() => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)},
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}
               ])} 
             />
