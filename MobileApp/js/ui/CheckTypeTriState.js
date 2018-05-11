@@ -45,9 +45,7 @@ export class CheckTypeTriState extends Component {
           else
           {
             this.localProps.check.checkResults = "FAILED";
-            Alert.alert("Info", "All checks have been completed.", [
-              {text:"Ok", onPress: () => this.props.navigation.pop(checkId+1)},
-            ])
+            this.props.navigation.pop(this.localProps.checkId+1);
           }
   }
 
@@ -62,7 +60,9 @@ export class CheckTypeTriState extends Component {
     if(!this.isLastCheck(checkId, checksLength)) {
         this.props.navigation.push('OpenBoxCheckPage', {shipmentId: shipmentId, checkId: checkId+1})
       } else {
-        this.props.navigation.pop(checkId+1)
+        Alert.alert("Info", "All checks have been completed.", [
+          {text:"Ok", onPress: () => this.props.navigation.pop(checkId+1)},
+        ])
       }
   }
 
