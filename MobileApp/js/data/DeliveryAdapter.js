@@ -18,7 +18,7 @@ export class DeliveryAdapter {
 
     const shipment1 = {
       key: "1", shipmentId: "AMZL001", type: 'DELIVERY',
-      customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
+      customerId: '123', customerName: 'Vishal Bhandari', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
       customerCity: 'Bangalore', customerPincode: '560043',
       category: 'MOBILE',
       itemDescription : 'Samsung S7',
@@ -80,7 +80,7 @@ export class DeliveryAdapter {
 
     const shipment2 = {
       key: "2", 'shipmentId': "AMZL002", 'type' : 'DELIVERY',
-      customerId: '123', 'customerName': 'Vishal', 'customerAddress1': 'Banaswadi', 'customerAddress2': 'Banaswadi',
+      customerId: '123', 'customerName': 'Ankit Rai', 'customerAddress1': 'Kalyan Nagar', 'customerAddress2': 'Banaswadi',
       customerCity: 'Bangalore', 'customerPincode': '560043',
       category: 'APPAREL',
       itemDescription : "Men's T-Shirt",
@@ -130,7 +130,7 @@ export class DeliveryAdapter {
     }
     const shipment3 = {
           key: "3", shipmentId: "AMZL003", type: 'DELIVERY',
-          customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
+          customerId: '123', customerName: 'Subrat Panda', customerAddress1: 'Bellandur', customerAddress2: 'Banaswadi',
           customerCity: 'Bangalore', customerPincode: '560043',
           category: 'LARGE',
           itemDescription : "Sony LED TV",
@@ -185,7 +185,7 @@ export class DeliveryAdapter {
 
     const shipment4 = {
           key: "4", 'shipmentId': "AMZL004", 'type' : 'DELIVERY',
-          customerId: '123', 'customerName': 'Vishal', 'customerAddress1': 'Banaswadi', 'customerAddress2': 'Banaswadi',
+          customerId: '123', 'customerName': 'Subrat Panda', 'customerAddress1': 'Bellandur', 'customerAddress2': 'Banaswadi',
           customerCity: 'Bangalore', 'customerPincode': '560043',
           category: 'BEAUTY',
           itemDescription : "Nivea Lotion",
