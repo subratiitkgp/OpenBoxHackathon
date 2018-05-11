@@ -17,10 +17,11 @@ export class DeliveryAdapter {
     let shipments = [];
 
     const shipment1 = {
-      key: "1", shipmentId: "001", type: 'DELIVERY',
+      key: "1", shipmentId: "AMZL001", type: 'DELIVERY',
       customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
       customerCity: 'Bangalore', customerPincode: '560043',
       category: 'MOBILE',
+      itemDescription : 'Samsung S7',
       imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg',
       CUSTOMER_OPENBOX_CHECKS: [
         {
@@ -78,10 +79,11 @@ export class DeliveryAdapter {
     }
 
     const shipment2 = {
-      key: "2", 'shipmentId': "002", 'type' : 'DELIVERY', 
+      key: "2", 'shipmentId': "AMZL002", 'type' : 'DELIVERY',
       customerId: '123', 'customerName': 'Vishal', 'customerAddress1': 'Banaswadi', 'customerAddress2': 'Banaswadi',
       customerCity: 'Bangalore', 'customerPincode': '560043',
       category: 'APPAREL',
+      itemDescription : "Men's T-Shirt",
       imageUrl:'https://images-na.ssl-images-amazon.com/images/I/81Q9deM-LXL._UY879_.jpg',
       CUSTOMER_OPENBOX_CHECKS: [
         {
@@ -127,10 +129,11 @@ export class DeliveryAdapter {
       signature: undefined
     }
     const shipment3 = {
-          key: "3", shipmentId: "003", type: 'DELIVERY',
+          key: "3", shipmentId: "AMZL003", type: 'DELIVERY',
           customerId: '123', customerName: 'Vishal', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
           customerCity: 'Bangalore', customerPincode: '560043',
           category: 'LARGE',
+          itemDescription : "Sony LED TV",
           imageUrl:'https://images-na.ssl-images-amazon.com/images/I/81drtEjsU8L._SX679_.jpg',
           CUSTOMER_OPENBOX_CHECKS: [
             {
@@ -181,10 +184,11 @@ export class DeliveryAdapter {
         }
 
     const shipment4 = {
-          key: "4", 'shipmentId': "004", 'type' : 'DELIVERY',
+          key: "4", 'shipmentId': "AMZL004", 'type' : 'DELIVERY',
           customerId: '123', 'customerName': 'Vishal', 'customerAddress1': 'Banaswadi', 'customerAddress2': 'Banaswadi',
           customerCity: 'Bangalore', 'customerPincode': '560043',
           category: 'BEAUTY',
+          itemDescription : "Nivea Lotion",
           imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71Mua-w4%2BTL._SL1500_.jpg',
           CUSTOMER_OPENBOX_CHECKS: [
             {
