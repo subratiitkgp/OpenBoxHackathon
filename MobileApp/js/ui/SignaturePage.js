@@ -149,7 +149,9 @@ export class SignaturePage extends Component {
     setTimeout(() => {
       this.setState({loadingModalVisible: false});
       this.props.navigation.pop(3);
-      this.props.navigation.navigate("TaskPage");
+      setTimeout(() => {
+        this.props.navigation.navigate("TaskPage");
+      }, 300);
     }, 2000);
   }
 
