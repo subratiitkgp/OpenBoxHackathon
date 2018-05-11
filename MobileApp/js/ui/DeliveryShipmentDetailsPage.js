@@ -40,9 +40,9 @@ export class DeliveryShipmentDetailsPage extends Component {
     DeliveryAdapter.syncDeliveryShipment(shipment);
     this.setState({loadingModalVisible: true});
     setTimeout(() => {
+      this.setState({loadingModalVisible: false});
       this.props.navigation.pop(2);
       this.props.navigation.navigate("TaskPage");
-      this.setState({loadingModalVisible: false});
     }, 2000);
   }
 

@@ -30,7 +30,8 @@ export class CheckTypeSingleChoice extends Component {
       checkData: check.checkData,
       checkResults: check.checkResults,
       shipment,
-      check
+      check,
+      checkId
     };
   }
 

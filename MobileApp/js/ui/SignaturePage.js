@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Alert, View, Button, Picker, StyleSheet, Modal, Text } from 'react-native';
+import { Alert, View, Button, Picker, StyleSheet, Modal, Text, ActivityIndicator } from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
 import {DeliveryAdapter} from '../data/DeliveryAdapter';
 
@@ -23,6 +23,7 @@ export class SignaturePage extends Component {
       reviewModalVisible: false,
       reviewedSummary: !shipment.isCustomerOBCheckRequired,
       signed: false,
+      loadingModalVisible: false
     }
   }
 
@@ -70,6 +71,17 @@ export class SignaturePage extends Component {
                   </Button>
                 </View>
             </View>
+          </Modal>
+
+          <Modal
+            animationType="slide"
+            transparent={true}
+            onRequestClose={() => {}}
+            visible={this.state.loadingModalVisible}>
+              <View style={{margin: 50, backgroundColor: 'lightblue', alignItems: 'center', borderWidth: 5}}>
+                <Text style={{fontSize: 24, fontWeight: 'bold'}}>Saving</Text>
+                <ActivityIndicator size="large" color="#0000ff" />
+              </View>
           </Modal>
 
         <SignatureCapture
@@ -136,7 +148,12 @@ export class SignaturePage extends Component {
     shipment.reason = this.localProps.reason;
     shipment.signature = result.encoded;
     DeliveryAdapter.syncDeliveryShipment(shipment);
-    this.props.navigation.pop(2);
+    this.setState({loadingModalVisible: true});
+    setTimeout(() => {
+      this.setState({loadingModalVisible: false});
+      this.props.navigation.pop(3);
+      this.props.navigation.navigate("TaskPage");
+    }, 2000);
   }
 
   _onDragEvent() {

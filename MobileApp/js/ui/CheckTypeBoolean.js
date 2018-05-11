@@ -31,8 +31,8 @@ export class CheckTypeBoolean extends Component {
         checkQuestionHeader,
         checkResults: check.checkResults,
         check,
-        checkId,
-        shipment
+        shipment,
+        checkId
       };
   }
 
@@ -59,8 +59,9 @@ export class CheckTypeBoolean extends Component {
     }
     else
     {
+      console.log(this.checkId);
       this.localProps.check.checkResults = "FAILED";
-      this.props.navigation.pop(this.props.checkId+1)
+      this.props.navigation.pop(this.localProps.checkId+1)
     }
     DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
   }
