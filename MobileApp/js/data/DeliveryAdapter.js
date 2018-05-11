@@ -36,16 +36,6 @@ export class DeliveryAdapter {
           checkResults: undefined
         },
         {
-          checkName: 'ACCESSORIES',
-          checkData: [ 
-            { key : "CHARGER", value : "Charger" },
-            { key: "HEADPHONE", value: "Headphone" },
-            { key: "BATTERY", value: "Battery" }
-          ],
-          checkInfo: "BLACK",
-          checkResults: undefined
-        },
-        {
           checkName: 'CONDITION',
           checkData: undefined,
           checkInfo: "BLACK",
@@ -56,6 +46,16 @@ export class DeliveryAdapter {
           checkData: undefined,
           checkInfo: "BLACK",
           checkResults: undefined
+        },
+        {
+                  checkName: 'ACCESSORIES',
+                  checkData: [
+                    { key : "CHARGER", value : "Charger" },
+                    { key: "HEADPHONE", value: "Headphone" },
+                    { key: "BATTERY", value: "Battery" }
+                  ],
+                  checkInfo: "BLACK",
+                  checkResults: undefined
         },
       ],
       SELLER_OPENBOX_CHECKS: undefined,
@@ -138,15 +138,7 @@ export class DeliveryAdapter {
               checkInfo: "BLACK",
               checkResults: undefined
             },
-            {
-              checkName: 'ACCESSORIES',
-              checkData: [
-                { key : "WIRE", value : "Wire" },
-                { key: "STAND", value: "Stand" }
-              ],
-              checkInfo: "BLACK",
-              checkResults: undefined
-            },
+
             {
               checkName: 'CONDITION',
               checkData: undefined,
@@ -158,6 +150,15 @@ export class DeliveryAdapter {
               checkData: undefined,
               checkInfo: "BLACK",
               checkResults: undefined
+            },
+            {
+                          checkName: 'ACCESSORIES',
+                          checkData: [
+                            { key : "WIRE", value : "Wire" },
+                            { key: "STAND", value: "Stand" }
+                          ],
+                          checkInfo: "BLACK",
+                          checkResults: undefined
             },
           ],
           SELLER_OPENBOX_CHECKS: undefined,
