@@ -55,9 +55,9 @@ export class CheckTypeMultiChoice extends Component {
         renderItem={(checkData, index) => {
           console.log(checkData.index);
           return (
-            <View style={{flexDirection: 'row',alignItems: 'center'}}>
+            <View style={{flexDirection: 'row',alignItems: 'center',fontSize : 25}}>
               <CheckBox value={this.state.checkBoxValues[checkData.index]} onValueChange={(value) => this.changeCheckboxState(value, checkData.index)} />
-              <Text>{checkData.item.value}</Text>
+              <Text style = {{fontSize : 30,margin:10}}>{checkData.item.value}</Text>
             </View>
           )
         }}
