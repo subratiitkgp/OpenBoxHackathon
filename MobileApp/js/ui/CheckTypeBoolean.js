@@ -13,7 +13,7 @@ export class CheckTypeBoolean extends Component {
         {this.props.checkDetails.checkQuestionHeader}
       </Text>
       <Button
-        title="Correct"
+        title="Yes"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
           {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)},
@@ -21,7 +21,7 @@ export class CheckTypeBoolean extends Component {
         ])}
         />
       <Button
-        title="Incorrect"
+        title="No"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
         [ 
           {text:"Ok", onPress:() => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)},
