@@ -56,7 +56,7 @@ export class CheckTypeBoolean extends Component {
     DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
     if(result === "PASSED") {
       this.localProps.check.checkResults = "PASSED";
-      this.navigateToNextPage(this.shipmentId, this.checkId, this.checksLength)
+      this.navigateToNextPage(this.shipmentId, this.props.checkId, this.localProps.checksLength)
     }
     else
     {
