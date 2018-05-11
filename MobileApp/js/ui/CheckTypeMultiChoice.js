@@ -27,13 +27,15 @@ export class CheckTypeMultiChoice extends Component {
     const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
     const checkQuestionHeader = CheckNames[checkName].value;
     
+
     this.localProps = {
       checksLength: OpenBoxChecks[shipment.category].length,
       checkQuestionHeader,
       checkData: check.checkData,
       checkResults: check.checkResults,
       shipment,
-      check
+      check,
+      checkId
     };
 
     this.state = {

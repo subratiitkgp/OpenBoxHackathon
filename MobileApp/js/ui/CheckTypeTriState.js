@@ -13,8 +13,6 @@ export class CheckTypeTriState extends Component {
           super(props);
           const shipmentId = this.props.shipmentId;
           let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
-
-          // let shipment = ShipmentStore.getShipment(shipmentId);
           const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
           const checks = shipment[checkScenario];
           const checkId = this.props.checkId;
