@@ -1,56 +1,28 @@
 'use strict';
-
-let pickupShipments = [];
-
-export class PickupAdapter {
-  static fetchPickupShipments() {
-    let shipments = [];
-    for (let i = 1; i <= 100; ++i) {
-      let shipmentId = "PICKUP" + (100000 + i);
-      shipments.push({key: i.toString(), shipmentId});
-    }
-    pickupShipments = shipments;
-  }
-
-  static updatePickupShipment(shipmentId, status, smartCheckInfo) {
-    // TODO
-  }
-
-  static getPickupShipments() {
-    return pickupShipments;
-  }
-
-  static getPickupShipment(shipmentId) {
-    return pickupShipments.find(shipment => shipment.shipmentId == shipmentId);
-  }
-}
-
-'use strict';
-
 import { ShipmentStore } from '../data/ShipmentStore';
 
 let shipmentsGlobal = [];
 
-export class DeliveryAdapter {
-  static setDeliveryShipments(shipments) {
+export class PickupAdapter {
+  static setPickupShipments(shipments) {
     shipmentsGlobal = shipments;
   }
 
-  static fetchDeliveryShipments() {
+  static fetchPickupShipments() {
     return shipmentsGlobal;
   }
 
-  static initializeDeliveryShipments() {
+  static initializePickupShipments() {
     let shipments = [];
 
     const shipment1 = {
-      key: "1", shipmentId: "AMZL001", type: 'DELIVERY',
+      key: "1", shipmentId: "AMZPKP001", type: 'PICKUP',
       customerId: '123', customerName: 'Vishal Bhandari', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
       customerCity: 'Bangalore', customerPincode: '560043',
       category: 'MOBILE',
       itemDescription : 'Samsung S7',
       imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg',
-      CUSTOMER_OPENBOX_CHECKS: [
+      CUSTOMER_SMARTCHECK_CHECKS: [
         {
           checkName: 'CONDITION',
           checkData: undefined,
@@ -89,25 +61,25 @@ export class DeliveryAdapter {
         },
       ],
       SELLER_OPENBOX_CHECKS: undefined,
-      CUSTOMER_SMARTCHECK_CHECKS: undefined,
+      CUSTOMER_OPENBOX_CHECKS: undefined,
       SELLER_SMARTCHECK_CHECKS: undefined,
       isSellerOBCheckRequired: true,
       isSellerSCCheckRequired: true,
       isCustomerOBCheckRequired: true,
       isCustomerSCCheckRequired: false,
-      status: "OUT_FOR_DELIVERY",
+      status: "OUT_FOR_PICKUP",
       reason: undefined,
       signature: undefined
     }
 
     const shipment2 = {
-      key: "2", 'shipmentId': "AMZL002", 'type' : 'DELIVERY',
+      key: "2", 'shipmentId': "AMZPKP002", 'type' : 'PICKUP',
       customerId: '123', 'customerName': 'Ankit Rai', 'customerAddress1': 'Kalyan Nagar', 'customerAddress2': 'Banaswadi',
       customerCity: 'Bangalore', 'customerPincode': '560043',
       category: 'APPAREL',
       itemDescription : "Men's T-Shirt",
       imageUrl:'https://images-na.ssl-images-amazon.com/images/I/81Q9deM-LXL._UY879_.jpg',
-      CUSTOMER_OPENBOX_CHECKS: [
+      CUSTOMER_SMARTCHECK_CHECKS: [
         {
            checkName: 'CONDITION',
            checkData: undefined,
@@ -126,18 +98,16 @@ export class DeliveryAdapter {
         }
       ],
       SELLER_OPENBOX_CHECKS: undefined,
-      CUSTOMER_SMARTCHECK_CHECKS: undefined,
+      CUSTOMER_OPENBOX_CHECKS: undefined,
       SELLER_SMARTCHECK_CHECKS: undefined,
       isSellerOBCheckRequired: true,
       isSellerSCCheckRequired: false,
       isCustomerOBCheckRequired: true,
       isCustomerSCCheckRequired: false,
-      status: "OUT_FOR_DELIVERY",
+      status: "OUT_FOR_PICKUP",
       reason: undefined,
       signature: undefined
     }
-
-
 
     shipments.push(shipment1, shipment2);
 
@@ -145,11 +115,11 @@ export class DeliveryAdapter {
     return shipments;
   }
 
-  static getDeliveryShipment(shipmentId) {
-    return this.fetchDeliveryShipments().find(shipment => shipment.shipmentId === shipmentId);
+  static getPickupShipment(shipmentId) {
+    return this.fetchPickupShipments().find(shipment => shipment.shipmentId === shipmentId);
   }
 
-  static syncDeliveryShipment(shipment) {
+  static syncPickupShipment(shipment) {
     ShipmentStore.saveShipment(shipment);
   }
 }

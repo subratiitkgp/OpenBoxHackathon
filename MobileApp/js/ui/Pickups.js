@@ -4,23 +4,25 @@ import React, { Component } from 'react';
 import { Text, View, FlatList } from 'react-native';
 import { Pickup } from './Pickup';
 import { PickupAdapter } from '../data/PickupAdapter';
+import { PickupStatus } from '../constants/PickupStatus';
+import { ShipmentType } from '../constants/ShipmentType';
 
 export class Pickups extends Component {
   constructor(props) {
     super(props);
-
-    PickupAdapter.fetchPickupShipments();
   }
 
-  renderShipment(shipmentId) {
-    return (
-      <Pickup shipmentId={shipmentId} navigation={this.props.navigation}/>
-    );
+  renderShipment(shipment) {
+      return (
+        <Pickup shipment={shipment} navigation={this.props.navigation}/>
+      );
   }
 
   render() {
-    const shipments = PickupAdapter.getPickupShipments();
-
+    let shipments = PickupAdapter.fetchPickupShipments();
+    shipments=shipments.filter(shipment => 
+      shipment.status===PickupStatus.OUT_FOR_PICKUP.key
+      && shipment.type===ShipmentType.PICKUP.key)
     return (
       <View>
         <FlatList
@@ -28,7 +30,7 @@ export class Pickups extends Component {
           data={shipments}
           keyExtractor={(shipment) => shipment.key}
           initialNumToRender={1}
-          renderItem={(shipment) => this.renderShipment(shipment.item.shipmentId)}
+          renderItem={(shipment) => this.renderShipment(shipment.item)}
         />
       </View>
     )

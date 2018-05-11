@@ -17,7 +17,7 @@ export class DeliveryAdapter {
     let shipments = [];
 
     const shipment1 = {
-      key: "1", shipmentId: "AMZL001", type: 'DELIVERY',
+      key: "1", shipmentId: "AMZDEL001", type: 'DELIVERY',
       customerId: '123', customerName: 'Vishal Bhandari', customerAddress1: 'Banaswadi', customerAddress2: 'Banaswadi',
       customerCity: 'Bangalore', customerPincode: '560043',
       category: 'MOBILE',
@@ -79,7 +79,7 @@ export class DeliveryAdapter {
     }
 
     const shipment2 = {
-      key: "2", 'shipmentId': "AMZL002", 'type' : 'DELIVERY',
+      key: "2", 'shipmentId': "AMZDEL002", 'type' : 'DELIVERY',
       customerId: '123', 'customerName': 'Ankit Rai', 'customerAddress1': 'Kalyan Nagar', 'customerAddress2': 'Banaswadi',
       customerCity: 'Bangalore', 'customerPincode': '560043',
       category: 'APPAREL',
@@ -129,7 +129,7 @@ export class DeliveryAdapter {
       signature: undefined
     }
     const shipment3 = {
-          key: "3", shipmentId: "AMZL003", type: 'DELIVERY',
+          key: "3", shipmentId: "AMZDEL003", type: 'DELIVERY',
           customerId: '123', customerName: 'Subrat Panda', customerAddress1: 'Bellandur', customerAddress2: 'Banaswadi',
           customerCity: 'Bangalore', customerPincode: '560043',
           category: 'LARGE',
@@ -184,7 +184,7 @@ export class DeliveryAdapter {
         }
 
     const shipment4 = {
-          key: "4", 'shipmentId': "AMZL004", 'type' : 'DELIVERY',
+          key: "4", 'shipmentId': "AMZDEL004", 'type' : 'DELIVERY',
           customerId: '123', 'customerName': 'Subrat Panda', 'customerAddress1': 'Bellandur', 'customerAddress2': 'Banaswadi',
           customerCity: 'Bangalore', 'customerPincode': '560043',
           category: 'BEAUTY',

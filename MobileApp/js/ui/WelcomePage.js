@@ -5,6 +5,7 @@ import { Alert, View, Button } from 'react-native';
 import { Store } from '../data/Store';
 import { ShipmentStore } from '../data/ShipmentStore';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
+import { PickupAdapter } from '../data/PickupAdapter';
 
 import { CheckTypeMultiChoice } from './CheckTypeMultiChoice';
 import { CheckTypeBoolean } from './CheckTypeBoolean';
@@ -56,34 +57,16 @@ export class WelcomePage extends Component {
     // Alert.alert("Deleted", "Deleted");
   }
 
-  render1() {
-    const { navigate } = this.props.navigation;
-    const shipment = (ShipmentStore.getAllShipments())[0];
-    const status = DeliveryStatus.DELIVERED.key;
-    const reason = undefined;
-
-    return (
-      <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
-        <Button
-          title="Delivery Executive"
-          onPress={() => navigate('SignaturePage', {shipment, status, reason})}
-        />
-        <Button
-          title="Reinitialize Shipments"
-          onPress={() => {
-            ShipmentStore.deleteAllShipments();
-            const shipments = DeliveryAdapter.initializeDeliveryShipments();
-            ShipmentStore.saveAllShipments(shipments);
-            DeliveryAdapter.setDeliveryShipments(shipments);
-            Alert.alert("Info", "Shipments have been reinitialized");
-          }}
-        />
-        <Button
-          title="Print Shipments"
-          onPress={() => this.printShipments()}
-        />
-      </View>
-    )
+  initializeAllShipments() {
+    ShipmentStore.deleteAllShipments();
+    const shipments = DeliveryAdapter.initializeDeliveryShipments();
+    ShipmentStore.saveAllShipments(shipments);
+    DeliveryAdapter.setDeliveryShipments(shipments);
+    const pickupShipments = PickupAdapter.initializePickupShipments();
+    console.log(pickupShipments);
+    ShipmentStore.saveAllShipments(pickupShipments);
+    PickupAdapter.setPickupShipments(pickupShipments);
+    Alert.alert("Info", "Shipments have been reinitialized");
   }
 
   render() {
@@ -96,13 +79,7 @@ export class WelcomePage extends Component {
         />
         <Button
           title="Reinitialize Shipments"
-          onPress={() => {
-            ShipmentStore.deleteAllShipments();
-            const shipments = DeliveryAdapter.initializeDeliveryShipments();
-            ShipmentStore.saveAllShipments(shipments);
-            DeliveryAdapter.setDeliveryShipments(shipments);
-            Alert.alert("Info", "Shipments have been reinitialized");
-          }}
+          onPress={() => this.initializeAllShipments()}
         />
         <Button
           title="Print Shipments"

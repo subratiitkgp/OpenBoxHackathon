@@ -1,11 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, CheckBox } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, CheckBox } from 'react-native';
 
 export class Delivery extends Component {
- 
-  
   getCheckIcon(tag, enabled) {
     if (enabled) return (
       <View>
@@ -30,7 +28,7 @@ export class Delivery extends Component {
     const custSC = shipment.isCustomerSCCheckRequired;
 
     return (
-      <TouchableOpacity onPress={() => navigate('DeliveryShipmentDetailsPage', {shipmentId: shipment.shipmentId})}>
+      <TouchableWithoutFeedback onPress={() => navigate('DeliveryShipmentDetailsPage', {shipmentId: shipment.shipmentId})}>
         <View style={{flex: 1, flexDirection: 'row',
                       justifyContent: 'space-evenly', alignItems: 'center',
                       margin: 10}}>
@@ -60,7 +58,7 @@ export class Delivery extends Component {
             </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     );
   }
 }

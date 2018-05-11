@@ -1,6 +1,7 @@
 'use strict';
 
 export const PickupStatus = {
+    OUT_FOR_PICKUP: {key: "OUT_FOR_PICKUP", value: "Out For Pickup"},
     PICKED: {key: "PICKED", value: "Picked"},
     UNPICKED_AGENT_ISSUE: {key: "UNPICKED_AGENT_ISSUE", value: "Unpicked Agent Issue"},
     UNPICKED_CUSTOMER_ISSUE: {key: "UNPICKED_CUSTOMER_ISSUE", value: "Unpicked Customer Issue"},
