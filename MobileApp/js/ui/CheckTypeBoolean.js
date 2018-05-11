@@ -60,7 +60,7 @@ export class CheckTypeBoolean extends Component {
     else
     {
       this.localProps.check.checkResults = "FAILED";
-      this.props.navigation.pop(checkId+1)
+      this.props.navigation.pop(this.checkId+1)
     }
   }
 
