@@ -50,11 +50,14 @@ export class CheckTypeBooleanWithText extends Component {
       if(!this.isLastCheck(checkId, checksLength)) {
         this.props.navigation.push('OpenBoxCheckPage', {shipmentId: shipmentId, checkId: checkId+1})
       } else {
-        this.props.navigation.pop(checkId+1)
+        Alert.alert("Info", "All checks have been completed.", [
+          {text:"Ok", onPress: () => this.props.navigation.pop(checkId+1)},
+        ])      
       }
   }
   saveResultsAndNavigate(result) {
-        if(result === "PASSED") {
+    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
+    if(result === "PASSED") {
           this.localProps.check.checkResults = "PASSED";
           console.log(this.localProps.shipment);
           this.navigateToNextPage(this.props.shipmentId,this.localProps.checkId, this.localProps.checksLength)

@@ -88,7 +88,8 @@ export class CheckTypeMultiChoice extends Component {
   }
 
   saveResultsAndNavigate(result) {
-      if(result === "PASSED") {
+    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
+    if(result === "PASSED") {
         this.localProps.check.checkResults = "PASSED";
         console.log(this.localProps.shipment);
         this.navigateToNextPage(this.props.shipmentId,this.props.checkId, this.localProps.checksLength)
@@ -96,7 +97,9 @@ export class CheckTypeMultiChoice extends Component {
       else
       {
         this.localProps.check.checkResults = "FAILED";
-        this.props.navigation.pop(this.props.checkId + 1);
+        Alert.alert("Info", "All checks have been completed.", [
+          {text:"Ok", onPress: () => this.props.navigation.pop(checkId+1)},
+        ])
       }
   }
 

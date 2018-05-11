@@ -30,7 +30,8 @@ export class CheckTypeBoolean extends Component {
         checksLength: OpenBoxChecks[shipment.category].length,
         checkQuestionHeader,
         checkResults: check.checkResults,
-        check
+        check,
+        shipment
       };
   }
 
@@ -45,10 +46,13 @@ export class CheckTypeBoolean extends Component {
     if(!this.isLastCheck(checkId, checksLength)) {
         this.props.navigation.push('OpenBoxCheckPage', {shipmentId: this.props.shipmentId, checkId: this.props.checkId+1})
       } else {
-        this.props.navigation.pop(checkId+1)
+        Alert.alert("Info", "All checks have been completed.", [
+          {text:"Ok", onPress: () => this.props.navigation.pop(checkId+1)},
+        ])
       }
   }
   saveResultsAndNavigate(result) {
+    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
     if(result === "PASSED") {
       this.localProps.check.checkResults = "PASSED";
       this.navigateToNextPage(this.shipmentId, this.checkId, this.checksLength)
