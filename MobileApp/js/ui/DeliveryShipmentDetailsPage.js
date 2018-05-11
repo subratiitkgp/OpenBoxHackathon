@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { Alert, Text, View, Image, TouchableOpacity, Button, Picker, CheckBox, Modal, ActivityIndicator } from 'react-native';
-import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { DeliveryStatus, DeliveryReason } from '../constants/DeliveryStatus';
 import { CheckUtil } from '../util/CheckUtil';
 import { ShipmentStore } from '../data/ShipmentStore';
@@ -37,7 +36,7 @@ export class DeliveryShipmentDetailsPage extends Component {
 
     shipment.status = status;
     shipment.reason = reason;
-    DeliveryAdapter.syncDeliveryShipment(shipment);
+    ShipmentStore.saveShipment(shipment);
     this.setState({loadingModalVisible: true});
     setTimeout(() => {
       this.setState({loadingModalVisible: false});

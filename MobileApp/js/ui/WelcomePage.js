@@ -28,7 +28,7 @@ export class WelcomePage extends Component {
   }
 
   printShipments() {
-    console.log(DeliveryAdapter.fetchDeliveryShipments());
+    console.log(ShipmentStore.getAllShipments());
   }
 
   getDummyShipment(shipmentCount) {

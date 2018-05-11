@@ -2,10 +2,8 @@
 
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, CheckBox, FlatList } from 'react-native';
-import { ShipmentStore } from '../data/ShipmentStore';
 import { ShipmentType } from '../constants/ShipmentType';
 import { ShipmentStatus, DeliveryStatus } from '../constants/DeliveryStatus';
-import { DeliveryAdapter } from '../data/DeliveryAdapter';
 import { OpenBoxCheckPage } from './OpenBoxCheckPage';
 
 export class CheckTypeMultiChoice extends Component {
