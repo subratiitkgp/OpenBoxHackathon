@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Alert, Text, View, Image, TouchableOpacity, Button, Picker, CheckBox} from 'react-native';
+import { Alert, Text, View, Image, TouchableOpacity, Button, Picker, CheckBox, Modal, ActivityIndicator } from 'react-native';
 import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { DeliveryStatus, DeliveryReason } from '../constants/DeliveryStatus';
 
@@ -11,6 +11,7 @@ export class DeliveryShipmentDetailsPage extends Component {
     this.state={
         pickerValue: DeliveryStatus.OUT_FOR_DELIVERY.key,
         reasonPickerValue: undefined,
+        loadingModalVisible: false
     }
   }
 
@@ -30,7 +31,12 @@ export class DeliveryShipmentDetailsPage extends Component {
     shipment.status = status;
     shipment.reason = reason;
     DeliveryAdapter.syncDeliveryShipment(shipment);
-    this.props.navigation.pop();
+    this.setState({loadingModalVisible: true});
+    setTimeout(() => {
+      this.props.navigation.pop(2);
+      this.props.navigation.navigate("TaskPage");
+      this.setState({loadingModalVisible: false});
+    }, 2000);
   }
 
   disableOpenBoxButton(shipment) {
@@ -134,6 +140,16 @@ export class DeliveryShipmentDetailsPage extends Component {
                 {text:"Cancel", onPress: () => console.log("Cancel pressed")}
               ])} 
           />
+          <Modal
+            animationType="slide"
+            transparent={true}
+            onRequestClose={() => {}}
+            visible={this.state.loadingModalVisible}>
+              <View style={{margin: 50, backgroundColor: 'lightblue', alignItems: 'center', borderWidth: 5}}>
+                <Text style={{fontSize: 24, fontWeight: 'bold'}}>Saving</Text>
+                <ActivityIndicator size="large" color="#0000ff" />
+              </View>
+          </Modal>
         </View>
     );
   }
