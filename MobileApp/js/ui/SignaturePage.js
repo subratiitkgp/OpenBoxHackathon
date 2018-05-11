@@ -35,16 +35,10 @@ export class SignaturePage extends Component {
     let shipment = this.localProps.shipment;    
     return (
       <View style={{flex: 1}}>
-        <View style={{margin: 10}}>
-          <Button
-            title={"Please review check summary"}
-            disabled={true}
-            onPress={() => this.showSummary()}
-          />
-        </View>
         {
           shipment.isCustomerOBCheckRequired ? 
             <View style={{margin: 10}}>
+              <Text style={{fontSize: 24}}>Please Review Check Summary</Text>
               <Button
                 title="Review Check Summary"
                 onPress={() => this.showSummary()}
@@ -84,16 +78,19 @@ export class SignaturePage extends Component {
               </View>
           </Modal>
 
-        <SignatureCapture
-          style={[{flex:1},styles.signature]}
-          ref="sign"
-          onSaveEvent={(result) => this._onSaveEvent(result)}
-          onDragEvent={() => this._onDragEvent()}
-          saveImageFileInExtStorage={false}
-          showNativeButtons={false}
-          showTitleLabel={false}
-          viewMode={"portrait"}
-        />
+        <View style={{flex: 1, height: "100%", margin: 10}}>
+          <Text style={{fontSize: 24}}>Please Sign Below</Text>
+          <SignatureCapture
+            style={[{flex:1},styles.signature]}
+            ref="sign"
+            onSaveEvent={(result) => this._onSaveEvent(result)}
+            onDragEvent={() => this._onDragEvent()}
+            saveImageFileInExtStorage={false}
+            showNativeButtons={false}
+            showTitleLabel={true}
+            viewMode={"portrait"}
+          />
+        </View>
         <View style={{margin: 10}}>
           <Button title={"Save"} 
             onPress={() => this.saveSign()} 

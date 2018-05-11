@@ -76,6 +76,7 @@ export class WelcomePage extends Component {
             const shipments = DeliveryAdapter.initializeDeliveryShipments();
             ShipmentStore.saveAllShipments(shipments);
             DeliveryAdapter.setDeliveryShipments(shipments);
+            Alert.alert("Info", "Shipments have been reinitialized");
           }}
         />
         <Button
@@ -101,6 +102,7 @@ export class WelcomePage extends Component {
             const shipments = DeliveryAdapter.initializeDeliveryShipments();
             ShipmentStore.saveAllShipments(shipments);
             DeliveryAdapter.setDeliveryShipments(shipments);
+            Alert.alert("Info", "Shipments have been reinitialized");
           }}
         />
         <Button
