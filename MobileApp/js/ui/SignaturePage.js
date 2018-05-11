@@ -63,8 +63,7 @@ export class SignaturePage extends Component {
             onRequestClose={() => {
               this.setState({reviewModalVisible: false});
             }}>
-            <View style={{marginTop: 22}}>
-              <View>
+            <View style={{flex: 1, marginTop: 22, justifyContent: 'space-between', borderWidth: 2}}>
                 <Text style={{fontSize: 24, fontWeight: 'bold'}}>Please Review Check Summary: {'\n'}</Text>
                 {this.getSummaryText()}
                 <View style={{margin: 10}}>
@@ -75,7 +74,6 @@ export class SignaturePage extends Component {
                     }}>
                   </Button>
                 </View>
-              </View>
             </View>
           </Modal>
 
