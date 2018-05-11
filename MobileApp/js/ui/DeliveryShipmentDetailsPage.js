@@ -11,7 +11,8 @@ export class DeliveryShipmentDetailsPage extends Component {
     this.state={
         pickerValue: DeliveryStatus.OUT_FOR_DELIVERY.key,
         reasonPickerValue: undefined,
-        loadingModalVisible: false
+        loadingModalVisible: false,
+        updateStatusButtonDisabled: true
     }
   }
 
@@ -117,8 +118,12 @@ export class DeliveryShipmentDetailsPage extends Component {
               mode={"dropdown"}
               style={{width:270, height: 50}} 
               selectedValue={this.state.pickerValue} 
-              onValueChange={(itemValue, itemIndex) => this.setState({pickerValue: itemValue, reasonPickerValue: Object.entries(DeliveryReason[pickerValue])[0]})}>
-                {pickerItems}
+              onValueChange={(itemValue, itemIndex) => {
+                let isOFD = (itemValue===DeliveryStatus.OUT_FOR_DELIVERY.key);
+                this.setState({ updateStatusButtonDisabled: isOFD, pickerValue: itemValue, reasonPickerValue: Object.entries(DeliveryReason[pickerValue])[0]})
+              }}>
+              
+              {pickerItems}
             </Picker>
           </View>
           <View style={{margin: 10, width: "100%", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderWidth: 1}}>
@@ -133,7 +138,7 @@ export class DeliveryShipmentDetailsPage extends Component {
           </View>
         
           <Button
-            title="Update Delivery Status"
+            title="Update Delivery Status" disabled={this.state.updateStatusButtonDisabled}
             onPress={() => Alert.alert("Confirmation","Are you sure you want to update this delivery status",
               [ 
                 {text:"Ok", onPress:() => this.navigateToListPageAndSaveState(shipment, this.state.pickerValue, this.state.reasonPickerValue)},

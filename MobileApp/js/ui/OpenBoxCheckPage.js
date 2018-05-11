@@ -31,20 +31,15 @@ export class OpenBoxCheckPage extends Component {
       checkName
     };
 
-    this.ChangeThisTitle(checkName);
   }
 
   static navigationOptions = ({ navigation }) => {
-    const {state} = navigation;
-    let title = `${state.params.title}`;
-    if (title === undefined) title = "Loading";
-    return { title };
+    // const {state} = navigation;
+    // let title = `${state.params.title}`;
+    // if (title === undefined) title = "Loading";
+    // return { title };
+    return {title: 'Open Box Check'};
   };
-
-  ChangeThisTitle(titleText) {
-    const {setParams} = this.props.navigation;
-    setParams({ title: titleText })
-  }
 
   renderCheckTypeBoolean() {
     return (
