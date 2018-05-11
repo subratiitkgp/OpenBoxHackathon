@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Alert, Text, View, Image, TouchableOpacity, Button, Picker, CheckBox, Modal, ActivityIndicator } from 'react-native';
 import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { DeliveryStatus, DeliveryReason } from '../constants/DeliveryStatus';
+import { CheckUtil } from '../util/CheckUtil';
+import { ShipmentStore } from '../data/ShipmentStore';
 
 export class DeliveryShipmentDetailsPage extends Component {
   static navigationOptions = {
@@ -52,7 +54,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   areAllChecksPassed(shipment) {
-    const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
+    const custOpenBoxChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
     let flag = true;
     custOpenBoxChecks.forEach(check => {
       if(shipment.isCustomerOBCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
@@ -63,7 +65,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   isAnyCheckPassedOrFailed(shipment) {
-    const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
+    const custOpenBoxChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
     let flag = false;
     custOpenBoxChecks.forEach(check => {
       if(shipment.isCustomerOBCheckRequired && (check.checkResults === 'PASSED' || check.checkResults === 'FAILED')) {
@@ -91,9 +93,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   render() {
     const { navigation } = this.props;
     const shipmentId = navigation.getParam('shipmentId');
-    let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
-    console.log("ankit rai");
-    console.log(shipment);
+    let shipment = ShipmentStore.getShipment(shipmentId);
     const pickerValue = this.state.pickerValue;
     const sellerOpenBox = shipment.isSellerOBCheckRequired;
     const custOpenBox = shipment.isCustomerOBCheckRequired;

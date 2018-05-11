@@ -11,6 +11,7 @@ import { CheckTypeTriState } from './CheckTypeTriState';
 import { OpenBoxChecks, CheckTypes, CheckNames } from '../constants/OpenBoxChecks';
 import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { CheckUtil } from '../util/CheckUtil';
+import { ShipmentStore } from '../data/ShipmentStore';
 
 export class OpenBoxCheckPage extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export class OpenBoxCheckPage extends Component {
     const shipmentId = this.props.navigation.getParam('shipmentId');
     const checkId = this.props.navigation.getParam('checkId');
 
-    let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
+    let shipment = ShipmentStore.getShipment(shipmentId);
     const category = shipment.category;
 
     const openBoxChecks = OpenBoxChecks[category];
@@ -85,7 +86,15 @@ export class OpenBoxCheckPage extends Component {
   }
 
   static navigationOptions = ({ navigation }) => {
-    return {title: 'Open Box Check'};
+    const shipmentId = navigation.getParam('shipmentId');
+    const checkId = navigation.getParam('checkId');
+
+    let shipment = ShipmentStore.getShipment(shipmentId);
+    const category = shipment.category;
+    const openBoxChecks = OpenBoxChecks[category];
+    const check = openBoxChecks[checkId];
+    const checkName = check.checkName;
+    return {title: CheckNames[checkName].key};
   };
 
   renderCheckTypeBoolean() {

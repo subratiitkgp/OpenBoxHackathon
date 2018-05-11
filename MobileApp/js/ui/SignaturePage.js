@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Alert, View, Button, Picker, StyleSheet, Modal, Text, ActivityIndicator } from 'react-native';
 import SignatureCapture from 'react-native-signature-capture';
 import {DeliveryAdapter} from '../data/DeliveryAdapter';
+import { CheckUtil } from '../util/CheckUtil';
 
 export class SignaturePage extends Component {
   constructor(props) {
@@ -108,8 +109,7 @@ export class SignaturePage extends Component {
 
   getSummaryText() {
     const shipment = this.localProps.shipment;
-    const checks = shipment.CUSTOMER_OPENBOX_CHECKS;
-
+    const checks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
     return (
       <View style={{flex: 1, margin: 20}}>
         <Text style={{fontSize: 24, fontWeight: 'bold'}}>Please Review Check Summary: {'\n'} {'\n'}</Text>

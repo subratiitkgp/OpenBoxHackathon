@@ -5,6 +5,7 @@ import { Text, View, FlatList } from 'react-native';
 import { Delivery } from './Delivery';
 import { DeliveryAdapter } from '../data/DeliveryAdapter';
 import { DeliveryStatus } from '../constants/DeliveryStatus';
+import { ShipmentType } from '../constants/ShipmentType';
 
 export class Deliveries extends Component {
   constructor(props) {
@@ -19,7 +20,9 @@ export class Deliveries extends Component {
 
   render() {
     let shipments = DeliveryAdapter.fetchDeliveryShipments();
-    shipments=shipments.filter(shipment => shipment.status===DeliveryStatus.OUT_FOR_DELIVERY.key)
+    shipments=shipments.filter(shipment => 
+      shipment.status===DeliveryStatus.OUT_FOR_DELIVERY.key
+      && shipment.type===ShipmentType.DELIVERY.key)
     return (
       <View>
         <FlatList
