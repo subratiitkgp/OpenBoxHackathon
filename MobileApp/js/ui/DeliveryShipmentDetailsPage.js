@@ -62,6 +62,17 @@ export class DeliveryShipmentDetailsPage extends Component {
     return flag;
   }
 
+  isAnyCheckPassedOrFailed(shipment) {
+    const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
+    let flag = false;
+    custOpenBoxChecks.forEach(check => {
+      if(shipment.isCustomerOBCheckRequired && (check.checkResults === 'PASSED' || check.checkResults === 'FAILED')) {
+        flag =  true;
+      }
+    });
+    return flag;
+  }
+
   getCheckIcon(tag, enabled) {
     if (enabled) return (
       <View>
@@ -81,6 +92,8 @@ export class DeliveryShipmentDetailsPage extends Component {
     const { navigation } = this.props;
     const shipmentId = navigation.getParam('shipmentId');
     let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
+    console.log("ankit rai");
+    console.log(shipment);
     const pickerValue = this.state.pickerValue;
     const sellerOpenBox = shipment.isSellerOBCheckRequired;
     const custOpenBox = shipment.isCustomerOBCheckRequired;
@@ -122,14 +135,32 @@ export class DeliveryShipmentDetailsPage extends Component {
             {this.getCheckIcon("COB", custOpenBox)}
             {this.getCheckIcon("SOB", sellerOpenBox)}
           </View>
-          {shipment.isCustomerOBCheckRequired === true ? 
-            <Button
-            title="Start Open Box"
-            onPress={() => {
-              navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
-            }}/>
-            : null}
           
+          {shipment.isCustomerOBCheckRequired === true ? 
+              this.isAnyCheckPassedOrFailed(shipment) === false ? 
+              <Button
+              title="Start Open Box"
+              onPress={() => {
+                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+              }}
+              />
+              :  
+              this.areAllChecksPassed(shipment) === true ? 
+              <Button
+              title="Open Box Done" color="green"
+              onPress={() => {
+                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+              }}
+              />
+              :
+              <Button
+              title="Re-Start Open Box"
+              onPress={() => {
+                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+              }}
+              />
+            : null}
+
           <View style={{margin: 10, width: "100%", flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderWidth: 1}}>
             <Text>Delivery Status</Text>
             <Picker 
