@@ -35,16 +35,29 @@ export class Delivery extends Component {
                       justifyContent: 'space-evenly', alignItems: 'center',
                       margin: 10}}>
           <Image source={{uri: shipment.imageUrl}}
-                style={{width: 100, height: 200}}
-          />
+                style={{width: 100, height: 200}}/>
           <View style={{flexDirection: 'column'}}>
-          <Text>
-            {shipment.shipmentId}
-          </Text>
-          <View style={{flexDirection: 'row'}}>
-            {this.getCheckIcon("COB", custOpenBox)}
-            {this.getCheckIcon("SOB", sellerOpenBox)}
-          </View>
+            <View style={{flexDirection: 'column'}}>
+                <Text style={{fontWeight: "bold",fontSize : 24}}>
+                    {shipment.shipmentId}
+                </Text>
+                <Text style={{fontSize : 20}}>
+                    {shipment.itemDescription}
+                </Text>
+                <Text style={{fontSize : 20}}>
+                    {shipment.category}
+                </Text>
+                <Text style={{fontSize : 20}}>
+                    {shipment.customerCity}
+                </Text>
+                <Text style={{fontSize : 20}}>
+                    {shipment.customerPincode}
+                </Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+                {this.getCheckIcon("COB", custOpenBox)}
+                {this.getCheckIcon("SOB", sellerOpenBox)}
+            </View>
           </View>
         </View>
       </TouchableOpacity>
