@@ -58,8 +58,15 @@ export class OpenBoxCheckPage extends Component {
           checkId: checkDetails.checkId + 1
         });
       } else {
-        Alert.alert("Info", "All checks have been completed.", [
-          {text:"Ok", onPress: () => navigation.pop(checkDetails.checkId + 1)},
+        Alert.alert("Info", "All checks have been completed.",
+        [
+          {text:"Ok", onPress: () => {
+              navigation.pop(checkDetails.checkId+2);
+              navigation.navigate("DeliveryShipmentDetailsPage", {
+                shipmentId: checkDetails.shipment.shipmentId
+              });
+            }
+          }
         ])
       }
   }
@@ -69,7 +76,10 @@ export class OpenBoxCheckPage extends Component {
     if(checkResult === "PASSED") {
       this.navigateToNextPage(checkDetails, navigation);
     } else {
-      navigation.pop(checkDetails.checkId + 1);
+        navigation.pop(checkDetails.checkId+2);
+        navigation.navigate("DeliveryShipmentDetailsPage", {
+            shipmentId: checkDetails.shipment.shipmentId
+        });
     }
     DeliveryAdapter.syncDeliveryShipment(checkDetails.shipment);
   }
