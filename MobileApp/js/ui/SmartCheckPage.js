@@ -16,14 +16,13 @@ export class SmartCheckPage extends Component {
     super(props);
     const shipment = this.props.navigation.getParam('shipment');
     const checkId = this.props.navigation.getParam('checkId');
- 
 
     const category = shipment.category;
 
     const smartChecks = SmartChecks[category];
     const check = smartChecks[checkId];
 
-    const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
+    const checkScenario = "CUSTOMER_SMARTCHECK_CHECKS";
 
     const checksLength = smartChecks.length;
     const checkName = check.checkName;
@@ -60,7 +59,7 @@ export class SmartCheckPage extends Component {
       [
         {text:"Ok", onPress: () => {
             navigation.pop(checkDetails.checkId+2);
-            const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY ? 
+            const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY.key ? 
               'DeliveryShipmentDetailsPage' : 'PickupShipmentDetailsPage';
             navigation.navigate(pageName, {shipmentId: checkDetails.shipment.shipmentId});
           }
@@ -75,7 +74,7 @@ export class SmartCheckPage extends Component {
       this.navigateToNextPage(checkDetails, navigation);
     } else {
         navigation.pop(checkDetails.checkId+2);
-        const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY ? 
+        const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY.key ? 
               'DeliveryShipmentDetailsPage' : 'PickupShipmentDetailsPage';
         navigation.navigate(pageName, {shipment: checkDetails.shipment});
     }

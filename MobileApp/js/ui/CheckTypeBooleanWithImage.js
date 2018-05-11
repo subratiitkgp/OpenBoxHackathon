@@ -14,14 +14,14 @@ export class CheckTypeBooleanWithImage extends Component {
         {this.props.checkDetails.checkQuestionHeader}
       </Text>
       <Image source={{uri: this.props.checkDetails.shipmentCheck.checkData.displayValue}}
-             style={{width: 200, height: 200}}
+             style={{width: 170, height: 300}}
        />
       <Button
         title="Yes"
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
         [ 
           {text:"Ok", onPress:() => {
-            (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+            (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY.key) ? 
               OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
             :
               SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
@@ -35,7 +35,7 @@ export class CheckTypeBooleanWithImage extends Component {
         onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
         [ 
           {text:"Ok", onPress:() => {
-            (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+            (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY.key) ? 
               OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)
             :
               SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)

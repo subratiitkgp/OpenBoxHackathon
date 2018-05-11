@@ -59,7 +59,7 @@ export class CheckTypeMultiChoice extends Component {
             Alert.alert("Confirmation", "Are you sure your check is passed?",
             [
               {text:"Ok", onPress:() => {
-                (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+                (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY.key) ? 
                   OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
                 :
                   SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)
@@ -76,7 +76,7 @@ export class CheckTypeMultiChoice extends Component {
           onPress={() => Alert.alert("Confirmation", "Are you sure your check is failed? This will take you back to main page.",
           [ 
             {text:"Ok", onPress:() => {
-              (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY) ? 
+              (this.props.checkDetails.shipment.type === ShipmentType.DELIVERY.key) ? 
                 OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)
               :
                 SmartCheckPage.saveResultsAndNavigate(this.props.checkDetails, "FAILED", this.props.navigation)

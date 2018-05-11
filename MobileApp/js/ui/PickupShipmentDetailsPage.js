@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { Alert, Text, View, Image, TouchableOpacity, Button, Picker, CheckBox, Modal, ActivityIndicator } from 'react-native';
-import { PickupAdapter} from '../data/PickupAdapter';
 import { PickupStatus, PickupReason } from '../constants/PickupStatus';
 import { CheckUtil } from '../util/CheckUtil';
 import { ShipmentStore } from '../data/ShipmentStore';
@@ -30,7 +29,6 @@ export class PickupShipmentDetailsPage extends Component {
   navigateToListPageAndSaveState(shipment, pickerValue, reasonPickerValue) {
     const status = pickerValue;
     const reason = reasonPickerValue;
-    console.log(shipment);
 
     if (status === PickupStatus.PICKED.key) {
       if(!this.areAllChecksPassed(shipment)) {
@@ -41,15 +39,19 @@ export class PickupShipmentDetailsPage extends Component {
       return;
     }
 
-    shipment.status = status;
-    shipment.reason = reason;
-    PickupAdapter.syncPickupShipment(shipment);
     this.setState({loadingModalVisible: true});
     setTimeout(() => {
       this.setState({loadingModalVisible: false});
-      this.props.navigation.pop(2);
-      this.props.navigation.navigate("TaskPage");
-    }, 2000);
+      setTimeout(() => {
+        shipment.status = status;
+        shipment.reason = reason;
+        ShipmentStore.saveShipment(shipment);
+        setTimeout(() => {
+          this.props.navigation.pop(2);
+          this.props.navigation.navigate("TaskPage");
+        },500);
+      }, 500);
+    }, 1000);
   }
 
   disableSmartButton(shipment) {
@@ -60,7 +62,7 @@ export class PickupShipmentDetailsPage extends Component {
   }
 
   areAllChecksPassed(shipment) {
-    const custSmartChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+    const custSmartChecks = shipment.CUSTOMER_SMARTCHECK_CHECKS;
     let flag = true;
     custSmartChecks.forEach(check => {
       if(shipment.isCustomerSCCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
@@ -71,7 +73,7 @@ export class PickupShipmentDetailsPage extends Component {
   }
 
   isAnyCheckPassedOrFailed(shipment) {
-    const custSmartChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+    const custSmartChecks = shipment.CUSTOMER_SMARTCHECK_CHECKS;
     let flag = false;
     custSmartChecks.forEach(check => {
       if(shipment.isCustomerSCCheckRequired && (check.checkResults === 'PASSED' || check.checkResults === 'FAILED')) {

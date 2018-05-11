@@ -24,8 +24,6 @@ export class Delivery extends Component {
     const shipment = this.props.shipment;
     const sellerOpenBox = shipment.isSellerOBCheckRequired;
     const custOpenBox = shipment.isCustomerOBCheckRequired;
-    const sellerSC = shipment.isSellerSCCheckRequired;
-    const custSC = shipment.isCustomerSCCheckRequired;
 
     return (
       <TouchableWithoutFeedback onPress={() => navigate('DeliveryShipmentDetailsPage', {shipmentId: shipment.shipmentId})}>

@@ -13,6 +13,11 @@ export class DeliveryShipmentDetailsPage extends Component {
   
   constructor(props) {
     super(props);
+
+    const shipmentId = this.props.navigation.getParam('shipmentId');
+    const shipment = ShipmentStore.getShipment(shipmentId);
+    this.localProps = {shipment}
+
     this.state={
         pickerValue: DeliveryStatus.OUT_FOR_DELIVERY.key,
         reasonPickerValue: undefined,
@@ -34,14 +39,16 @@ export class DeliveryShipmentDetailsPage extends Component {
       return;
     }
 
-    shipment.status = status;
-    shipment.reason = reason;
-    ShipmentStore.saveShipment(shipment);
     this.setState({loadingModalVisible: true});
     setTimeout(() => {
       this.setState({loadingModalVisible: false});
-      this.props.navigation.pop(2);
-      this.props.navigation.navigate("TaskPage");
+      setTimeout(() => {
+        shipment.status = status;
+        shipment.reason = reason;
+        ShipmentStore.saveShipment(shipment);
+        this.props.navigation.pop(2);
+        this.props.navigation.navigate("TaskPage");
+      }, 500);
     }, 2000);
   }
 
@@ -53,7 +60,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   areAllChecksPassed(shipment) {
-    const custOpenBoxChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+    const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
     let flag = true;
     custOpenBoxChecks.forEach(check => {
       if(shipment.isCustomerOBCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
@@ -64,7 +71,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   isAnyCheckPassedOrFailed(shipment) {
-    const custOpenBoxChecks = shipment[CheckUtil.getCheckScenario(shipment.type, shipment.status)];
+    const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
     let flag = false;
     custOpenBoxChecks.forEach(check => {
       if(shipment.isCustomerOBCheckRequired && (check.checkResults === 'PASSED' || check.checkResults === 'FAILED')) {
@@ -91,13 +98,10 @@ export class DeliveryShipmentDetailsPage extends Component {
 
   render() {
     const { navigation } = this.props;
-    const shipmentId = navigation.getParam('shipmentId');
-    let shipment = ShipmentStore.getShipment(shipmentId);
+    const shipment = this.localProps.shipment;
     const pickerValue = this.state.pickerValue;
-    const sellerOpenBox = shipment.isSellerOBCheckRequired;
-    const custOpenBox = shipment.isCustomerOBCheckRequired;
-    const sellerSC = shipment.isSellerSCCheckRequired;
-    const custSC = shipment.isCustomerSCCheckRequired;
+    const sellerOpenBox = this.localProps.shipment.isSellerOBCheckRequired;
+    const custOpenBox = this.localProps.shipment.isCustomerOBCheckRequired;
 
     let pickerItems = Object.entries(DeliveryStatus).map((key, value) => {
       return <Picker.Item key={key[1].key} value={key[1].key} label={key[1].value} />
@@ -140,7 +144,7 @@ export class DeliveryShipmentDetailsPage extends Component {
               <Button
               title="Start Open Box"
               onPress={() => {
-                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+                navigation.navigate("OpenBoxCheckPage", {shipment: shipment, checkId: 0});
               }}
               />
               :  
@@ -148,14 +152,14 @@ export class DeliveryShipmentDetailsPage extends Component {
               <Button
               title="Open Box Done" color="green"
               onPress={() => {
-                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+                navigation.navigate("OpenBoxCheckPage", {shipment: shipment, checkId: 0});
               }}
               />
               :
               <Button
               title="Re-Start Open Box"
               onPress={() => {
-                navigation.navigate("OpenBoxCheckPage", {shipmentId: shipmentId, checkId: 0});
+                navigation.navigate("OpenBoxCheckPage", {shipment: shipment, checkId: 0});
               }}
               />
             : null}

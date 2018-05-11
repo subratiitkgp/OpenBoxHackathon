@@ -21,7 +21,7 @@ export class SignaturePage extends Component {
       reason
     };
 
-    const checkRequired = shipment.type === ShipmentType.DELIVERY ? 
+    const checkRequired = shipment.type === ShipmentType.DELIVERY.key ? 
       shipment.isCustomerOBCheckRequired : shipment.isCustomerSCCheckRequired;
 
     this.state = {
@@ -38,7 +38,7 @@ export class SignaturePage extends Component {
 
   render() {
     let shipment = this.localProps.shipment;    
-    const checkRequired = shipment.type === ShipmentType.DELIVERY ? 
+    const checkRequired = shipment.type === ShipmentType.DELIVERY.key ? 
       shipment.isCustomerOBCheckRequired : shipment.isCustomerSCCheckRequired;
     return (
       <View style={{flex: 1}}>

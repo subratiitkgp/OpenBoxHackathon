@@ -16,16 +16,15 @@ export class OpenBoxCheckPage extends Component {
   constructor(props) {
     super(props);
 
-    const shipmentId = this.props.navigation.getParam('shipmentId');
+    const shipment = this.props.navigation.getParam('shipment');
     const checkId = this.props.navigation.getParam('checkId');
 
-    let shipment = ShipmentStore.getShipment(shipmentId);
     const category = shipment.category;
 
     const openBoxChecks = OpenBoxChecks[category];
     const check = openBoxChecks[checkId];
 
-    const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
+    const checkScenario = "CUSTOMER_OPENBOX_CHECKS";
 
     const checksLength = openBoxChecks.length;
     const checkName = check.checkName;
@@ -52,9 +51,10 @@ export class OpenBoxCheckPage extends Component {
   }
 
   static navigateToNextPage(checkDetails, navigation) {
+    console.log(checkDetails.shipment);
     if(!this.isLastCheck(checkDetails)) {
         navigation.push('OpenBoxCheckPage', {
-          shipmentId: checkDetails.shipment.shipmentId,
+          shipment: checkDetails.shipment,
           checkId: checkDetails.checkId + 1
         });
     } else {
@@ -62,7 +62,7 @@ export class OpenBoxCheckPage extends Component {
       [
         {text:"Ok", onPress: () => {
             navigation.pop(checkDetails.checkId+2);
-            const pageName = checkDetails.shipment.type == ShipmentType.DELIVERY ? 
+            const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY.key ? 
               'DeliveryShipmentDetailsPage' : 'PickupShipmentDetailsPage';
             navigation.navigate(pageName, {shipmentId: checkDetails.shipment.shipmentId});
           }
@@ -78,17 +78,16 @@ export class OpenBoxCheckPage extends Component {
     } else {
         navigation.pop(checkDetails.checkId+2);
         navigation.navigate("DeliveryShipmentDetailsPage", {
-            shipmentId: checkDetails.shipment.shipmentId
+            shipment: checkDetails.shipment
         });
     }
     ShipmentStore.saveShipment(checkDetails.shipment);
   }
 
   static navigationOptions = ({ navigation }) => {
-    const shipmentId = navigation.getParam('shipmentId');
+    const shipment = navigation.getParam('shipment');
     const checkId = navigation.getParam('checkId');
 
-    let shipment = ShipmentStore.getShipment(shipmentId);
     const category = shipment.category;
     const openBoxChecks = OpenBoxChecks[category];
     const check = openBoxChecks[checkId];
