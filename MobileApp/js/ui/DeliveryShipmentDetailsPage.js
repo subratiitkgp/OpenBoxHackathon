@@ -47,9 +47,8 @@ export class DeliveryShipmentDetailsPage extends Component {
   }
 
   disableOpenBoxButton(shipment) {
-    console.log(shipment.isCustomerOBCheckRequired);
     if(shipment.isCustomerOBCheckRequired === true) {
-        return false;
+      return false;
     }
     return true;
   }

@@ -10,41 +10,41 @@ import { CheckUtil } from '../util/CheckUtil';
 export class CheckTypeSingleChoice extends Component {
 
   constructor(props) {
-        super(props);
-        const shipmentId = this.props.shipmentId;
-        let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
+    super(props);
+    const shipmentId = this.props.shipmentId;
+    let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
 
-        // let shipment = ShipmentStore.getShipment(shipmentId);
-        const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
-        const checks = shipment[checkScenario];
-        const checkId = this.props.checkId;
-        const check = checks[checkId];
-        const checksLength = OpenBoxChecks[shipment.category].length;
+    // let shipment = ShipmentStore.getShipment(shipmentId);
+    const checkScenario = CheckUtil.getCheckScenario(shipment.type, shipment.status);
+    const checks = shipment[checkScenario];
+    const checkId = this.props.checkId;
+    const check = checks[checkId];
+    const checksLength = OpenBoxChecks[shipment.category].length;
 
-        const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
-        const checkQuestionHeader = CheckNames[checkName].value;
+    const checkName = OpenBoxChecks[shipment.category][checkId].checkName;
+    const checkQuestionHeader = CheckNames[checkName].value;
 
-        this.localProps = {
-              checksLength: OpenBoxChecks[shipment.category].length,
-              checkQuestionHeader,
-              checkData: check.checkData,
-              checkResults: check.checkResults,
-              shipment,
-              check
-            };
+    this.localProps = {
+      checksLength: OpenBoxChecks[shipment.category].length,
+      checkQuestionHeader,
+      checkData: check.checkData,
+      checkResults: check.checkResults,
+      shipment,
+      check
+    };
   }
 
   saveResultsAndNavigate(result) {
-    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
     if(result === "PASSED") {
-          this.localProps.check.checkResults = "PASSED";
-          this.navigateToNextPage(this.props.shipmentId, this.props.checkId, this.localProps.checksLength)
-        }
-        else
-        {
-          this.localProps.check.checkResults = "FAILED";
-          this.props.navigation.pop(this.localProps.checkId + 1);
-        }
+      this.localProps.check.checkResults = "PASSED";
+      this.navigateToNextPage(this.props.shipmentId, this.props.checkId, this.localProps.checksLength)
+    }
+    else
+    {
+      this.localProps.check.checkResults = "FAILED";
+      this.props.navigation.pop(this.localProps.checkId + 1);
+    }
+    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
   }
 
   isLastCheck(checkId, checksLength) {

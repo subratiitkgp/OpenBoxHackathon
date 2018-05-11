@@ -25,6 +25,7 @@ export class WelcomePage extends Component {
     Store.init([ShipmentStore.getShipmentSchema()]);
     const shipments = ShipmentStore.getAllShipments();
     DeliveryAdapter.setDeliveryShipments(shipments);
+    console.log(shipments);
   }
 
   printShipments() {

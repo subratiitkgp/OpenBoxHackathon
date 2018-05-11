@@ -53,7 +53,6 @@ export class CheckTypeBoolean extends Component {
       }
   }
   saveResultsAndNavigate(result) {
-    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
     if(result === "PASSED") {
       this.localProps.check.checkResults = "PASSED";
       this.navigateToNextPage(this.shipmentId, this.props.checkId, this.localProps.checksLength)
@@ -63,6 +62,7 @@ export class CheckTypeBoolean extends Component {
       this.localProps.check.checkResults = "FAILED";
       this.props.navigation.pop(this.props.checkId+1)
     }
+    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
   }
 
   render() {

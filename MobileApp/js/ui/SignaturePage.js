@@ -31,16 +31,12 @@ export class SignaturePage extends Component {
   };
 
   render() {
-    let shipment = this.localProps.shipment;
-
-    console.log(this.state.reviewedSummary);
-    console.log(this.state.signed);
-    
+    let shipment = this.localProps.shipment;    
     return (
       <View style={{flex: 1}}>
         <View style={{margin: 10}}>
           <Button
-            title={"ShipmentId: " + shipment.shipmentId}
+            title={"Please review check summary"}
             disabled={true}
             onPress={() => this.showSummary()}
           />
@@ -49,7 +45,7 @@ export class SignaturePage extends Component {
           shipment.isCustomerOBCheckRequired ? 
             <View style={{margin: 10}}>
               <Button
-                title="Review Summary"
+                title="Review Check Summary"
                 onPress={() => this.showSummary()}
               />
             </View>
@@ -63,8 +59,7 @@ export class SignaturePage extends Component {
             onRequestClose={() => {
               this.setState({reviewModalVisible: false});
             }}>
-            <View style={{flex: 1, marginTop: 22, justifyContent: 'space-between', borderWidth: 2}}>
-                <Text style={{fontSize: 24, fontWeight: 'bold'}}>Please Review Check Summary: {'\n'}</Text>
+            <View style={{flex: 1, margin: 50, justifyContent: 'space-between', borderWidth: 2}}>
                 {this.getSummaryText()}
                 <View style={{margin: 10}}>
                   <Button
@@ -107,7 +102,8 @@ export class SignaturePage extends Component {
     const checks = shipment.CUSTOMER_OPENBOX_CHECKS;
 
     return (
-      <View>
+      <View style={{flex: 1, margin: 20}}>
+        <Text style={{fontSize: 24, fontWeight: 'bold'}}>Please Review Check Summary: {'\n'} {'\n'}</Text>
         {
           checks.map((check, index) => {
             return (

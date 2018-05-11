@@ -34,16 +34,16 @@ export class CheckTypeTriState extends Component {
   }
 
   saveResultsAndNavigate(result) {
-    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
     if(result === "PASSED") {
-            this.localProps.check.checkResults = "PASSED";
-            this.navigateToNextPage(this.props.shipmentId, this.localProps.checkId, this.localProps.checksLength)
-          }
-          else
-          {
-            this.localProps.check.checkResults = "FAILED";
-            this.props.navigation.pop(this.localProps.checkId + 1);
-          }
+      this.localProps.check.checkResults = "PASSED";
+      this.navigateToNextPage(this.props.shipmentId, this.localProps.checkId, this.localProps.checksLength)
+    }
+    else
+    {
+      this.localProps.check.checkResults = "FAILED";
+      this.props.navigation.pop(this.localProps.checkId + 1);
+    }
+    DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
   }
 
   isLastCheck(checkId, checksLength) {

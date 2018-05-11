@@ -22,12 +22,6 @@ export class OpenBoxCheckPage extends Component {
     const openBoxChecks = OpenBoxChecks[category];
     const checkId = this.props.navigation.getParam('checkId');
     const openBoxCheck = openBoxChecks[checkId];
-
-    console.log(category);
-    console.log(openBoxChecks);
-    console.log(checkId);
-    console.log(openBoxCheck);
-
     const checkType = openBoxCheck.checkType;
     const checkName = openBoxCheck.checkName;
 
