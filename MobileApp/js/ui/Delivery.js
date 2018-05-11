@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Text, View, Image, TouchableOpacity, CheckBox } from 'react-native';
 
 export class Delivery extends Component {
+ 
+  
   getCheckIcon(tag, enabled) {
     if (enabled) return (
       <View>

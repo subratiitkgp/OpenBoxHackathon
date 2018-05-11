@@ -6,6 +6,12 @@ import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { DeliveryStatus, DeliveryReason } from '../constants/DeliveryStatus';
 
 export class DeliveryShipmentDetailsPage extends Component {
+  
+   
+  static navigationOptions = {
+    title: "Product Delivery"
+  };
+  
   constructor(props) {
     super(props);
     this.state={
