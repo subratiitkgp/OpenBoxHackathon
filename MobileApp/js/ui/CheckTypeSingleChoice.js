@@ -69,8 +69,8 @@ export class CheckTypeSingleChoice extends Component {
     
 
     return (
-      <View style={{flex: 1, justifyContent: 'space-evenly', margin: 100}}>
-      <Text>
+      <View style={{flex: 1, justifyContent: 'space-evenly', margin: 50}}>
+      <Text style={{fontWeight: "bold",fontSize : 24}}>
         {this.localProps.checkQuestionHeader}
       </Text>
       <Button

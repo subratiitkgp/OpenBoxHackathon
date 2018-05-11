@@ -45,8 +45,8 @@ export class CheckTypeMultiChoice extends Component {
 
   render() {  
     return (
-      <View style={{flex: 1, justifyContent: 'space-between'}}>
-      <Text>
+      <View style={{flex: 1, justifyContent: 'space-between',margin: 50}}>
+      <Text style={{fontWeight: "bold",fontSize : 24}}>
         {this.localProps.checkQuestionHeader}
       </Text>
       <FlatList style={{borderWidth: 1}}
@@ -57,7 +57,7 @@ export class CheckTypeMultiChoice extends Component {
         renderItem={(checkData, index) => {
           console.log(checkData.index);
           return (
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row',alignItems: 'center'}}>
               <CheckBox value={this.state.checkBoxValues[checkData.index]} onValueChange={(value) => this.changeCheckboxState(value, checkData.index)} />
               <Text>{checkData.item.value}</Text>
             </View>

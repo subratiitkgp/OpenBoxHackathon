@@ -71,8 +71,8 @@ export class CheckTypeBooleanWithText extends Component {
 
     
     return (
-      <View style={{flex: 1, justifyContent: 'space-between', margin: 100}}>
-      <Text>
+      <View style={{flex: 1, justifyContent: 'space-between', margin: 50}}>
+      <Text style={{fontWeight: "bold",fontSize : 24}}>
         {this.localProps.checkQuestionHeader}
       </Text>
       <Button
