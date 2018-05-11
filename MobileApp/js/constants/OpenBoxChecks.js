@@ -22,7 +22,7 @@ export const CheckNames = {
   BRAND: {key: "BRAND", value: "Is the brand of the item correct ?"},
   COLOR: {key: "COLOR", value: "Is the color of the item correct ?"},
   SIZE:  {key: "SIZE", value: "Is the size of the item correct ?"},
-  ACCESSORIES : {key: "ACCESSORIES", value: "Are all the accessories present ?"}
+  ACCESSORIES : {key: "ACCESSORIES", value: "Are the following accessories present ?"}
 }
 
 export const OpenBoxChecks = {
