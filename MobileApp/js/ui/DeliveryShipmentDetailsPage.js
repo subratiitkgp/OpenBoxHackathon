@@ -5,6 +5,7 @@ import { Alert, Text, View, Image, TouchableOpacity, Button, Picker, CheckBox, M
 import { DeliveryAdapter} from '../data/DeliveryAdapter';
 import { DeliveryStatus, DeliveryReason } from '../constants/DeliveryStatus';
 import { CheckUtil } from '../util/CheckUtil';
+import { ShipmentStore } from '../data/ShipmentStore';
 
 export class DeliveryShipmentDetailsPage extends Component {
   static navigationOptions = {
@@ -92,9 +93,7 @@ export class DeliveryShipmentDetailsPage extends Component {
   render() {
     const { navigation } = this.props;
     const shipmentId = navigation.getParam('shipmentId');
-    let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
-    console.log("ankit rai");
-    console.log(shipment);
+    let shipment = ShipmentStore.getShipment(shipmentId);
     const pickerValue = this.state.pickerValue;
     const sellerOpenBox = shipment.isSellerOBCheckRequired;
     const custOpenBox = shipment.isCustomerOBCheckRequired;
