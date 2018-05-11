@@ -57,9 +57,9 @@ export class DeliveryAdapter {
         {
           checkName: 'ACCESSORIES',
           checkData: [
-            { key : "CHARGER", value : "Charger" },
-            { key: "HEADPHONE", value: "Headphone" },
-            { key: "BATTERY", value: "Battery" }
+            { key : "CHARGER", value : "Charger", required: true },
+            { key: "HEADPHONE", value: "Headphone", required: false },
+            { key: "BATTERY", value: "Battery", required: true }
           ],
           checkInfo: "BLACK",
           checkResults: undefined
@@ -161,8 +161,9 @@ export class DeliveryAdapter {
             {
                           checkName: 'ACCESSORIES',
                           checkData: [
-                            { key : "WIRE", value : "Wire" },
-                            { key: "STAND", value: "Stand" }
+                            { key : "WIRE", value : "Wire", required: false },
+                            { key: "STAND", value: "Stand", required: false },
+                            { key: "REMOTE", value: "Remote", required: true}
                           ],
                           checkInfo: "BLACK",
                           checkResults: undefined

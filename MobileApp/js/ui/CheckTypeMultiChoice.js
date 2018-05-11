@@ -43,7 +43,18 @@ export class CheckTypeMultiChoice extends Component {
     };
   }
 
-  render() {  
+  verifyMandatoryChecksSelected(checkData, checkBoxValues) {
+    let i;
+    for(i = 0 ; i < checkData.length ; i++) {
+      if(checkData[i].required === true && checkBoxValues[i] === false) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  render() {
     return (
       <View style={{flex: 1, justifyContent: 'space-between',margin: 50}}>
       <Text style={{fontWeight: "bold",fontSize : 24}}>
@@ -55,11 +66,13 @@ export class CheckTypeMultiChoice extends Component {
         keyExtractor={(checkData) => checkData.key}
         initialNumToRender={1}
         renderItem={(checkData, index) => {
-          console.log(checkData.index);
           return (
             <View style={{flexDirection: 'row',alignItems: 'center'}}>
               <CheckBox value={this.state.checkBoxValues[checkData.index]} onValueChange={(value) => this.changeCheckboxState(value, checkData.index)} />
-              <Text style = {{fontSize : 30,margin:10}}>{checkData.item.value}</Text>
+              <Text style = {{fontSize : 25,margin:10}}>{checkData.item.value}</Text>
+              {checkData.item.required===true ?
+                <Text style = {{fontSize : 25,margin:10}}>(Required)</Text>
+              : null}
             </View>
           )
         }}
@@ -68,11 +81,18 @@ export class CheckTypeMultiChoice extends Component {
       <View style={{margin: 10}}>
         <Button style={{margin: 100, padding: 100}}
           title="Yes"
-          onPress={() => Alert.alert("Confirmation", "Are you sure your check is passed?",
-          [ 
-            {text:"Ok", onPress: () => this.saveResultsAndNavigate("PASSED")},
-            {text:"Cancel", onPress: () => console.log("Cancel pressed")}
-          ])}
+          onPress={() => {
+            let areMandatoryChecksSelected = this.verifyMandatoryChecksSelected(this.localProps.checkData, this.state.checkBoxValues);
+            if(areMandatoryChecksSelected === false) {
+              Alert.alert("Alert", "All mandatory checks need to be selected for this product.","")
+              return;
+            }
+            Alert.alert("Confirmation", "Are you sure your check is passed?",
+            [
+              {text:"Ok", onPress: () => this.saveResultsAndNavigate("PASSED")},
+              {text:"Cancel", onPress: () => console.log("Cancel pressed")}
+            ])}
+          }
           />
       </View>  
       <View style={{margin: 10}}>
