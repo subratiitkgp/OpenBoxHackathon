@@ -48,10 +48,10 @@ export class CheckTypeBooleanWithText extends Component {
 
   navigateToNextPage(shipmentId, checkId, checksLength) {
       if(!this.isLastCheck(checkId, checksLength)) {
-        this.props.navigation.push('OpenBoxCheckPage', {shipmentId: shipmentId, checkId: checkId+1})
+        this.props.navigation.push('OpenBoxCheckPage', {shipmentId: shipmentId, checkId: checkId + 1})
       } else {
         Alert.alert("Info", "All checks have been completed.", [
-          {text:"Ok", onPress: () => this.props.navigation.pop(checkId+1)},
+          {text:"Ok", onPress: () => this.props.navigation.pop(checkId + 1)},
         ])      
       }
   }
@@ -59,13 +59,12 @@ export class CheckTypeBooleanWithText extends Component {
     DeliveryAdapter.syncDeliveryShipment(this.localProps.shipment);
     if(result === "PASSED") {
           this.localProps.check.checkResults = "PASSED";
-          console.log(this.localProps.shipment);
           this.navigateToNextPage(this.props.shipmentId,this.localProps.checkId, this.localProps.checksLength)
         }
         else
         {
           this.localProps.check.checkResults = "FAILED";
-          this.props.navigation.pop(this.localProps.checkId+1);
+          this.props.navigation.pop(this.localProps.checkId + 1);
         }
   }
 

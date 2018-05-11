@@ -18,9 +18,16 @@ export class OpenBoxCheckPage extends Component {
     const shipmentId = this.props.navigation.getParam('shipmentId');
     let shipment = DeliveryAdapter.getDeliveryShipment(shipmentId);
     const category = shipment.category;
+
     const openBoxChecks = OpenBoxChecks[category];
     const checkId = this.props.navigation.getParam('checkId');
     const openBoxCheck = openBoxChecks[checkId];
+
+    console.log(category);
+    console.log(openBoxChecks);
+    console.log(checkId);
+    console.log(openBoxCheck);
+
     const checkType = openBoxCheck.checkType;
     const checkName = openBoxCheck.checkName;
 

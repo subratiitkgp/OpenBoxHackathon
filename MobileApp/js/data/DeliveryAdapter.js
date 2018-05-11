@@ -55,14 +55,14 @@ export class DeliveryAdapter {
            checkResults: undefined
         },
         {
-                  checkName: 'ACCESSORIES',
-                  checkData: [
-                    { key : "CHARGER", value : "Charger" },
-                    { key: "HEADPHONE", value: "Headphone" },
-                    { key: "BATTERY", value: "Battery" }
-                  ],
-                  checkInfo: "BLACK",
-                  checkResults: undefined
+          checkName: 'ACCESSORIES',
+          checkData: [
+            { key : "CHARGER", value : "Charger" },
+            { key: "HEADPHONE", value: "Headphone" },
+            { key: "BATTERY", value: "Battery" }
+          ],
+          checkInfo: "BLACK",
+          checkResults: undefined
         },
       ],
       SELLER_OPENBOX_CHECKS: undefined,
