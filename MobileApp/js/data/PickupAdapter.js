@@ -21,7 +21,7 @@ export class PickupAdapter {
       customerCity: 'Bangalore', customerPincode: '560043',
       category: 'MOBILE',
       itemDescription : 'Samsung S7',
-      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg',
+      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/61sKuELUGgL._SY879_.jpg',
       CUSTOMER_SMARTCHECK_CHECKS: [
         {
           checkName: 'CONDITION',
@@ -34,7 +34,7 @@ export class PickupAdapter {
            checkInfo: undefined,
            checkData: {
               displayText : "Image",
-              displayValue : "https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg",
+              displayValue : "https://images-na.ssl-images-amazon.com/images/I/61sKuELUGgL._SY879_.jpg",
               required: true
            },
            checkResults: undefined
@@ -77,8 +77,8 @@ export class PickupAdapter {
       customerId: '123', 'customerName': 'Ankit Rai', 'customerAddress1': 'Kalyan Nagar', 'customerAddress2': 'Banaswadi',
       customerCity: 'Bangalore', 'customerPincode': '560043',
       category: 'APPAREL',
-      itemDescription : "Men's T-Shirt",
-      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/81Q9deM-LXL._UY879_.jpg',
+      itemDescription : "Women's Dress",
+      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/816rPQUICJL._UY879_.jpg',
       CUSTOMER_SMARTCHECK_CHECKS: [
         {
            checkName: 'CONDITION',
@@ -91,7 +91,7 @@ export class PickupAdapter {
            checkInfo: undefined,
            checkData: {
                       displayText : "Image",
-                      displayValue : "https://images-na.ssl-images-amazon.com/images/I/71SVO4osmJL._SY879_.jpg",
+                      displayValue : "https://images-na.ssl-images-amazon.com/images/I/816rPQUICJL._UY879_.jpg",
                       required: true
            },
            checkResults: undefined
