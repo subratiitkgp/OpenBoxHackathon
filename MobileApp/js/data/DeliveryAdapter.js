@@ -2,17 +2,7 @@
 
 import { ShipmentStore } from '../data/ShipmentStore';
 
-let shipmentsGlobal = [];
-
 export class DeliveryAdapter {
-  static setDeliveryShipments(shipments) {
-    shipmentsGlobal = shipments;
-  }
-
-  static fetchDeliveryShipments() {
-    return shipmentsGlobal;
-  }
-
   static initializeDeliveryShipments() {
     let shipments = [];
 
@@ -31,10 +21,10 @@ export class DeliveryAdapter {
           checkResults: undefined
         },
         {
-                  checkName: 'CONDITION',
-                  checkData: undefined,
-                  checkInfo: "BLACK",
-                  checkResults: undefined
+          checkName: 'CONDITION',
+          checkData: undefined,
+          checkInfo: "BLACK",
+          checkResults: undefined
         },
         {
           checkName: 'COLOR',
@@ -98,24 +88,24 @@ export class DeliveryAdapter {
            checkInfo: "WHITE",
            checkResults: undefined
         },
-            {
-              checkName: 'SIZE',
-              checkData: undefined,
-              checkInfo: "MEDIUM",
-              checkResults: undefined
-            },
-            {
-              checkName: 'CONDITION',
-              checkData: undefined,
-              checkInfo: "BLACK",
-              checkResults: undefined
-            },
-            {
-              checkName: 'BRAND',
-              checkData: undefined,
-              checkInfo: "ALLEN SOLLY",
-              checkResults: undefined
-            },
+        {
+          checkName: 'SIZE',
+          checkData: undefined,
+          checkInfo: "MEDIUM",
+          checkResults: undefined
+        },
+        {
+          checkName: 'CONDITION',
+          checkData: undefined,
+          checkInfo: "BLACK",
+          checkResults: undefined
+        },
+        {
+          checkName: 'BRAND',
+          checkData: undefined,
+          checkInfo: "ALLEN SOLLY",
+          checkResults: undefined
+        },
       ],
       SELLER_OPENBOX_CHECKS: undefined,
       CUSTOMER_SMARTCHECK_CHECKS: undefined,
@@ -162,14 +152,14 @@ export class DeliveryAdapter {
               checkResults: undefined
             },
             {
-                          checkName: 'ACCESSORIES',
-                          checkData: [
-                            { key : "WIRE", value : "Wire", required: false },
-                            { key: "STAND", value: "Stand", required: false },
-                            { key: "REMOTE", value: "Remote", required: true}
-                          ],
-                          checkInfo: "BLACK",
-                          checkResults: undefined
+              checkName: 'ACCESSORIES',
+              checkData: [
+                { key : "WIRE", value : "Wire", required: false },
+                { key: "STAND", value: "Stand", required: false },
+                { key: "REMOTE", value: "Remote", required: true}
+              ],
+              checkInfo: "BLACK",
+              checkResults: undefined
             },
           ],
           SELLER_OPENBOX_CHECKS: undefined,
@@ -230,16 +220,6 @@ export class DeliveryAdapter {
 
 
     shipments.push(shipment1, shipment2, shipment3, shipment4);
-
-    shipmentsGlobal = shipments;
     return shipments;
-  }
-
-  static getDeliveryShipment(shipmentId) {
-    return this.fetchDeliveryShipments().find(shipment => shipment.shipmentId === shipmentId);
-  }
-
-  static syncDeliveryShipment(shipment) {
-    ShipmentStore.saveShipment(shipment);
   }
 }

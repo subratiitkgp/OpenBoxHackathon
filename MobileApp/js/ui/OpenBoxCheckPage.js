@@ -78,7 +78,7 @@ export class OpenBoxCheckPage extends Component {
     } else {
         navigation.pop(checkDetails.checkId+2);
         navigation.navigate("DeliveryShipmentDetailsPage", {
-            shipment: checkDetails.shipment
+          shipmentId: checkDetails.shipment.shipmentId
         });
     }
     ShipmentStore.saveShipment(checkDetails.shipment);

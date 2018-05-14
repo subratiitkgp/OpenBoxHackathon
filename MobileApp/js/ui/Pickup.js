@@ -6,14 +6,14 @@ import { Text, View, Image, TouchableWithoutFeedback, CheckBox } from 'react-nat
 export class Pickup extends Component {
   getCheckIcon(tag, enabled) {
     if (enabled) return (
-      <View>
-        <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
+      <View style={{flexDirection: 'row'}}>
+        <View style={{margin: 5, width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
         <Text>{tag}</Text>
       </View>
     );
     else return (
       <View>
-        <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>
+        <View style={{margin: 5, width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>
         <Text>{tag}</Text>
       </View>
     )
@@ -51,8 +51,7 @@ export class Pickup extends Component {
                 </Text>
             </View>
             <View style={{flexDirection: 'row'}}>
-                {this.getCheckIcon("CSC", custSC)}
-                {this.getCheckIcon("SSC", sellerSC)}
+                { custSC ? this.getCheckIcon("Smart Check", custSC): null }
             </View>
           </View>
         </View>

@@ -1,17 +1,7 @@
 'use strict';
 import { ShipmentStore } from '../data/ShipmentStore';
 
-let shipmentsGlobal = [];
-
 export class PickupAdapter {
-  static setPickupShipments(shipments) {
-    shipmentsGlobal = shipments;
-  }
-
-  static fetchPickupShipments() {
-    return shipmentsGlobal;
-  }
-
   static initializePickupShipments() {
     let shipments = [];
 
@@ -109,18 +99,28 @@ export class PickupAdapter {
       signature: undefined
     }
 
-    shipments.push(shipment1, shipment2);
+    const shipment3 = {
+      key: "1", shipmentId: "AMZPKP003", type: 'PICKUP',
+      customerId: '123', customerName: 'Subrat Panda', customerAddress1: 'Marathahalli', customerAddress2: 'Marathahalli',
+      customerCity: 'Bangalore', customerPincode: '560103',
+      category: 'BEAUTY',
+      itemDescription : 'Nivea Deodrant',
+      imageUrl:'https://images-na.ssl-images-amazon.com/images/I/51jQGW7pLWL._SY879_.jpg',
+      CUSTOMER_SMARTCHECK_CHECKS: undefined,
+      SELLER_OPENBOX_CHECKS: undefined,
+      CUSTOMER_OPENBOX_CHECKS: undefined,
+      SELLER_SMARTCHECK_CHECKS: undefined,
+      isSellerOBCheckRequired: true,
+      isSellerSCCheckRequired: true,
+      isCustomerOBCheckRequired: true,
+      isCustomerSCCheckRequired: true,
+      status: "OUT_FOR_PICKUP",
+      reason: undefined,
+      signature: undefined
+    }
 
-    shipmentsGlobal = shipments;
+    shipments.push(shipment1, shipment2, shipment3);
     return shipments;
-  }
-
-  static getPickupShipment(shipmentId) {
-    return this.fetchPickupShipments().find(shipment => shipment.shipmentId === shipmentId);
-  }
-
-  static syncPickupShipment(shipment) {
-    ShipmentStore.saveShipment(shipment);
   }
 }
 

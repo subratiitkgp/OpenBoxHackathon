@@ -76,7 +76,7 @@ export class SmartCheckPage extends Component {
         navigation.pop(checkDetails.checkId+2);
         const pageName = checkDetails.shipment.type === ShipmentType.DELIVERY.key ? 
               'DeliveryShipmentDetailsPage' : 'PickupShipmentDetailsPage';
-        navigation.navigate(pageName, {shipment: checkDetails.shipment});
+        navigation.navigate(pageName, {shipmentId: checkDetails.shipment.shipmentId});
     }
     ShipmentStore.saveShipment(checkDetails.shipment);
   }

@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { Text, View, Button, Alert, TextInput, Picker } from 'react-native';
-import { DeliveryShipmentDetailsPage } from './DeliveryShipmentDetailsPage';
 import { OpenBoxCheckPage } from './OpenBoxCheckPage';
 
 export class CheckTypeBooleanWithText extends Component {

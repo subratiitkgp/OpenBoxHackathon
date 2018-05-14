@@ -14,6 +14,8 @@ export class DeliveryShipmentDetailsPage extends Component {
   constructor(props) {
     super(props);
 
+    console.log(props);
+
     const shipmentId = this.props.navigation.getParam('shipmentId');
     const shipment = ShipmentStore.getShipment(shipmentId);
     this.localProps = {shipment}
@@ -83,14 +85,14 @@ export class DeliveryShipmentDetailsPage extends Component {
 
   getCheckIcon(tag, enabled) {
     if (enabled) return (
-      <View>
-        <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
+      <View style={{flexDirection: 'row'}}>
+        <View style={{margin: 5, width: 20, height: 20, borderWidth: 2, backgroundColor: 'green'}}/>
         <Text>{tag}</Text>
       </View>
     );
     else return (
       <View>
-        <View style={{width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>
+        <View style={{margin: 5, width: 20, height: 20, borderWidth: 2, backgroundColor: 'grey'}}/>
         <Text>{tag}</Text>
       </View>
     )
@@ -135,8 +137,7 @@ export class DeliveryShipmentDetailsPage extends Component {
           </View>
 
           <View style={{flexDirection: 'row'}}>
-            {this.getCheckIcon("COB", custOpenBox)}
-            {this.getCheckIcon("SOB", sellerOpenBox)}
+            { custOpenBox ? this.getCheckIcon("OpenBox", custOpenBox): null }
           </View>
           
           {shipment.isCustomerOBCheckRequired === true ? 

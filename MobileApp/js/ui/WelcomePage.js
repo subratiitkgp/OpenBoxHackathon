@@ -25,22 +25,10 @@ export class WelcomePage extends Component {
     super(props);
     Store.init([ShipmentStore.getShipmentSchema()]);
     const shipments = ShipmentStore.getAllShipments();
-    DeliveryAdapter.setDeliveryShipments(shipments);
   }
 
   printShipments() {
     console.log(ShipmentStore.getAllShipments().length);
-  }
-
-  getDummyShipment(shipmentCount) {
-    return (DeliveryAdapter.fetchDeliveryShipments())[shipmentCount];
-  }
-
-  createNewShipment() {
-    const shipment = this.getDummyShipment(shipmentCount);
-    ShipmentStore.saveShipment(shipment);
-    shipmentCount = shipmentCount + 1;
-    Alert.alert("Created", "Created");
   }
 
   updateShipment() {
@@ -61,10 +49,8 @@ export class WelcomePage extends Component {
     ShipmentStore.deleteAllShipments();
     const shipments = DeliveryAdapter.initializeDeliveryShipments();
     ShipmentStore.saveAllShipments(shipments);
-    DeliveryAdapter.setDeliveryShipments(shipments);
     const pickupShipments = PickupAdapter.initializePickupShipments();
     ShipmentStore.saveAllShipments(pickupShipments);
-    PickupAdapter.setPickupShipments(pickupShipments);
     Alert.alert("Info", "Shipments have been reinitialized");
   }
 
