@@ -63,6 +63,7 @@ export class DeliveryShipmentDetailsPage extends Component {
 
   areAllChecksPassed(shipment) {
     const custOpenBoxChecks = shipment.CUSTOMER_OPENBOX_CHECKS;
+    if (custOpenBoxChecks === undefined) return true;
     let flag = true;
     custOpenBoxChecks.forEach(check => {
       if(shipment.isCustomerOBCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {

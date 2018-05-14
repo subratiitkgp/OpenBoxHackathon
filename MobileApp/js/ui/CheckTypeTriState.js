@@ -31,7 +31,7 @@ export class CheckTypeTriState extends Component {
         title="Incorrect but Accepted"
         onPress={() => Alert.alert("Confirmation", "Are you sure you want to go ahead with your choice?",
         [ 
-          {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigtion)},
+          {text:"Ok", onPress: () => OpenBoxCheckPage.saveResultsAndNavigate(this.props.checkDetails, "PASSED", this.props.navigation)},
           {text:"Cancel", onPress: () => console.log("Cancel pressed")}
         ])}      
         />

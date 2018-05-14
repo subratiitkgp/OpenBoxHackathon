@@ -106,14 +106,51 @@ export class PickupAdapter {
       category: 'BEAUTY',
       itemDescription : 'Nivea Deodrant',
       imageUrl:'https://images-na.ssl-images-amazon.com/images/I/51jQGW7pLWL._SY879_.jpg',
-      CUSTOMER_SMARTCHECK_CHECKS: undefined,
+      CUSTOMER_SMARTCHECK_CHECKS: [
+        {
+          checkName: 'CONDITION',
+          checkData: undefined,
+          checkInfo: "BLACK",
+          checkResults: undefined
+        },
+        {
+           checkName: 'IMAGE',
+           checkInfo: undefined,
+           checkData: {
+              displayText : "Image",
+              displayValue : "https://images-na.ssl-images-amazon.com/images/I/61sKuELUGgL._SY879_.jpg",
+              required: true
+           },
+           checkResults: undefined
+        },
+        {
+          checkName: 'SERIAL',
+          checkInfo: undefined,
+          checkData: {
+              displayText : "Serial Number",
+              displayValue : "IMEI00929230409",
+              required: true
+          },
+          checkResults: undefined
+        },
+        {
+          checkName: 'ACCESSORIES',
+          checkData: [
+            { key : "CHARGER", value : "Charger", required: true },
+            { key: "HEADPHONE", value: "Headphone", required: false },
+            { key: "BATTERY", value: "Battery", required: true }
+          ],
+          checkInfo: "BLACK",
+          checkResults: undefined
+        },
+      ],
       SELLER_OPENBOX_CHECKS: undefined,
       CUSTOMER_OPENBOX_CHECKS: undefined,
       SELLER_SMARTCHECK_CHECKS: undefined,
-      isSellerOBCheckRequired: true,
-      isSellerSCCheckRequired: true,
-      isCustomerOBCheckRequired: true,
-      isCustomerSCCheckRequired: true,
+      isSellerOBCheckRequired: false,
+      isSellerSCCheckRequired: false,
+      isCustomerOBCheckRequired: false,
+      isCustomerSCCheckRequired: false,
       status: "OUT_FOR_PICKUP",
       reason: undefined,
       signature: undefined

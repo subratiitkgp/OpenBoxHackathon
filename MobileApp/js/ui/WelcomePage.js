@@ -63,12 +63,8 @@ export class WelcomePage extends Component {
           onPress={() => navigate('TaskPage', { name: 'Jane' })}
         />
         <Button
-          title="Reinitialize Shipments"
+          title="Get All Shipments"
           onPress={() => this.initializeAllShipments()}
-        />
-        <Button
-          title="Print Shipments"
-          onPress={() => this.printShipments()}
         />
       </View>
     )

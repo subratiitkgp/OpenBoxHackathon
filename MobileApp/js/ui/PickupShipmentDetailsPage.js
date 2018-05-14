@@ -63,6 +63,7 @@ export class PickupShipmentDetailsPage extends Component {
 
   areAllChecksPassed(shipment) {
     const custSmartChecks = shipment.CUSTOMER_SMARTCHECK_CHECKS;
+    if (custSmartChecks === undefined) return true;
     let flag = true;
     custSmartChecks.forEach(check => {
       if(shipment.isCustomerSCCheckRequired && (check.checkResults === undefined || check.checkResults=== 'FAILED')) {
